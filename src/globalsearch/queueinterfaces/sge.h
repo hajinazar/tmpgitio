@@ -4,14 +4,13 @@
 
   Copyright (C) 2011 by David C. Lonie
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation version 2 of the License.
+  This source code is released under the New BSD License, (the "License").
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  ***********************************************************************/
 
 #ifndef SGEQUEUEINTERFACE_H
@@ -22,58 +21,49 @@
 // Tell doxygen to skip this file
 /// \cond
 
-#include <globalsearch/queueinterfaces/sgedialog.h>
 #include <globalsearch/queueinterfaces/remote.h>
+#include <globalsearch/queueinterfaces/sgedialog.h>
 
-#include <QtCore/QDateTime>
-#include <QtCore/QReadWriteLock>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
+#include <QDateTime>
+#include <QReadWriteLock>
+#include <QString>
+#include <QStringList>
 
 namespace GlobalSearch {
 
-  class SgeQueueInterface : public RemoteQueueInterface
-  {
-    Q_OBJECT;
+class SgeQueueInterface : public RemoteQueueInterface
+{
+  Q_OBJECT
 
-  public:
-    explicit SgeQueueInterface(OptBase *parent,
-                               const QString &settingsFile = "");
+public:
+  explicit SgeQueueInterface(OptBase* parent, const QString& settingsFile = "");
 
-    virtual ~SgeQueueInterface();
+  virtual ~SgeQueueInterface() override;
 
-    virtual bool isReadyToSearch(QString *str);
+  virtual bool isReadyToSearch(QString* str) override;
 
-    QDialog* dialog();
+  QDialog* dialog() override;
 
-    friend class SgeConfigDialog;
+  friend class SgeConfigDialog;
 
-  public slots:
-    void readSettings(const QString &filename = "");
-    void writeSettings(const QString &filename = "");
-    bool startJob(Structure *s);
-    bool stopJob(Structure *s);
-    QueueInterface::QueueStatus getStatus(Structure *s) const;
-    void setInterval(const int sec);
+public slots:
+  void readSettings(const QString& filename = "") override;
+  void writeSettings(const QString& filename = "") override;
+  bool startJob(Structure* s) override;
+  bool stopJob(Structure* s) override;
+  QueueInterface::QueueStatus getStatus(Structure* s) const override;
 
-  protected:
-    // Fetches the queue from the server
-    QStringList getQueueList() const;
-    // Cached queue data
-    QStringList m_queueData;
-    // Limits queue checks to once per second
-    QDateTime m_queueTimeStamp;
-    // Locks for m_queueData;
-    QReadWriteLock m_queueMutex;
-    // Paths:
-    QString m_qstat;
-    QString m_qsub;
-    QString m_qdel;
-    // Refresh interval for queue data
-    int m_interval;
-    // Clean remote directories when a job is stopped?
-    bool m_cleanRemoteOnStop;
-  };
+protected:
+  // Fetches the queue from the server
+  // With "true" argument, refresh is done regardless of the queue refresh interval
+  QStringList getQueueList(bool forced = false) const;
+  // Cached queue data
+  QStringList m_queueData;
+  // Limits queue checks to once per second
+  QDateTime m_queueTimeStamp;
+  // Locks for m_queueData;
+  QReadWriteLock m_queueMutex;
+};
 }
 
 // End doxygen skip:

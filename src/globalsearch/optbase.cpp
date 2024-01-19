@@ -3,26 +3,27 @@
 
   Copyright (C) 2010-2011 by David C. Lonie
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation version 2 of the License.
+  This source code is released under the New BSD License, (the "License").
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  ***********************************************************************/
 
 #include <globalsearch/optbase.h>
 
 #include <globalsearch/bt.h>
+#include <globalsearch/eleminfo.h>
+#include <globalsearch/formats/poscarformat.h>
+#include <globalsearch/http/aflowml.h>
 #include <globalsearch/macros.h>
 #include <globalsearch/optimizer.h>
-#include <globalsearch/queuemanager.h>
 #include <globalsearch/queueinterface.h>
-#include <globalsearch/queueinterfaces/local.h>
-#include <globalsearch/queueinterfaces/pbs.h>
+#include <globalsearch/queuemanager.h>
 #ifdef ENABLE_SSH
+#include <globalsearch/sshconnection.h>
 #include <globalsearch/sshmanager.h>
 #ifdef USE_CLI_SSH
 #include <globalsearch/sshmanager_cli.h>
@@ -32,266 +33,901 @@
 #endif // ENABLE_SSH
 #include <globalsearch/structure.h>
 #include <globalsearch/ui/abstractdialog.h>
+#include <globalsearch/utilities/makeunique.h>
+#include <globalsearch/utilities/passwordprompt.h>
+#include <globalsearch/utilities/utilityfunctions.h>
 
-#include <QtCore/QFile>
-#include <QtCore/QThread>
+#include <QDebug>
+#include <QFile>
+#include <QThread>
 
-#include <QtGui/QClipboard>
-#include <QtGui/QMessageBox>
-#include <QtGui/QApplication>
-#include <QtGui/QInputDialog>
+#include <QApplication>
+#include <QClipboard>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QtConcurrent>
 
-using namespace OpenBabel;
+#include <cfloat>
+#include <cmath>
+#include <fstream>
+#include <iostream>
+#include <mutex>
+#include <chrono>
+#include <thread>
+
+// Uncomment for yet more debug info about probabilities
+//#define OPTBASE_PROBS_DEBUG
 
 namespace GlobalSearch {
 
-  OptBase::OptBase(AbstractDialog *parent) :
-    QObject(parent),
-    m_dialog(parent),
-    m_tracker(new Tracker (this)),
-    m_queueThread(new QThread),
-    m_queue(new QueueManager(m_queueThread, this)),
-    m_queueInterface(0), // This will be set when the GUI is initialized
-    m_optimizer(0),      // This will be set when the GUI is initialized
-#ifdef ENABLE_SSH
-    m_ssh(NULL),
-#endif // ENABLE_SSH
+OptBase::OptBase(AbstractDialog* parent)
+  : QObject(parent),
+    cutoff(-1), testingMode(false), test_nRunsStart(1), test_nRunsEnd(100),
+    test_nStructs(600), stateFileMutex(new QMutex), readOnly(false),
     m_idString("Generic"),
-    sOBMutex(new QMutex),
-    stateFileMutex(new QMutex),
-    backTraceMutex(new QMutex),
-    savePending(false),
-    readOnly(false),
-    testingMode(false),
-    test_nRunsStart(1),
-    test_nRunsEnd(100),
-    test_nStructs(600),
-    cutoff(-1),
-    m_schemaVersion(1)
-  {
-    // Connections
-    connect(this, SIGNAL(sessionStarted()),
-            m_queueThread, SLOT(start()),
-            Qt::DirectConnection);
-    connect(this, SIGNAL(startingSession()),
-            m_queueThread, SLOT(start()),
-            Qt::DirectConnection);
-    connect(this, SIGNAL(startingSession()),
-            this, SLOT(setIsStartingTrue()),
-            Qt::DirectConnection);
-    connect(this, SIGNAL(sessionStarted()),
-            this, SLOT(setIsStartingFalse()),
-            Qt::DirectConnection);
-    connect(this, SIGNAL(readOnlySessionStarted()),
-            this, SLOT(setIsStartingFalse()),
-            Qt::DirectConnection);
-    connect(this, SIGNAL(needBoolean(const QString&, bool*)),
-            this, SLOT(promptForBoolean(const QString&, bool*)),
-            Qt::BlockingQueuedConnection); // Wait until slot returns
-    connect(this, SIGNAL(needPassword(const QString&, QString*, bool*)),
-            this, SLOT(promptForPassword(const QString&, QString*, bool*)),
-            Qt::BlockingQueuedConnection); // Wait until slot returns
-    connect(this, SIGNAL(sig_setClipboard(const QString&)),
-            this, SLOT(setClipboard_(const QString&)),
-            Qt::QueuedConnection);
+#ifdef ENABLE_SSH
+    m_ssh(nullptr),
+#endif // ENABLE_SSH
+    m_dialog(parent), m_tracker(new Tracker(this)), m_queueThread(new QThread),
+    m_queue(new QueueManager(m_queueThread, this)), m_numOptSteps(0),
+    m_schemaVersion(3), m_usingGUI(true),
+    m_logErrorDirs(false), m_calculateHardness(false),
+    m_hardnessFitnessWeight(-1.0),
+    m_networkAccessManager(std::make_shared<QNetworkAccessManager>()),
+    m_aflowML(make_unique<AflowML>(m_networkAccessManager, this)),
+    m_calculateFeatures(false), m_features_num(0),
+    m_softExit(false), m_hardExit(false), m_localQueue(false)
+{
+  // Connections
+  connect(this, SIGNAL(sessionStarted()), m_queueThread, SLOT(start()),
+          Qt::DirectConnection);
+  connect(this, SIGNAL(startingSession()), m_queueThread, SLOT(start()),
+          Qt::DirectConnection);
+  connect(this, SIGNAL(startingSession()), this, SLOT(setIsStartingTrue()),
+          Qt::DirectConnection);
+  connect(this, SIGNAL(sessionStarted()), this, SLOT(setIsStartingFalse()),
+          Qt::DirectConnection);
+  connect(this, SIGNAL(readOnlySessionStarted()), this,
+          SLOT(setIsStartingFalse()), Qt::DirectConnection);
+  connect(this, SIGNAL(needBoolean(const QString&, bool*)), this,
+          SLOT(promptForBoolean(const QString&, bool*)),
+          Qt::BlockingQueuedConnection); // Wait until slot returns
+  connect(this, SIGNAL(needPassword(const QString&, QString*, bool*)), this,
+          SLOT(promptForPassword(const QString&, QString*, bool*)),
+          Qt::BlockingQueuedConnection); // Wait until slot returns
+  connect(this, SIGNAL(sig_setClipboard(const QString&)), this,
+          SLOT(setClipboard_(const QString&)), Qt::QueuedConnection);
+  connect(m_tracker, &Tracker::newStructureAdded,
+          [this]() { QtConcurrent::run([this]() { this->save("", false); }); });
+  connect(m_queue, &QueueManager::structureUpdated,
+          [this]() { QtConcurrent::run([this]() { this->save("", false); }); });
+  connect(m_queue, &QueueManager::readyForFeatureCalculations,
+          this,    &OptBase::calculateFeatures, Qt::QueuedConnection);
+  connect(m_queue, &QueueManager::readyForFeatureCalculations,
+          this,    &OptBase::calculateHardness, Qt::QueuedConnection);
+  connect(m_aflowML.get(), &AflowML::received, this,
+          &OptBase::finishHardnessCalculation);
+}
 
-    INIT_RANDOM_GENERATOR();
+OptBase::~OptBase()
+{
+  delete m_queue;
+  m_queue = 0;
+
+  if (m_queueThread && m_queueThread->isRunning()) {
+    m_queueThread->wait();
   }
+  delete m_queueThread;
+  m_queueThread = 0;
 
-  OptBase::~OptBase()
-  {
+  delete m_tracker;
+  m_tracker = 0;
+}
+
+void OptBase::reset()
+{
+  m_tracker->lockForWrite();
+  m_tracker->deleteAllStructures();
+  m_tracker->reset();
+  m_tracker->unlock();
+  m_queue->reset();
+}
+
+#ifdef ENABLE_SSH
+bool OptBase::createSSHConnections()
+{
+#ifdef USE_CLI_SSH
+  return this->createSSHConnections_cli();
+#else  // USE_CLI_SSH
+  return this->createSSHConnections_libssh();
+#endif // USE_CLI_SSH
+}
+#endif // ENABLE_SSH
+
+void OptBase::performTheExit(int delay)
+{
+  // This functions performs the exit, i.e., terminates the run.
+  // The input parameter "delay" has a default of 0. If a non-zero
+  //   delay is specified, the function waits for that amount, and
+  //   will attempt to do some clean up before quitting.
+
+  if (delay > 0) {
+    // Impose a delay if needed
+    QThread::msleep(delay * 1000);
+
+    m_dialog = nullptr;
+
+    // Save one last time
+    warning("Saving XtalOpt settings...");
+
+    // First save the state file (only if we have structures)
+    if (!m_queue->getAllStructures().isEmpty())
+      save("", false);
+
+    // Then save the config settings
+    QString configFileName = QSettings().fileName();
+    save(configFileName, false);
+
+    // Stop queuemanager thread
+    if (m_queueThread->isRunning()) {
+      m_queueThread->disconnect();
+      m_queueThread->quit();
+      m_queueThread->wait();
+    }
+
+    // Delete queuemanager
     delete m_queue;
     m_queue = 0;
 
-    if (m_queueThread && m_queueThread->isRunning()) {
-      m_queueThread->wait();
-    }
-    delete m_queueThread;
-    m_queueThread = 0;
-
-    delete m_optimizer;
-    m_optimizer = 0;
-
-    delete m_queueInterface;
-    m_queueInterface = 0;
-
-    delete m_tracker;
-    m_tracker = 0;
-  }
-
-  void OptBase::reset() {
-    m_tracker->lockForWrite();
-    m_tracker->deleteAllStructures();
-    m_tracker->reset();
-    m_tracker->unlock();
-    m_queue->reset();
-  }
-
 #ifdef ENABLE_SSH
-  bool OptBase::createSSHConnections()
-  {
-#ifdef USE_CLI_SSH
-    return this->createSSHConnections_cli();
-#else // USE_CLI_SSH
-    return this->createSSHConnections_libssh();
-#endif // USE_CLI_SSH
-  }
+    // Stop SSHManager
+    delete m_ssh;
+    m_ssh = 0;
 #endif // ENABLE_SSH
-
-  void OptBase::printBackTrace() {
-    backTraceMutex->lock();
-    QStringList l = getBackTrace();
-    backTraceMutex->unlock();
-    for (int i = 0; i < l.size();i++)
-      qDebug() << l.at(i);
   }
 
-  QList<double> OptBase::getProbabilityList(const QList<Structure*> &structures) {
-    // IMPORTANT: structures must contain one more structure than
-    // needed -- the last structure in the list will be removed from
-    // the probability list!
-    if (structures.size() <= 2) {
-      return QList<double>();
-    }
+  QString formattedTime = QDateTime::currentDateTime().toString("MMMM dd, yyyy   hh:mm:ss");
+  QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
+  warning("Quitting - " + formattedTimeMsg);
+  exit(1);
+}
 
-    QList<double> probs;
-    Structure *s=0, *first=0, *last=0;
-    first = structures.first();
-    last = structures.last();
-    first->lock()->lockForRead();
-    last->lock()->lockForRead();
-    double lowest = first->getEnthalpy();
-    double highest = last->getEnthalpy();;
-    double spread = highest - lowest;
-    last->lock()->unlock();
-    first->lock()->unlock();
-    // If all structures are at the same enthalpy, lets save some time...
-    if (spread <= 1e-5) {
-      double dprob = 1.0/static_cast<double>(structures.size()-1);
-      double prob = 0;
-      for (int i = 0; i < structures.size()-1; i++) {
-        probs.append(prob);
-        prob += dprob;
-      }
-      return probs;
-    }
-    // Generate a list of floats from 0->1 proportional to the enthalpies;
-    // E.g. if enthalpies are:
-    // -5   -2   -1   3   5
-    // We'll have:
-    // 0   0.3  0.4  0.8  1
-    for (int i = 0; i < structures.size(); i++) {
-      s = structures.at(i);
-      s->lock()->lockForRead();
-      probs.append( ( s->getEnthalpy() - lowest ) / spread);
-      s->lock()->unlock();
-    }
-    // Subtract each value from one, and find the sum of the resulting list
-    // We'll end up with:
-    // 1  0.7  0.6  0.2  0   --   sum = 2.5
-    double sum = 0;
-    for (int i = 0; i < probs.size(); i++){
-      probs[i] = 1.0 - probs.at(i);
-      sum += probs.at(i);
-    }
-    // Normalize with the sum so that the list adds to 1
-    // 0.4  0.28  0.24  0.08  0
-    for (int i = 0; i < probs.size(); i++){
-      probs[i] /= sum;
-    }
-    // Then replace each entry with a cumulative total:
-    // 0.4 0.68 0.92 1 1
-    sum = 0;
-    for (int i = 0; i < probs.size(); i++){
-      sum += probs.at(i);
-      probs[i] = sum;
-    }
-    // Pop off the last entry (remember the n_popSize + 1 earlier?)
-    // 0.4 0.68 0.92 1
-    probs.removeLast();
-    // And we have a enthalpy weighted probability list! To use:
+static inline double calculateProb(QString strucID,
+                                   int    features_num,
+                                   QList<OptBase::FeatureType> features_opt,
+                                   QList<double> features_wgt,
+                                   QList<double> features_val,
+                                   QList<double> features_min,
+                                   QList<double> features_max,
+                                   double currentEnthalpy,
+                                   double lowestEnthalpy,
+                                   double highestEnthalpy,
+                                   double hardnessWeight,
+                                   double currentHardness,
+                                   double lowestHardness,
+                                   double highestHardness)
+{
+  // General note: if the spread for any feature/property is zero (is less than 1.0e-8);
+  //   we take its contribution to be zero so it does not suppress the effect of the other
+  //   features. Otherwise, this single feature will make the whole prob to be "nan" while
+  //   there might be other contributing features with meaningful values.
+  // So, we calculate "partialFitns" for each feature as its raw fitness, and depending
+  //   on the spread correct it to get the "correctFitns". Then multiply it into corresponding
+  //   weight to obtain the actual contribution of that feature to the total fitness.
+
+  double enthalpySpread = highestEnthalpy - lowestEnthalpy;
+  double hardnessSpread = highestHardness - lowestHardness;
+  double featuresSpread;
+  double weightsTotal   = 0.0;    // total weight of all features/properties
+  double fitnessTotal   = 0.0;    // total fitness (to be returned)
+  double partialFitns;            // (raw) contribution of a single feature to total fitness
+  double correctFitns;            // corrected contrib. of a single feature (if zero spread?)
+  const double zero     = 1.0e-8; // threshold for zero spread
+  QString outs = "";              // auxiliary variable for debug output
+
+  // ===== multi-objective features
+  // If no features calculation; features_num is 0 at this point.
+  // Any Filtration feature should have a value of 1 here and zero spread.
+  for(int i = 0; i < features_num; i++) {
+      featuresSpread = features_max[i] - features_min[i];
+      if (features_opt[i] == OptBase::FT_Min)
+        partialFitns = (features_max[i] - features_val[i]) / featuresSpread;
+      else if (features_opt[i] == OptBase::FT_Max)
+        partialFitns = (features_val[i] - features_min[i]) / featuresSpread;
+      else // Fil features
+        partialFitns = 0.0;
+      // Correction: if spread is zero then contribution is zero
+      correctFitns = (featuresSpread < zero) ? 0.0 : partialFitns;
+      //
+      weightsTotal += features_wgt[i];
+      fitnessTotal += features_wgt[i] * correctFitns;
+
+#ifdef FEATURES_DEBUG
+outs += QString("NOTE: feat %1 opt %2 val %3 min %4 max %5 ctr %6 wgt %7 - ftn %8\n")
+ .arg(i+1,2).arg(features_opt[i],2).arg(features_val[i],10,'f',5)
+ .arg(features_min[i],10,'f',5).arg(features_max[i],10,'f',5).arg(partialFitns,7,'f',5)
+ .arg(features_wgt[i],5,'f',3).arg(features_wgt[i] * correctFitns,7,'f',5);
+#endif
+  }
+
+  // ===== aflow-hardness
+  // If no aflow-hardness calculation, it's weight is -1.0 at this point.
+  if (hardnessWeight >= 0.0) {
+    partialFitns = (currentHardness - lowestHardness) / hardnessSpread;
+    // Correction: if spread is zero then contribution is zero
+    correctFitns = (hardnessSpread < zero) ? 0.0 : partialFitns;
     //
-    //   double r = rand.NextFloat();
-    //   uint ind;
-    //   for (ind = 0; ind < probs.size(); ind++)
-    //     if (r < probs.at(ind)) break;
-    //
-    // ind will hold the chosen index.
+    weightsTotal += hardnessWeight;
+    fitnessTotal += hardnessWeight * correctFitns;
+
+#ifdef FEATURES_DEBUG
+outs += QString("NOTE: hard %1 opt %2 val %3 min %4 max %5 ctr %6 wgt %7 - ftn %8\n")
+  .arg(-1,2).arg(1,2).arg(currentHardness,10,'f',5).arg(lowestHardness,10,'f',5)
+  .arg(highestHardness,10,'f',5).arg(partialFitns,7,'f',5).arg(hardnessWeight,5,'f',3)
+  .arg(hardnessWeight * correctFitns,7,'f',5);
+#endif
+  }
+
+  // ===== enthalpy
+  partialFitns = (highestEnthalpy - currentEnthalpy) / enthalpySpread;
+  // Correction: if spread is zero then contribution is zero
+  correctFitns = (enthalpySpread < zero) ? 0.0 : partialFitns;
+  //
+  fitnessTotal += (1.0 - weightsTotal) * correctFitns;
+
+#ifdef FEATURES_DEBUG
+outs += QString("NOTE: enth %1 opt %2 val %3 min %4 max %5 ctr %6 wgt %7 - ftn %8\n")
+  .arg(0,2).arg(0,2).arg(currentEnthalpy,10,'f',5).arg(lowestEnthalpy,10,'f',5)
+  .arg(highestEnthalpy,10,'f',5).arg(partialFitns,7,'f',5).arg(1.0-weightsTotal,5,'f',3)
+  .arg((1.0 - weightsTotal) * correctFitns,7,'f',5);
+outs += QString("NOTE: struc %1   oldFitness %2   newFitness %3")
+  .arg(strucID,8).arg(correctFitns,8,'f',6).arg(fitnessTotal,8,'f',6);
+qDebug().noquote() << outs;
+#endif
+
+  // Finally, return the calculated total fitness
+  return fitnessTotal;
+}
+
+QList<QPair<Structure*, double>>
+OptBase::getProbabilityList(const QList<Structure*>& structures,
+                     size_t popSize,
+                     double hardnessWeight,
+                     int    features_num,
+                     QList<double> features_wgt,
+                     QList<OptBase::FeatureType> features_opt)
+{
+  const double zero     = 1.0e-8; // threshold for zero spread
+  // This function is modified for multi-objective case;
+  //   it has default values for some input parameters in optbase.h
+  QList<QPair<Structure*, double>> probs;
+  if (structures.isEmpty() || popSize == 0)
+    return probs;
+
+  if (structures.size() == 1) {
+    probs.append(QPair<Structure*, double>(structures[0], 1.0));
     return probs;
   }
 
-  bool OptBase::save(const QString &stateFilename, bool notify)
-  {
-    if (isStarting ||
-        readOnly) {
-      savePending = false;
-      return false;
-    }
-    QReadLocker trackerLocker (m_tracker->rwLock());
-    QMutexLocker locker (stateFileMutex);
-    QString filename;
-    if (stateFilename.isEmpty()) {
-      filename = filePath + "/" + m_idString.toLower() + ".state";
-    }
-    else {
-      filename = stateFilename;
-    }
-    QString oldfilename = filename + ".old";
+  // Since enthalpy can be negative, we will make -DBL_MAX the starting value
+  // for highestEnthalpy. But since hardness can't be negative, we will use
+  // DBL_MIN as the starting value for highestHardness.
+  double lowestEnthalpy  =  DBL_MAX;
+  double highestEnthalpy = -DBL_MAX;
+  double lowestHardness  =  DBL_MAX;
+  double highestHardness =  DBL_MIN;
+  // For multi-objective case
+  QList<double> features_min = {};
+  QList<double> features_max = {};
+  for (int i = 0; i< features_num; i++) {
+    features_min.push_back(DBL_MAX);
+    features_max.push_back(-DBL_MAX);
+  }
 
-    if (notify) {
-      m_dialog->startProgressUpdate(tr("Saving: Writing %1...")
-                                    .arg(filename),
-                                    0, 0);
+  // Find the lowest and highest of each
+  for (const auto& s: structures) {
+    QReadLocker lock(&s->lock());
+    const auto& enthalpy = s->getEnthalpyPerFU();
+    if (enthalpy < lowestEnthalpy)
+      lowestEnthalpy = enthalpy;
+    if (enthalpy > highestEnthalpy)
+      highestEnthalpy = enthalpy;
+
+    const auto& hardness = s->vickersHardness();
+    if (hardness < lowestHardness)
+      lowestHardness = hardness;
+    if (hardness > highestHardness)
+      highestHardness = hardness;
+
+    for (int i = 0; i< features_num; i++) {
+        if(s->getStrucFeatValues(i) < features_min[i])
+          features_min[i] = s->getStrucFeatValues(i);
+        if(s->getStrucFeatValues(i) > features_max[i])
+          features_max[i] = s->getStrucFeatValues(i);
+    }
+  }
+
+  // Now calculate the probability of each structure
+  for (const auto& s: structures) {
+    QReadLocker lock(&s->lock());
+
+    double prob = calculateProb(s->getIDString(),
+                                features_num,
+                                features_opt,
+                                features_wgt,
+                                s->getStrucFeatValuesVec(),
+                                features_min,
+                                features_max,
+                                s->getEnthalpyPerFU(),
+                                lowestEnthalpy,
+                                highestEnthalpy,
+                                hardnessWeight,
+                                s->vickersHardness(),
+                                lowestHardness,
+                                highestHardness);
+
+    probs.append(QPair<Structure*, double>(s, prob));
+  }
+
+  // =======================================================================
+  // The probs are set to zero if the spread is zero (i.e., less than 1e-8).
+  // So, all probs shouldn't be "nan" anymore; unless there is an unfortunate
+  //   case in which the ratio still diverges because of small denaminator, etc.
+  //                           -----------------
+  // In any case; if all the probs are equal (including "nan"), just return a uniform list
+  bool allNan = true;
+  bool allEqual = true;
+  double refProb = probs[0].second;
+  for (const auto& prob: probs) {
+    if (!std::isnan(prob.second)) {
+      allNan = false;
+      if (fabs(prob.second - refProb) > zero)
+        allEqual = false;
+    }
+  }
+
+  if (allNan || allEqual) {
+    double dref = 1.0 / probs.size();
+    double sum = 0.0;
+
+    for (auto& prob: probs) {
+      prob.second = sum;
+      sum += dref;
+    }
+    return probs;
+  }
+  // =======================================================================
+
+  // Sort by probability
+  std::sort(probs.begin(), probs.end(),
+            [](const QPair<Structure*, double>& a,
+               const QPair<Structure*, double>& b)
+            {
+              return a.second < b.second;
+            });
+
+  // Remove the lowest probability structures until we have the pop size
+  while (probs.size() > popSize)
+    probs.pop_front();
+
+
+#ifdef OPTBASE_PROBS_DEBUG
+  QString outs1 = QString("\nNOTE: Unnormalized (but sorted and trimmed) probs list is:\n"
+                         "    structure :  enthalpy  : probs\n");
+  for (const auto& elem: probs) {
+    QReadLocker lock(&elem.first->lock());
+    outs1 += QString("      %1 : %3 : %4\n").arg(elem.first->getIDString(),7)
+      .arg(elem.first->getEnthalpyPerFU(),0,'f',6).arg(elem.second,0,'f',6);
+  }
+  qDebug().noquote() << outs1;
+#endif
+
+  // Sum the resulting probs
+  double sum = 0.0;
+  for (const auto& elem: probs)
+    sum += elem.second;
+
+  // Normalize the list so that the sum is 1
+  for (auto& elem: probs)
+    elem.second /= sum;
+
+#ifdef OPTBASE_PROBS_DEBUG
+  outs1 = QString("NOTE: Normalized, sorted, and trimmed probs list is:\n"
+                  "    structure :  enthalpy  : probs\n");
+  for (const auto& elem: probs) {
+    QReadLocker lock(&elem.first->lock());
+    outs1 += QString("      %1 : %3 : %4\n").arg(elem.first->getIDString(),7)
+      .arg(elem.first->getEnthalpyPerFU(),0,'f',6).arg(elem.second,0,'f',6);
+  }
+  qDebug().noquote() << outs1;
+#endif
+
+  // Now replace each entry with a cumulative total
+  sum = 0.0;
+  for (auto& elem: probs) {
+    sum += elem.second;
+    elem.second = sum;
+  }
+
+#ifdef OPTBASE_PROBS_DEBUG
+  outs1 = QString("NOTE: Cumulative (final) probs list is:\n"
+                  "    structure :  enthalpy  : probs\n");
+  for (const auto& elem: probs) {
+    QReadLocker lock(&elem.first->lock());
+    outs1 += QString("      %1 : %3 : %4\n").arg(elem.first->getIDString(),7)
+      .arg(elem.first->getEnthalpyPerFU(),0,'f',6).arg(elem.second,0,'f',6);
+  }
+  qDebug().noquote() << outs1;
+#endif
+
+  return probs;
+}
+
+void OptBase::calculateFeatures(Structure* s)
+{
+  // This is the wrapper for feature calculation for the structure.
+  //
+  // The feature calculations for each structure is handled in two steps:
+  //   (1) startFeatureCalculations
+  //     (1-a) generate output.POSCAR file,
+  //     (1-b) copy to remote (if needed),
+  //     (1-c) run the commands, i.e., user-defined script.
+  //   (2) finishFeatureCalculations
+  //     (2-a) wait for feature output files to appear (if needed),
+  //     (2-b) copy back them from remote (if needed),
+  //     (2-c) process the output files,
+  //     (2-d) update structure object with the results,
+  //     (2-e) signal the finish.
+  //
+  // Note:
+  //   (1) Failing in the followings are ***fatal errors****
+  //       - writing the output.POSCAR file
+  //       - copying the output.POSCAR file to remote (in a remote run)
+  //       - running user script
+  //       - copying back feature output files (in a remote run)
+  //   However, since error handling in local/local-remote runs is not
+  //   so reliable (due to error channel pollution, etc.), we won't force
+  //   quitting the feature calculcations and just print an error message;
+  //   except than error in writing the output.POSCAR which will results
+  //   in marking the structure as Fail, signalling the finish, and return.
+
+  // We might be here just because aflow-hardness is requested; so first check
+  //   if feature calculations are requested too or not! If not, just do nothing.
+  if (!m_calculateFeatures)
+    return;
+
+  QtConcurrent::run(this, &OptBase::startFeatureCalculations, s);
+
+  return;
+}
+
+void OptBase::startFeatureCalculations(Structure* s)
+{
+  // Set up some variables
+  QueueInterface* qi = queueInterface(s->getCurrentOptStep());
+  // Structure files prepared for the user script
+  QString flname = "output.POSCAR";
+  // The local run directory (where files are generated)
+  QString locdir = s->fileName() + QDir::separator();
+  // Where we run the user-provided script
+  //   It's assumed that the remote is a "unix"-based system
+  QString wrkdir =
+    (qi->getIDString().toLower() == "local") ? locdir : s->getRempath() + "/";
+
+  qDebug() << "Feature calculations for " << s->getIDString() << " started!";
+
+  // We set the default feature calc. status to Fail. In case the run is
+  //   interrupted with a major failure, this will remain as the overall status.
+  QWriteLocker structureLocker(&s->lock());
+  s->setStrucFeatStatus(Structure::FS_Fail);
+  structureLocker.unlock();
+
+  // Write the output.POSCAR file
+  std::stringstream ss;
+  QFile file(locdir + flname);
+  if ((file.open(QIODevice::WriteOnly | QIODevice::Text)) &&
+      (PoscarFormat::write(*s, ss) && file.write(ss.str().c_str()))) {
+    file.close();
+  } else {
+    // This is a major failure! We shouldn't proceed!
+    error(tr("Failed writing output.POSCAR file for structure %1")
+        .arg(s->getIDString()));
+    emit doneWithFeatures(s);
+    return;
+  }
+
+  // Copy it to the remote location. This is needed only for remote runs.
+  // Actually, this function doesn't do anything if it is a local run!
+  if (!qi->copyAFileLocalToRemote(locdir + flname, wrkdir + flname)) {
+    error(tr("Failed to copy the output.POSCAR file for structure %1 to remote!")
+          .arg(s->getIDString()));
+  }
+
+  // Run/Submit the feature scripts
+  QString stdout_str, stderr_str;
+  int ec;
+  for(int i = 0; i < getFeaturesNum(); i++) {
+    if (!qi->runACommand(wrkdir, getFeaturesExe(i), &stdout_str, &stderr_str, &ec)) {
+      error(tr("Failed to run the user script for feature %1 for structure %2")
+            .arg(i+1).arg(s->getIDString()));
+    }
+  }
+
+  // Now, on a separate thread, wait for all feature output files
+  //   to appear (and copy them back if it's a remote run), and
+  //   process the results of feature calculations.
+  QtConcurrent::run(this, &OptBase::finishFeatureCalculations, s);
+
+  return;
+}
+
+void OptBase::finishFeatureCalculations(Structure* s)
+{
+  // Set up some variables
+  QueueInterface* qi = queueInterface(s->getCurrentOptStep());
+  // Structure files prepared for the user script
+  QString flname = "output.POSCAR";
+  // The local run directory (where files are generated)
+  QString locdir = s->fileName() + QDir::separator();
+  // Where we run the user-provided script
+  //   It's assumed that the remote is a "unix"-based system
+  QString wrkdir =
+    (qi->getIDString().toLower() == "local") ? locdir : s->getRempath() + "/";
+
+  // First, check if all output files exist and wait if not. This step is basically
+  //   important for features that submit their calculation to a queue; otherwise
+  //   the qprocess run returns when process finishes and files are already generated.
+  // This function runs on a separate thread; so sleep won't freeze gui.
+  bool ok = false, exists;
+  while (!ok) {
+    ok = true;
+    for (int i = 0; i < getFeaturesNum(); i++)
+      if (!qi->checkIfFileExists(s, getFeaturesOut(i), &exists) || !exists)
+        ok = false;
+    if (!ok)
+      QThread::currentThread()->usleep(queueRefreshInterval() * 1000 * 1000);
+  }
+
+  // Copy feature output files back to structure's local working directory.
+  // Actually, this function doesn't do anything if it is a local run!
+  for (int i = 0; i < getFeaturesNum(); i++) {
+    if (!qi->copyAFileRemoteToLocal(wrkdir + getFeaturesOut(i), locdir + getFeaturesOut(i))) {
+      error(tr("Failed to copy output for feature %1 for structure %2 from remote!")
+            .arg(i+1).arg(s->getIDString()));
+    }
+  }
+
+  // Process the feature output files.
+
+  QList<double> tmp_values;
+  int failed_count = 0;
+  int dismis_count = 0;
+  for (int i = 0; i < getFeaturesNum(); i++) {
+    double flagv = 0.0;
+    bool   flags = false;
+
+    QFile file(locdir + getFeaturesOut(i));
+
+    if (file.open(QIODevice::ReadOnly)) {
+      QTextStream in(&file);
+      QString fline = in.readLine();
+      QStringList flist = fline.split(" ", QString::SkipEmptyParts);
+      if (flist.size() >= 1) {
+        // The below line, aims at reading the first entry of the first line;
+        //   while ignoring everything else. The default "false" value of the
+        //   "flags" variable changes to true if a legit value is read successfully.
+        flagv = flist.at(0).toDouble(&flags);
+      }
+      file.close();
+    } else {
+      // This is when failed to read the file for any reason, or it's empty.
+      //   With default values of flagv/flags, the feature will be automatically marked
+      // as failed in the following. We just produce an error message here.
+      error(tr("Failed to read any results from output file for feature %1 for structure %2")
+            .arg(i+1).arg(s->getIDString()));
     }
 
-    // Copy .state -> .state.old
-    if (QFile::exists(filename) ) {
+    // Apparently c++ considers "nan" and "inf" valid numerical entries. To avoid issues
+    //   with these type of values, we exclude them and mark the feature calc as failed.
+    //   Otherwise, the probability calculation might end up with a seg fault.
+    if (std::isnan(flagv) || std::isinf(flagv)) {
+      flagv = 0.0;
+      flags = false;
+    }
+
+    // Save the whatever value we end up with for the feature.
+    tmp_values.push_back(flagv);
+
+    if (!flags)
+      // Calculations went wrong (e.g. output file is empty or has an incorrect format)
+      failed_count += 1;
+    else if (getFeaturesOpt(i) == OptBase::FT_Fil && flagv == 0.0)
+      // Structure marked for discarding by a filtration feature
+      dismis_count += 1;
+  }
+
+  // Update feature calculation status for the structure to either: Retain, Dismiss, Fail.
+  // If none of features Fail or Dismiss, we mark the structure as Retain.
+  // If at least one Dismiss, we don't care about fails and mark it as Dismiss
+  //   since it will be removed from the pull anyways, but gives a chance of redoing.
+  // If there are at least Fail features (and no Dismiss), then we mark it as Fail.
+
+  QWriteLocker structureLocker(&s->lock());
+  s->setStrucFeatValuesVec(tmp_values);
+  if (failed_count == 0 && dismis_count == 0)
+    s->setStrucFeatStatus(Structure::FS_Retain);
+  else if (dismis_count > 0)
+    s->setStrucFeatStatus(Structure::FS_Dismiss);
+  else
+    s->setStrucFeatStatus(Structure::FS_Fail);
+  structureLocker.unlock();
+
+  qDebug() << "Feature calculations for " << s->getIDString()
+           << " finished ( status = " << s->getStrucFeatStatus() << " )";
+
+  // We are done here.
+  emit doneWithFeatures(s);
+
+  return;
+}
+
+// Start up a resubmission thread that will attempt resubmissions every
+// 10 minutes
+void OptBase::startHardnessResubmissionThread()
+{
+  if (!m_calculateHardness)
+    return;
+
+  // Run in a separate thread
+  // This is our first usage of std::thread in the program. If we run into
+  // linking or packaging problems, we can go back to QtConcurrent
+  std::thread(&OptBase::_startHardnessResubmissionThread, this).detach();
+}
+
+void OptBase::_startHardnessResubmissionThread()
+{
+  if (!m_calculateHardness)
+    return;
+
+  // Make sure we only ever have one of these going at a time
+  static std::mutex resubmissionMutex;
+  std::unique_lock<std::mutex> lock(resubmissionMutex, std::defer_lock);
+  if (!lock.try_lock())
+    return;
+
+  while (m_calculateHardness) {
+    // Wait 10 minutes before the resubmission
+    std::this_thread::sleep_for(std::chrono::minutes(10));
+    resubmitUnfinishedHardnessCalcs();
+  }
+
+  lock.unlock();
+
+  // Run this function again if m_calculateHardness became true in
+  // between the "while" check and the unlocking of the mutex
+  if (m_calculateHardness)
+    _startHardnessResubmissionThread();
+}
+
+void OptBase::calculateHardness(Structure* s)
+{
+  // If we are not to calculate hardness, do nothing
+  if (!m_calculateHardness)
+    return;
+
+  // Convert the structure to a POSCAR file
+  std::stringstream ss;
+  PoscarFormat::write(*s, ss);
+
+  QString id = QString::number(s->getGeneration()) + "x" +
+               QString::number(s->getIDNumber());
+  qDebug() << "Submitting structure" << id << "for Aflow ML calculation...";
+  size_t ind = m_aflowML->submitPoscar(ss.str().c_str());
+  m_pendingHardnessCalculations[ind] = s;
+}
+
+void OptBase::resubmitUnfinishedHardnessCalcs()
+{
+  if (!m_calculateHardness)
+    return;
+
+  QReadLocker trackerLocker(m_tracker->rwLock());
+  QList<Structure*> structures = m_queue->getAllOptimizedStructures();
+  structures.append(m_queue->getAllDuplicateStructures());
+  structures.append(m_queue->getAllSupercellStructures());
+  for (auto& s : structures) {
+    if (s->vickersHardness() < 0.0)
+      calculateHardness(s);
+  }
+}
+
+void OptBase::_finishHardnessCalculation(size_t ind)
+{
+  // Let's use a mutex so this function can't be run in multiple threads at
+  // once
+  static std::mutex mutex;
+  std::unique_lock<std::mutex> lock(mutex);
+
+  // First, make sure we have this index
+  auto it = m_pendingHardnessCalculations.find(ind);
+
+  if (it == m_pendingHardnessCalculations.end()) {
+    qDebug() << "Error in" << __FUNCTION__
+             << ": Received hardness data for index" << ind << ", but could"
+             << "not find the structure for this index!";
+    return;
+  }
+
+  Structure* s = it->second;
+  m_pendingHardnessCalculations.erase(ind);
+
+  QString id = QString::number(s->getGeneration()) + "x" +
+               QString::number(s->getIDNumber());
+  qDebug() << "Received Aflow ML data for structure" << id;
+
+  // Make sure AflowML actually has the data
+  if (!m_aflowML->containsData(ind)) {
+    qDebug() << "Error in" << __FUNCTION__
+             << ": Received hardness data for index" << ind << ", but could"
+             << "not find the AflowMLData for this index!";
+    return;
+  }
+
+  AflowMLData data = m_aflowML->data(ind);
+  m_aflowML->eraseData(ind);
+
+  // Also make sure the structure is still in the tracker
+  // Just skip over it if it isn't
+  QReadLocker trackerLocker(m_tracker->rwLock());
+  if (!m_tracker->contains(s))
+    return;
+
+  double bulkModulus = atof(data["ml_ael_bulk_modulus_vrh"].c_str());
+  double shearModulus = atof(data["ml_ael_shear_modulus_vrh"].c_str());
+
+  //double k = shearModulus / bulkModulus;
+
+  // The Chen model: 2.0 * (k^2 * shear)^0.585 - 3.0
+  //double hardness = 2.0 * pow((pow(k, 2.0) * shearModulus), 0.585) - 3.0;
+
+  // The Teter model: 0.151 * shear
+  double hardness = 0.151 * shearModulus;
+
+  QWriteLocker structureLocker(&s->lock());
+  s->setBulkModulus(bulkModulus);
+  s->setShearModulus(shearModulus);
+  s->setVickersHardness(hardness);
+
+  emit doneWithHardness(s);
+}
+
+void OptBase::finishHardnessCalculation(size_t ind)
+{
+  // Run in a separate thread
+  QtConcurrent::run(this, &OptBase::_finishHardnessCalculation, ind);
+}
+
+bool OptBase::save(QString stateFilename, bool notify)
+{
+  if (isStarting || readOnly)
+    return false;
+
+  QReadLocker trackerLocker(m_tracker->rwLock());
+  QMutexLocker locker(stateFileMutex);
+  QString filename;
+  if (stateFilename.isEmpty()) {
+    filename = filePath + "/" + m_idString.toLower() + ".state";
+  } else {
+    filename = stateFilename;
+  }
+  QString oldfilename = filename + ".old";
+
+  if (notify && m_dialog) {
+    m_dialog->startProgressUpdate(tr("Saving: Writing %1...").arg(filename), 0,
+                                  0);
+  }
+
+  SETTINGS(filename);
+
+  // Copy .state -> .state.old
+  if (QFile::exists(filename)) {
+    // Only copy over if the current state is valid
+    const bool saveSuccessful =
+      settings->value(m_idString.toLower().append("/saveSuccessful"), false)
+        .toBool();
+    if (saveSuccessful) {
       if (QFile::exists(oldfilename)) {
         QFile::remove(oldfilename);
       }
       QFile::copy(filename, oldfilename);
     }
+  }
 
-    SETTINGS(filename);
-    const int VERSION = m_schemaVersion;
-    settings->beginGroup(m_idString.toLower());
-    settings->setValue("version",          VERSION);
-    settings->setValue("saveSuccessful", false);
-    settings->endGroup();
+  const int version = m_schemaVersion;
+  settings->beginGroup(m_idString.toLower());
+  settings->setValue("version", version);
+  settings->setValue("saveSuccessful", false);
+  settings->endGroup();
 
-    // Write/update .state
+  // Write/update .state
+  if (m_dialog)
     m_dialog->writeSettings(filename);
 
-    // Loop over structures and save them
-    QList<Structure*> *structures = m_tracker->list();
+  // Loop over structures and save them
+  QList<Structure*>* structures = m_tracker->list();
 
-    QString structureStateFileName;
+  QString structureStateFileName, oldStructureStateFileName;
 
-    Structure* structure;
-    for (int i = 0; i < structures->size(); i++) {
-      structure = structures->at(i);
-      structure->lock()->lockForRead();
-      // Set index here -- this is the only time these are written, so
-      // this is "ok" under a read lock because of the savePending logic
-      structure->setIndex(i);
-      structureStateFileName = structure->fileName() + "/structure.state";
-      if (notify) {
-        m_dialog->updateProgressLabel(tr("Saving: Writing %1...")
-                                      .arg(structureStateFileName));
+  Structure* structure;
+  for (int i = 0; i < structures->size(); i++) {
+    structure = structures->at(i);
+    QReadLocker structureLocker(&structure->lock());
+    // Set index here -- this is the only time these are written, so
+    // this is "ok" under a read lock because of the savePending logic
+    structure->setIndex(i);
+    structureStateFileName = structure->fileName() + "/structure.state";
+    oldStructureStateFileName = structureStateFileName + ".old";
+
+    // We are going to write to structure.state.old if one already exists
+    // and is a valid state file. This is done in response to
+    // structure.state files being mysteriously empty on rare occasions...
+    if (QFile::exists(structureStateFileName)) {
+
+      // Attempt to open state file. We will make sure it is valid
+      QFile file(structureStateFileName);
+      if (!file.open(QIODevice::ReadOnly)) {
+        error("OptBase::save(): Error opening file " + structureStateFileName +
+              " for reading...");
+        return false;
       }
-      structure->writeSettings(structureStateFileName);
-      structure->lock()->unlock();
+
+      // If the state file is empty or if saveSuccessful is false,
+      // stateFileIsValid will be false. This will hopefully not interfere
+      // with the previous SETTINGS() declared by hiding it with scoping.
+      SETTINGS(structureStateFileName);
+      bool stateFileIsValid =
+        settings->value("structure/saveSuccessful", false).toBool();
+
+      // Copy it over if it's a valid state file...
+      if (stateFileIsValid) {
+        if (QFile::exists(oldStructureStateFileName)) {
+          QFile::remove(oldStructureStateFileName);
+        }
+        QFile::copy(structureStateFileName, oldStructureStateFileName);
+      }
     }
 
-    /////////////////////////
-    // Print results files //
-    /////////////////////////
+    if (notify && m_dialog) {
+      m_dialog->updateProgressLabel(
+        tr("Saving: Writing %1...").arg(structureStateFileName));
+    }
+    structure->writeSettings(structureStateFileName);
 
-    QFile file (filePath + "/results.txt");
-    QFile oldfile (filePath + "/results_old.txt");
-    if (notify) {
-      m_dialog->updateProgressLabel(tr("Saving: Writing %1...")
-                                    .arg(file.fileName()));
+    // Special request from Eva: if we are using VASP and we encounter
+    // a structure that skipped optimization (primitive reduction, for
+    // instance), still write the CONTCAR in the structure directory.
+    if (structure->skippedOptimization() &&
+        optimizer(getNumOptSteps() - 1)->getIDString() == "VASP") {
+      QFile file(structure->fileName() + "/CONTCAR");
+      file.open(QIODevice::WriteOnly);
+
+      std::stringstream ss;
+      PoscarFormat::write(*structure, ss);
+      file.write(ss.str().c_str());
+    }
+  }
+
+  /////////////////////////
+  // Print results files //
+  /////////////////////////
+
+  // Only print the results file if we have a file path
+  if (!filePath.isEmpty()) {
+    QFile file(filePath + "/results.txt");
+    QFile oldfile(filePath + "/results_old.txt");
+    if (notify && m_dialog) {
+      m_dialog->updateProgressLabel(
+        tr("Saving: Writing %1...").arg(file.fileName()));
     }
     if (oldfile.open(QIODevice::ReadOnly))
       oldfile.remove();
@@ -299,11 +935,11 @@ namespace GlobalSearch {
       file.copy(oldfile.fileName());
     file.close();
     if (!file.open(QIODevice::WriteOnly)) {
-      error("OptBase::save(): Error opening file "+file.fileName()+" for writing...");
-      savePending = false;
+      error("OptBase::save(): Error opening file " + file.fileName() +
+            " for writing...");
       return false;
     }
-    QTextStream out (&file);
+    QTextStream out(&file);
 
     QList<Structure*> sortedStructures;
 
@@ -311,140 +947,173 @@ namespace GlobalSearch {
       sortedStructures.append(structures->at(i));
     if (sortedStructures.size() != 0) {
       Structure::sortAndRankByEnthalpy(&sortedStructures);
-      out << sortedStructures.first()->getResultsHeader() << endl;
+      out << sortedStructures.first()->getResultsHeader(m_calculateHardness, getFeaturesNum())
+          << endl;
     }
 
     for (int i = 0; i < sortedStructures.size(); i++) {
       structure = sortedStructures.at(i);
-      if (!structure) continue; // In case there was a problem copying.
-      structure->lock()->lockForRead();
-      out << structure->getResultsEntry() << endl;
-      structure->lock()->unlock();
-      if (notify) {
+      if (!structure)
+        continue; // In case there was a problem copying.
+      QReadLocker structureLocker(&structure->lock());
+      out << structure->getResultsEntry(m_calculateHardness, getFeaturesNum(),
+                                        structure->getCurrentOptStep()) << endl;
+      structureLocker.unlock();
+      if (notify && m_dialog) {
         m_dialog->stopProgressUpdate();
       }
     }
-
-    // Mark operation successful
-    settings->setValue(m_idString.toLower() + "/saveSuccessful", true);
-    DESTROY_SETTINGS(filename);
-
-    savePending = false;
-    return true;
   }
 
-  QString OptBase::interpretTemplate(const QString & str, Structure* structure)
-  {
-    QStringList list = str.split("%");
-    QString line;
-    QString origLine;
-    for (int line_ind = 0; line_ind < list.size(); line_ind++) {
-      origLine = line = list.at(line_ind);
-      interpretKeyword_base(line, structure);
-      // Add other interpret keyword sections here if needed when subclassing
-      if (line != origLine) { // Line was a keyword
-        list.replace(line_ind, line);
-      }
-    }
-    // Rejoin string
-    QString ret = list.join("");
-    ret += "\n";
-    return ret;
-  }
+  // Write the user values to the output
+  writeUserValuesToSettings(structureStateFileName.toStdString());
 
-  void OptBase::interpretKeyword_base(QString &line, Structure* structure)
-  {
-    QString rep = "";
-    // User data
-    if (line == "user1")                rep += optimizer()->getUser1();
-    else if (line == "user2")           rep += optimizer()->getUser2();
-    else if (line == "user3")           rep += optimizer()->getUser3();
-    else if (line == "user4")           rep += optimizer()->getUser4();
-    else if (line == "description")     rep += description;
-    else if (line == "percent")         rep += "%";
+  // Write the template settings to the output file
+  writeAllTemplatesToSettings(structureStateFileName.toStdString());
 
-    // Structure specific data
-    if (line == "coords") {
-      QList<Avogadro::Atom*> atoms = structure->atoms();
-      QList<Avogadro::Atom*>::const_iterator it;
-      const Eigen::Vector3d *vec;
-      for (it  = atoms.begin();
-           it != atoms.end();
-           it++) {
-        rep += static_cast<QString>(OpenBabel::etab.GetSymbol((*it)->atomicNumber())) + " ";
-        vec = (*it)->pos();
-        rep += QString::number(vec->x()) + " ";
-        rep += QString::number(vec->y()) + " ";
-        rep += QString::number(vec->z()) + "\n";
-      }
-    }
-    else if (line == "coordsInternalFlags") {
-      QList<Avogadro::Atom*> atoms = structure->atoms();
-      QList<Avogadro::Atom*>::const_iterator it;
-      const Eigen::Vector3d *vec;
-      for (it  = atoms.begin();
-           it != atoms.end();
-           it++) {
-        rep += static_cast<QString>(OpenBabel::etab.GetSymbol((*it)->atomicNumber())) + " ";
-        vec = (*it)->pos();
-        rep += QString::number(vec->x()) + " 1 ";
-        rep += QString::number(vec->y()) + " 1 ";
-        rep += QString::number(vec->z()) + " 1\n";
-      }
-    }
-    else if (line == "coordsSuffixFlags") {
-      QList<Avogadro::Atom*> atoms = structure->atoms();
-      QList<Avogadro::Atom*>::const_iterator it;
-      const Eigen::Vector3d *vec;
-      for (it  = atoms.begin();
-           it != atoms.end();
-           it++) {
-        rep += static_cast<QString>(OpenBabel::etab.GetSymbol((*it)->atomicNumber())) + " ";
-        vec = (*it)->pos();
-        rep += QString::number(vec->x()) + " ";
-        rep += QString::number(vec->y()) + " ";
-        rep += QString::number(vec->z()) + " 1 1 1\n";
-      }
-    }
-    else if (line == "coordsId") {
-      QList<Avogadro::Atom*> atoms = structure->atoms();
-      QList<Avogadro::Atom*>::const_iterator it;
-      const Eigen::Vector3d *vec;
-      for (it  = atoms.begin();
-           it != atoms.end();
-           it++) {
-        rep += static_cast<QString>(OpenBabel::etab.GetSymbol((*it)->atomicNumber())) + " ";
-        rep += QString::number((*it)->atomicNumber()) + " ";
-        vec = (*it)->pos();
-        rep += QString::number(vec->x()) + " ";
-        rep += QString::number(vec->y()) + " ";
-        rep += QString::number(vec->z()) + "\n";
-      }
-    }
-    else if (line == "numAtoms")	rep += QString::number(structure->numAtoms());
-    else if (line == "numSpecies")	rep += QString::number(structure->getSymbols().size());
-    else if (line == "filename")	rep += structure->fileName();
-    else if (line == "rempath")       	rep += structure->getRempath();
-    else if (line == "gen")           	rep += QString::number(structure->getGeneration());
-    else if (line == "id")            	rep += QString::number(structure->getIDNumber());
-    else if (line == "incar")         	rep += QString::number(structure->getCurrentOptStep());
-    else if (line == "optStep")       	rep += QString::number(structure->getCurrentOptStep());
+  // Mark operation successful
+  settings->setValue(m_idString.toLower() + "/saveSuccessful", true);
 
-    if (!rep.isEmpty()) {
-      // Remove any trailing newlines
-      rep = rep.replace(QRegExp("\n$"), "");
-      line = rep;
+  return true;
+}
+
+QString OptBase::interpretTemplate(const QString& str, Structure* structure)
+{
+  QStringList list = str.split("%");
+  QString line;
+  QString origLine;
+  for (int line_ind = 0; line_ind < list.size(); line_ind++) {
+    origLine = line = list.at(line_ind);
+    interpretKeyword_base(line, structure);
+    // Add other interpret keyword sections here if needed when subclassing
+    if (line != origLine) { // Line was a keyword
+      list.replace(line_ind, line);
     }
   }
+  // Rejoin string
+  QString ret = list.join("");
+  ret += "\n";
+  return ret;
+}
 
-  QString OptBase::getTemplateKeywordHelp_base()
-  {
-    QString str;
-    QTextStream out (&str);
-    out
-      << "The following keywords should be used instead of the indicated variable data:\n"
+void OptBase::interpretKeyword_base(QString& line, Structure* structure)
+{
+  QString rep = "";
+  // User data
+  if (line == "user1")
+    rep += getUser1().c_str();
+  else if (line == "user2")
+    rep += getUser2().c_str();
+  else if (line == "user3")
+    rep += getUser3().c_str();
+  else if (line == "user4")
+    rep += getUser4().c_str();
+  else if (line == "description")
+    rep += description;
+  else if (line == "percent")
+    rep += "%";
+
+  // Structure specific data
+  if (line == "coords") {
+    std::vector<GlobalSearch::Atom>& atoms = structure->atoms();
+    std::vector<GlobalSearch::Atom>::const_iterator it;
+    for (it = atoms.begin(); it != atoms.end(); it++) {
+      rep += (QString(ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str()) +
+              " ");
+      const Vector3& vec = (*it).pos();
+      rep += QString::number(vec.x()) + " ";
+      rep += QString::number(vec.y()) + " ";
+      rep += QString::number(vec.z()) + "\n";
+    }
+  } else if (line == "coordsInternalFlags") {
+    std::vector<GlobalSearch::Atom>& atoms = structure->atoms();
+    std::vector<GlobalSearch::Atom>::const_iterator it;
+    for (it = atoms.begin(); it != atoms.end(); it++) {
+      rep += (QString(ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str()) +
+              " ");
+      const Vector3& vec = (*it).pos();
+      rep += QString::number(vec.x()) + " 1 ";
+      rep += QString::number(vec.y()) + " 1 ";
+      rep += QString::number(vec.z()) + " 1\n";
+    }
+  } else if (line == "coordsSuffixFlags") {
+    std::vector<GlobalSearch::Atom>& atoms = structure->atoms();
+    std::vector<GlobalSearch::Atom>::const_iterator it;
+    for (it = atoms.begin(); it != atoms.end(); it++) {
+      rep += (QString(ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str()) +
+              " ");
+      const Vector3& vec = (*it).pos();
+      rep += QString::number(vec.x()) + " ";
+      rep += QString::number(vec.y()) + " ";
+      rep += QString::number(vec.z()) + " 1 1 1\n";
+    }
+  } else if (line == "coordsId") {
+    std::vector<GlobalSearch::Atom>& atoms = structure->atoms();
+    std::vector<GlobalSearch::Atom>::const_iterator it;
+    for (it = atoms.begin(); it != atoms.end(); it++) {
+      rep += (QString(ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str()) +
+              " ");
+      rep += QString::number((*it).atomicNumber()) + " ";
+      const Vector3& vec = (*it).pos();
+      rep += QString::number(vec.x()) + " ";
+      rep += QString::number(vec.y()) + " ";
+      rep += QString::number(vec.z()) + "\n";
+    }
+  } else if (line == "numAtoms")
+    rep += QString::number(structure->numAtoms());
+  else if (line == "numSpecies")
+    rep += QString::number(structure->getSymbols().size());
+  else if (line == "filename")
+    rep += structure->fileName();
+  else if (line == "rempath")
+    rep += structure->getRempath();
+  else if (line == "gen")
+    rep += QString::number(structure->getGeneration());
+  else if (line == "id")
+    rep += QString::number(structure->getIDNumber());
+  else if (line == "incar")
+    rep += QString::number(structure->getCurrentOptStep());
+  else if (line == "optStep")
+    rep += QString::number(structure->getCurrentOptStep());
+  else if (line.startsWith("filecontents:", Qt::CaseInsensitive)) {
+    QString filename = line;
+    filename.remove(0, QString("filecontents:").size());
+    filename = filename.trimmed();
+    // Attempt to open the file
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly)) {
+      qDebug() << "Error in" << __FUNCTION__ << ": could not open" << filename;
+    }
+    rep += file.readAll();
+  }
+  // Append a file to be copied to the working dir
+  else if (line.startsWith("copyfile:", Qt::CaseInsensitive)) {
+    QString filename = line;
+    filename.remove(0, QString("copyfile:").size());
+    filename = filename.trimmed();
+    structure->appendCopyFile(filename.toStdString());
+    line = "";
+  }
+
+  if (!rep.isEmpty()) {
+    // Remove any trailing newlines
+    rep = rep.replace(QRegExp("\n$"), "");
+    line = rep;
+  }
+}
+
+QString OptBase::getTemplateKeywordHelp_base()
+{
+  QString str;
+  QTextStream out(&str);
+  out << "The following keywords should be used instead of the indicated "
+         "variable data:\n"
       << "\n"
       << "Misc:\n"
+      << "%fileContents:/path/to/local/file% -- Replaced with the contents of "
+      << "the specified file\n"
+      << "%copyFile:/path/to/local/file% -- Copy the specified file to the "
+      << "structures's working directory\n"
       << "%percent% -- Literal percent sign (needed for CASTEP!)\n"
       << "\n"
       << "User data:\n"
@@ -453,9 +1122,12 @@ namespace GlobalSearch {
       << "\n"
       << "Atomic coordinate formats for isolated structures:\n"
       << "%coords% -- cartesian coordinates\n\t[symbol] [x] [y] [z]\n"
-      << "%coordsInternalFlags% -- cartesian coordinates; flag after each coordinate\n\t[symbol] [x] 1 [y] 1 [z] 1\n"
-      << "%coordsSuffixFlags% -- cartesian coordinates; flags after all coordinates\n\t[symbol] [x] [y] [z] 1 1 1\n"
-      << "%coordsId% -- cartesian coordinates with atomic number\n\t[symbol] [atomic number] [x] [y] [z]\n"
+      << "%coordsInternalFlags% -- cartesian coordinates; flag after each "
+         "coordinate\n\t[symbol] [x] 1 [y] 1 [z] 1\n"
+      << "%coordsSuffixFlags% -- cartesian coordinates; flags after all "
+         "coordinates\n\t[symbol] [x] [y] [z] 1 1 1\n"
+      << "%coordsId% -- cartesian coordinates with atomic number\n\t[symbol] "
+         "[atomic number] [x] [y] [z]\n"
       << "\n"
       << "Generic structure data:\n"
       << "%numAtoms% -- Number of atoms in unit cell\n"
@@ -464,94 +1136,628 @@ namespace GlobalSearch {
       << "%rempath% -- path to structure's remote directory\n"
       << "%gen% -- structure generation number (if relevant)\n"
       << "%id% -- structure id number\n"
-      << "%optStep% -- current optimization step\n"
-      ;
-    return str;
+      << "%optStep% -- current optimization step\n";
+  return str;
+}
+
+std::unique_ptr<QueueInterface> OptBase::createQueueInterface(
+  const std::string& queueName)
+{
+  qDebug() << "Error:" << __FUNCTION__ << "not implemented. It needs to"
+           << "be overridden in a derived class.";
+  return nullptr;
+}
+
+std::unique_ptr<Optimizer> OptBase::createOptimizer(const std::string& optName)
+{
+  qDebug() << "Error:" << __FUNCTION__ << "not implemented. It needs to"
+           << "be overridden in a derived class.";
+  return nullptr;
+}
+
+QueueInterface* OptBase::queueInterface(int optStep) const
+{
+  if (optStep >= getNumOptSteps()) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds! The number of optimization steps is:"
+             << getNumOptSteps();
+    return nullptr;
+  }
+  return m_queueInterfaceAtOptStep[optStep].get();
+}
+
+int OptBase::queueInterfaceIndex(const QueueInterface* qi) const
+{
+  for (size_t i = 0; i < m_queueInterfaceAtOptStep.size(); ++i) {
+    if (qi == m_queueInterfaceAtOptStep[i].get())
+      return i;
+  }
+  return -1;
+}
+
+Optimizer* OptBase::optimizer(int optStep) const
+{
+  if (optStep >= getNumOptSteps()) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds! The number of optimization steps is:"
+             << getNumOptSteps();
+    return nullptr;
+  }
+  return m_optimizerAtOptStep[optStep].get();
+}
+
+int OptBase::optimizerIndex(const Optimizer* optimizer) const
+{
+  for (size_t i = 0; i < m_optimizerAtOptStep.size(); ++i) {
+    if (optimizer == m_optimizerAtOptStep[i].get())
+      return i;
+  }
+  return -1;
+}
+
+void OptBase::clearOptSteps()
+{
+  m_queueInterfaceAtOptStep.clear();
+  m_optimizerAtOptStep.clear();
+  m_queueInterfaceTemplates.clear();
+  m_optimizerTemplates.clear();
+  m_numOptSteps = 0;
+}
+
+void OptBase::appendOptStep()
+{
+  // If there are no opt steps, we can't copy previous ones
+  if (m_numOptSteps == 0) {
+    typedef std::map<std::string, std::string> templateMap;
+    m_queueInterfaceAtOptStep.push_back(nullptr);
+    m_optimizerAtOptStep.push_back(nullptr);
+    m_queueInterfaceTemplates.push_back(templateMap());
+    m_optimizerTemplates.push_back(templateMap());
+  }
+  // We will duplicate the most recent opt step otherwise
+  else {
+    m_queueInterfaceAtOptStep.push_back(createQueueInterface(
+      m_queueInterfaceAtOptStep.back()->getIDString().toStdString()));
+    m_optimizerAtOptStep.push_back(createOptimizer(
+      m_optimizerAtOptStep.back()->getIDString().toStdString()));
+    m_queueInterfaceTemplates.push_back(m_queueInterfaceTemplates.back());
+    m_optimizerTemplates.push_back(m_optimizerTemplates.back());
   }
 
-  void OptBase::setOptimizer(Optimizer *o)
-  {
-    m_optimizer = o;
-    emit optimizerChanged(o);
+  ++m_numOptSteps;
+}
+
+void OptBase::insertOptStep(size_t optStep)
+{
+  // If we are adding an opt step to the end, just use the append function
+  if (optStep == m_numOptSteps) {
+    appendOptStep();
+    return;
   }
 
-  void OptBase::setQueueInterface(QueueInterface *q)
-  {
-    m_queueInterface = q;
-    emit queueInterfaceChanged(q);
+  if (optStep > m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": attempting to insert"
+             << "an opt step," << optStep << ", that is greater than"
+             << "the number of opt steps," << m_numOptSteps;
+    return;
   }
 
-  void OptBase::promptForPassword(const QString &message,
-                                  QString *newPassword,
-                                  bool *ok)
-  {
+  // We will copy another step. Figure out the index of the one we will copy.
+  // We will copy the one immediately prior to optStep in most cases, but
+  // if optStep is 0, we will copy the first item already present
+  size_t copyInd = (optStep == 0 ? 0 : optStep - 1);
+  m_queueInterfaceAtOptStep.insert(
+    m_queueInterfaceAtOptStep.begin() + optStep,
+    createQueueInterface(
+      m_queueInterfaceAtOptStep[copyInd]->getIDString().toStdString()));
+  m_optimizerAtOptStep.insert(
+    m_optimizerAtOptStep.begin() + optStep,
+    createOptimizer(
+      m_optimizerAtOptStep[copyInd]->getIDString().toStdString()));
+
+  m_queueInterfaceTemplates.insert(m_queueInterfaceTemplates.begin() + optStep,
+                                   m_queueInterfaceTemplates[copyInd]);
+
+  m_optimizerTemplates.insert(m_optimizerTemplates.begin() + optStep,
+                              m_optimizerTemplates[copyInd]);
+
+  ++m_numOptSteps;
+}
+
+void OptBase::removeOptStep(size_t optStep)
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": attempting to remove"
+             << "an opt step," << optStep << ", that is out of bounds.\n"
+             << "The number of opt steps is" << m_numOptSteps;
+    return;
+  }
+
+  m_queueInterfaceAtOptStep.erase(m_queueInterfaceAtOptStep.begin() + optStep);
+  m_optimizerAtOptStep.erase(m_optimizerAtOptStep.begin() + optStep);
+
+  m_queueInterfaceTemplates.erase(m_queueInterfaceTemplates.begin() + optStep);
+  m_optimizerTemplates.erase(m_optimizerTemplates.begin() + optStep);
+
+  --m_numOptSteps;
+}
+
+void OptBase::setQueueInterface(size_t optStep, const std::string& qiName)
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds. Number of opt steps is" << m_numOptSteps;
+    return;
+  }
+  m_queueInterfaceAtOptStep[optStep] = createQueueInterface(qiName);
+
+  // We need to populate the templates list with empty templates
+  for (const auto& templateName :
+       m_queueInterfaceAtOptStep[optStep]->getTemplateFileNames()) {
+    setQueueInterfaceTemplate(optStep, templateName.toStdString(), "");
+  }
+}
+
+std::string OptBase::getQueueInterfaceTemplate(size_t optStep,
+                                               const std::string& name) const
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds. Number of opt steps is" << m_numOptSteps;
+    return "";
+  }
+  if (m_queueInterfaceTemplates[optStep].count(name) == 0) {
+    qDebug() << "Error in" << __FUNCTION__ << ": invalid key entry"
+             << "Name:" << name.c_str() << ", for opt step:" << optStep;
+    return "";
+  }
+  return m_queueInterfaceTemplates[optStep].at(name);
+}
+
+void OptBase::setQueueInterfaceTemplate(size_t optStep, const std::string& name,
+                                        const std::string& temp)
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds. Number of opt steps is" << m_numOptSteps;
+    return;
+  }
+  m_queueInterfaceTemplates[optStep][name] = temp;
+}
+
+void OptBase::setOptimizer(size_t optStep, const std::string& optName)
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds. Number of opt steps is" << m_numOptSteps;
+    return;
+  }
+  m_optimizerAtOptStep[optStep] = createOptimizer(optName);
+
+  // We need to populate the templates list with empty templates
+  for (const auto& templateName :
+       m_optimizerAtOptStep[optStep]->getTemplateFileNames()) {
+    setOptimizerTemplate(optStep, templateName.toStdString(), "");
+  }
+}
+
+std::string OptBase::getOptimizerTemplate(size_t optStep,
+                                          const std::string& name) const
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds. Number of opt steps is" << m_numOptSteps;
+    return "";
+  }
+  if (m_optimizerTemplates[optStep].count(name) == 0) {
+    qDebug() << "Error in" << __FUNCTION__ << ": invalid key entry"
+             << "Name:" << name.c_str() << ", for opt step:" << optStep;
+    return "";
+  }
+  return m_optimizerTemplates[optStep].at(name);
+}
+
+void OptBase::setOptimizerTemplate(size_t optStep, const std::string& name,
+                                   const std::string& temp)
+{
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of bounds. Number of opt steps is" << m_numOptSteps;
+    return;
+  }
+  m_optimizerTemplates[optStep][name] = temp;
+}
+
+OptBase::TemplateType OptBase::getTemplateType(size_t optStep,
+                                               const std::string& name) const
+{
+  TemplateType ret = TT_Unknown;
+
+  if (optStep >= m_numOptSteps) {
+    qDebug() << "Error in" << __FUNCTION__ << ": optStep," << optStep
+             << ", is out of range! Num opt steps is: " << m_numOptSteps;
+    return ret;
+  }
+
+  if (queueInterface(optStep) &&
+      queueInterface(optStep)->isTemplateFileName(name.c_str())) {
+    if (ret != TT_Unknown) {
+      qDebug() << "Error: in" << __FUNCTION__ << ": template name,"
+               << name.c_str() << ", in multiple template types!";
+      ret = TT_Unknown;
+      return ret;
+    }
+    ret = TT_QueueInterface;
+  }
+
+  if (optimizer(optStep) &&
+      optimizer(optStep)->isTemplateFileName(name.c_str())) {
+    if (ret != TT_Unknown) {
+      qDebug() << "Error: in" << __FUNCTION__ << ": template name,"
+               << name.c_str() << ", in multiple template types!";
+      ret = TT_Unknown;
+      return ret;
+    }
+    ret = TT_Optimizer;
+  }
+
+  if (ret == TT_Unknown) {
+    qDebug() << "Error in" << __FUNCTION__
+             << ": unknown template type: " << name.c_str();
+  }
+
+  return ret;
+}
+
+std::string OptBase::getTemplate(size_t optStep, const std::string& name) const
+{
+  TemplateType type = getTemplateType(optStep, name);
+
+  if (type == TT_Unknown)
+    return "";
+
+  if (type == TT_QueueInterface)
+    return getQueueInterfaceTemplate(optStep, name);
+
+  if (type == TT_Optimizer)
+    return getOptimizerTemplate(optStep, name);
+
+  // We should never make it here
+  return "";
+}
+
+void OptBase::setTemplate(size_t optStep, const std::string& name,
+                          const std::string& temp)
+{
+  TemplateType type = getTemplateType(optStep, name);
+
+  if (type == TT_Unknown)
+    return;
+
+  if (type == TT_QueueInterface)
+    setQueueInterfaceTemplate(optStep, name, temp);
+
+  if (type == TT_Optimizer)
+    setOptimizerTemplate(optStep, name, temp);
+
+  // We should never make it here
+}
+
+void OptBase::readQueueInterfaceTemplatesFromSettings(
+  size_t optStep, const std::string& settingsFile)
+{
+  QueueInterface* queue = queueInterface(optStep);
+  if (!queue) {
+    qDebug() << "Error in " << __FUNCTION__ << ": queue interface at"
+             << "opt step" << optStep << "does not exist!";
+    return;
+  }
+
+  SETTINGS(settingsFile.c_str());
+
+  settings->beginGroup(getIDString().toLower() + "/edit/queueInterface/" +
+                       QString::number(optStep) + "/" +
+                       queue->getIDString().toLower());
+  QStringList filenames = queue->getTemplateFileNames();
+  for (const auto& filename : filenames) {
+    QString temp = settings->value(filename).toString();
+    setQueueInterfaceTemplate(optStep, filename.toStdString(),
+                              temp.toStdString());
+  }
+  settings->endGroup();
+}
+
+void OptBase::readOptimizerTemplatesFromSettings(
+  size_t optStep, const std::string& settingsFile)
+{
+  Optimizer* optim = optimizer(optStep);
+  if (!optim) {
+    qDebug() << "Error in " << __FUNCTION__ << ": optimizer at"
+             << "opt step" << optStep << "does not exist!";
+    return;
+  }
+
+  SETTINGS(settingsFile.c_str());
+
+  optim->setLocalRunCommand(settings->value(getIDString().toLower() + "/edit/optimizer/" +
+                            QString::number(optStep) + "/exeLocation",
+                            optim->getIDString().toLower()).toString());
+  settings->beginGroup(getIDString().toLower() + "/edit/optimizer/" +
+                       QString::number(optStep) + "/" +
+                       optim->getIDString().toLower());
+  QStringList filenames = optim->getTemplateFileNames();
+  for (const auto& filename : filenames) {
+    QString temp = settings->value(filename).toString();
+
+    setOptimizerTemplate(optStep, filename.toStdString(), temp.toStdString());
+
+    if (!temp.isEmpty())
+      continue;
+
+    // If "temp" is empty, perhaps we have some template filenames to open
+    QString templateFile = settings->value(filename + "_templates").toString();
+
+    if (templateFile.isEmpty())
+      continue;
+
+    QFile file(templateFile);
+
+    // If the file exists, store it in the templates
+    if (!file.exists()) {
+      qWarning() << "Warning in " << __FUNCTION__ << ": " << templateFile
+                 << "does not exist!";
+      continue;
+    }
+    if (!file.open(QIODevice::ReadOnly)) {
+      qWarning() << "Warning in " << __FUNCTION__ << ": " << templateFile
+                 << "could not be opened!";
+      continue;
+    }
+
+    setOptimizerTemplate(optStep, filename.toStdString(),
+                         QString(file.readAll()).toStdString());
+    file.close();
+  }
+  settings->endGroup();
+}
+
+void OptBase::readTemplatesFromSettings(size_t optStep,
+                                        const std::string& filename)
+{
+  readQueueInterfaceTemplatesFromSettings(optStep, filename);
+  readOptimizerTemplatesFromSettings(optStep, filename);
+}
+
+void OptBase::readAllTemplatesFromSettings(const std::string& filename)
+{
+  SETTINGS(filename.c_str());
+  settings->beginGroup(getIDString().toLower() + "/edit");
+  size_t numOptSteps = settings->value("numOptSteps").toUInt();
+  while (getNumOptSteps() < numOptSteps)
+    appendOptStep();
+
+  for (size_t i = 0; i < getNumOptSteps(); ++i)
+    readTemplatesFromSettings(i, filename);
+  settings->endGroup();
+}
+
+void OptBase::writeQueueInterfaceTemplatesToSettings(
+  size_t optStep, const std::string& settingsFilename)
+{
+  QueueInterface* queue = queueInterface(optStep);
+  if (!queue) {
+    qDebug() << "Error in " << __FUNCTION__ << ": queue interface at"
+             << "opt step" << optStep << "does not exist!";
+    return;
+  }
+
+  SETTINGS(settingsFilename.c_str());
+  // QueueInterface templates
+  settings->beginGroup(getIDString().toLower() + "/edit/queueInterface/" +
+                       QString::number(optStep) + "/" +
+                       queue->getIDString().toLower());
+
+  QStringList filenames = queue->getTemplateFileNames();
+  for (const auto& filename : filenames) {
+    settings->setValue(
+      filename,
+      getQueueInterfaceTemplate(optStep, filename.toStdString()).c_str());
+  }
+  settings->endGroup();
+}
+
+void OptBase::writeOptimizerTemplatesToSettings(
+  size_t optStep, const std::string& settingsFilename)
+{
+  Optimizer* optim = optimizer(optStep);
+  if (!optim) {
+    qDebug() << "Error in " << __FUNCTION__ << ": optimizer at"
+             << "opt step" << optStep << "does not exist!";
+    return;
+  }
+
+  SETTINGS(settingsFilename.c_str());
+  // Optimizer templates
+  settings->setValue(getIDString().toLower() + "/edit/optimizer/" +
+                     QString::number(optStep) + "/exeLocation",
+                     optim->localRunCommand());
+  settings->beginGroup(getIDString().toLower() + "/edit/optimizer/" +
+                       QString::number(optStep) + "/" +
+                       optim->getIDString().toLower());
+
+  QStringList filenames = optim->getTemplateFileNames();
+  for (const auto& filename : filenames) {
+    settings->setValue(
+      filename, getOptimizerTemplate(optStep, filename.toStdString()).c_str());
+  }
+  settings->endGroup();
+}
+
+void OptBase::writeTemplatesToSettings(size_t optStep,
+                                       const std::string& filename)
+{
+  writeQueueInterfaceTemplatesToSettings(optStep, filename);
+  writeOptimizerTemplatesToSettings(optStep, filename);
+}
+
+void OptBase::writeAllTemplatesToSettings(const std::string& filename)
+{
+  SETTINGS(filename.c_str());
+  settings->beginGroup(getIDString().toLower() + "/edit");
+  settings->setValue("numOptSteps", QString::number(getNumOptSteps()));
+  for (size_t i = 0; i < getNumOptSteps(); ++i)
+    writeTemplatesToSettings(i, filename);
+  settings->endGroup();
+}
+
+void OptBase::readUserValuesFromSettings(const std::string& filename)
+{
+  SETTINGS(filename.c_str());
+
+  settings->beginGroup(getIDString().toLower() + "/edit");
+  m_user1 = settings->value("/user1", "").toString().toStdString();
+  m_user2 = settings->value("/user2", "").toString().toStdString();
+  m_user3 = settings->value("/user3", "").toString().toStdString();
+  m_user4 = settings->value("/user4", "").toString().toStdString();
+  settings->endGroup();
+}
+
+void OptBase::writeUserValuesToSettings(const std::string& filename)
+{
+  SETTINGS(filename.c_str());
+
+  settings->beginGroup(getIDString().toLower() + "/edit");
+
+  settings->setValue("/user1", m_user1.c_str());
+  settings->setValue("/user2", m_user2.c_str());
+  settings->setValue("/user3", m_user3.c_str());
+  settings->setValue("/user4", m_user4.c_str());
+
+  settings->endGroup();
+}
+
+bool OptBase::isReadyToSearch(QString& err) const
+{
+  err.clear();
+  if (filePath.isEmpty()) {
+    err += "Local working directory is not set.";
+    return false;
+  }
+
+  for (size_t i = 0; i < getNumOptSteps(); ++i) {
+    if (!queueInterface(i)) {
+      err += "Queue interface at opt step " + QString::number(i + 1) +
+             " is not set!";
+      return false;
+    }
+
+    if (!optimizer(i)) {
+      err += "Optimizer at opt step " + QString::number(i + 1) + " is not set!";
+      return false;
+    }
+
+    if (!queueInterface(i)->isReadyToSearch(&err))
+      return false;
+
+    if (!optimizer(i)->isReadyToSearch(&err))
+      return false;
+  }
+
+  return true;
+}
+
+bool OptBase::anyRemoteQueueInterfaces() const
+{
+  for (size_t i = 0; i < getNumOptSteps(); ++i) {
+    if (queueInterface(i)->getIDString().toLower() != "local")
+      return true;
+  }
+  return false;
+}
+
+void OptBase::promptForPassword(const QString& message, QString* newPassword,
+                                bool* ok)
+{
+  if (m_usingGUI) {
     (*newPassword) = QInputDialog::getText(dialog(), "Need password:", message,
                                            QLineEdit::Password, QString(), ok);
-  };
+  } else {
+    (*newPassword) = PasswordPrompt::getPassword().c_str();
+  }
+}
 
-  void OptBase::promptForBoolean(const QString &message,
-                                 bool *ok)
-  {
+void OptBase::promptForBoolean(const QString& message, bool* ok)
+{
+  if (m_usingGUI) {
     if (QMessageBox::question(dialog(), m_idString, message,
-                              QMessageBox::Yes | QMessageBox::No)
-        == QMessageBox::Yes) {
+                              QMessageBox::Yes | QMessageBox::No) ==
+        QMessageBox::Yes) {
       *ok = true;
     } else {
       *ok = false;
     }
+  } else {
+    std::cout << message.toStdString() << "\n[y/N]\n";
+    std::string in;
+    std::getline(std::cin, in);
+    in = trim(in);
+    if (in.size() != 0 && (in[0] == 'y' || in[0] == 'Y'))
+      *ok = true;
+    else
+      *ok = false;
   }
+}
 
-  void OptBase::setClipboard(const QString &text) const
-  {
-    emit sig_setClipboard(text);
-  }
+void OptBase::setClipboard(const QString& text) const
+{
+  emit sig_setClipboard(text);
+}
 
-  // No need to document this
-  /// @cond
-  void OptBase::setClipboard_(const QString &text) const
-  {
-    // Set to system clipboard
-    QApplication::clipboard()->setText(text, QClipboard::Clipboard);
-    // For middle-click on X11
-    if (QApplication::clipboard()->supportsSelection()) {
-      QApplication::clipboard()->setText(text, QClipboard::Selection);
-    }
+// No need to document this
+/// @cond
+void OptBase::setClipboard_(const QString& text) const
+{
+  // Set to system clipboard
+  QApplication::clipboard()->setText(text, QClipboard::Clipboard);
+  // For middle-click on X11
+  if (QApplication::clipboard()->supportsSelection()) {
+    QApplication::clipboard()->setText(text, QClipboard::Selection);
   }
-  /// @endcond
+}
+/// @endcond
 
 #ifdef ENABLE_SSH
 #ifndef USE_CLI_SSH
 
-  bool OptBase::createSSHConnections_libssh()
-  {
-    delete m_ssh;
-    SSHManagerLibSSH *libsshManager = new SSHManagerLibSSH(5, this);
-    m_ssh = libsshManager;
-    QString pw = "";
-    for (;;) {
-      try {
-        libsshManager->makeConnections(host, username, pw, port);
-      }
-      catch (SSHConnection::SSHConnectionException e) {
-        QString err;
-        switch (e) {
+bool OptBase::createSSHConnections_libssh()
+{
+  delete m_ssh;
+  SSHManagerLibSSH* libsshManager = new SSHManagerLibSSH(5, this);
+  m_ssh = libsshManager;
+  QString pw = "";
+  for (;;) {
+    try {
+      libsshManager->makeConnections(host, username, pw, port);
+    } catch (SSHConnection::SSHConnectionException e) {
+      QString err;
+      switch (e) {
         case SSHConnection::SSH_CONNECTION_ERROR:
         case SSHConnection::SSH_UNKNOWN_ERROR:
         default:
-          err = "There was a problem connection to the ssh server at "
-              + username + "@" + host + ":" + QString::number(port) + ". "
-              "Please check that all provided information is correct, and "
-              "attempt to log in outside of Avogadro before trying again.";
+          err = "There was a problem connection to the ssh server at " +
+                username + "@" + host + ":" + QString::number(port) +
+                ". "
+                "Please check that all provided information is correct, and "
+                "attempt to log in outside of Avogadro before trying again.";
           error(err);
           return false;
         case SSHConnection::SSH_UNKNOWN_HOST_ERROR: {
           // The host is not known, or has changed its key.
           // Ask user if this is ok.
-          err = "The host "
-            + host + ":" + QString::number(port)
-            + " either has an unknown key, or has changed it's key:\n"
-            + libsshManager->getServerKeyHash() + "\n"
-            + "Would you like to trust the specified host?";
+          err = "The host " + host + ":" + QString::number(port) +
+                " either has an unknown key, or has changed it's key:\n" +
+                libsshManager->getServerKeyHash() + "\n" +
+                "Would you like to trust the specified host?";
           bool ok;
           // This is a BlockingQueuedConnection, which blocks until
           // the slot returns.
@@ -565,55 +1771,70 @@ namespace GlobalSearch {
         case SSHConnection::SSH_BAD_PASSWORD_ERROR: {
           // Chances are that the pubkey auth was attempted but failed,
           // so just prompt user for password.
-          err = "Please enter a password for "
-            + username + "@" + host + ":" + QString::number(port)
-            + ":";
+          err = "Please enter a password for " + username + "@" + host + ":" +
+                QString::number(port) + ": ";
           bool ok;
           QString newPassword;
-          // This is a BlockingQueuedConnection, which blocks until
-          // the slot returns.
-          emit needPassword(err, &newPassword, &ok);
+
+          if (m_usingGUI)
+            // This is a BlockingQueuedConnection, which blocks until
+            // the slot returns.
+            emit needPassword(err, &newPassword, &ok);
+          else {
+            newPassword =
+              PasswordPrompt::getPassword(err.toStdString()).c_str();
+            ok = true;
+          }
+
           if (!ok) { // user cancels
             return false;
           }
           pw = newPassword;
           continue;
         } // end case
-        } // end switch
-      } // end catch
-      break;
-    } // end forever
-    return true;
-  }
+      }   // end switch
+    }     // end catch
+    break;
+  } // end forever
+  return true;
+}
 
 #else // not USE_CLI_SSH
 
-  bool OptBase::createSSHConnections_cli()
-  {
-    // Since we rely on public key auth here, it's much easier to set up:
-    SSHManagerCLI *cliSSHManager = new SSHManagerCLI(5, this);
-    cliSSHManager->makeConnections(host, username, "", port);
-    m_ssh = cliSSHManager;
-    return true;
-  }
+bool OptBase::createSSHConnections_cli()
+{
+  // Since we rely on public key auth here, it's much easier to set up:
+  SSHManagerCLI* cliSSHManager = new SSHManagerCLI(5, this);
+  cliSSHManager->makeConnections(host, username, "", port);
+  m_ssh = cliSSHManager;
+  return true;
+}
 
 #endif // not USE_CLI_SSH
 #endif // ENABLE_SSH
 
-  void OptBase::warning(const QString & s) {
-    qWarning() << "Warning: " << s;
-    emit warningStatement(s);
-  }
+void OptBase::warning(const QString& s)
+{
+  qWarning() << "Warning: " << s;
+  emit warningStatement(s);
+}
 
-  void OptBase::debug(const QString & s) {
-    qDebug() << "Debug: " << s;
-    emit debugStatement(s);
-  }
+void OptBase::debug(const QString& s)
+{
+  qDebug() << "Debug: " << s;
+  emit debugStatement(s);
+}
 
-  void OptBase::error(const QString & s) {
-    qWarning() << "Error: " << s;
-    emit errorStatement(s);
-  }
+void OptBase::error(const QString& s)
+{
+  qWarning() << "Error: " << s;
+  emit errorStatement(s);
+}
+
+void OptBase::message(const QString& s)
+{
+  qDebug() << "Message: " << s;
+  emit messageStatement(s);
+}
 
 } // end namespace GlobalSearch
-

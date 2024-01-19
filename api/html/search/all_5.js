@@ -1,14 +1,15 @@
 var searchData=
 [
-  ['fa_5fdonothing',['FA_DoNothing',['../classGlobalSearch_1_1OptBase.html#a970b328cd0a36335c34c6b24c6ac2775ab04d2d04ae7df7ba1da75a185c53dfca',1,'GlobalSearch::OptBase']]],
-  ['fa_5fkillit',['FA_KillIt',['../classGlobalSearch_1_1OptBase.html#a970b328cd0a36335c34c6b24c6ac2775a4457ab4b5903c890b0edf0817bf00e74',1,'GlobalSearch::OptBase']]],
-  ['fa_5fnewoffspring',['FA_NewOffspring',['../classGlobalSearch_1_1OptBase.html#a970b328cd0a36335c34c6b24c6ac2775a548d59265329ca034e4e99257b85aa5e',1,'GlobalSearch::OptBase']]],
-  ['fa_5frandomize',['FA_Randomize',['../classGlobalSearch_1_1OptBase.html#a970b328cd0a36335c34c6b24c6ac2775a79cd7097c06d1b27824ae7c90201276a',1,'GlobalSearch::OptBase']]],
-  ['failaction',['failAction',['../classGlobalSearch_1_1OptBase.html#adda17a1eab956c00c6b14ab3ae451b91',1,'GlobalSearch::OptBase']]],
-  ['failactions',['FailActions',['../classGlobalSearch_1_1OptBase.html#a970b328cd0a36335c34c6b24c6ac2775',1,'GlobalSearch::OptBase']]],
-  ['faillimit',['failLimit',['../classGlobalSearch_1_1OptBase.html#aec8bb712a35c23ab79608a5d70f52b90',1,'GlobalSearch::OptBase']]],
-  ['fetchfile',['fetchFile',['../classGlobalSearch_1_1QueueInterface.html#ac8af84b05ee61d8c9bb6f1648cc5f221',1,'GlobalSearch::QueueInterface::fetchFile()'],['../classGlobalSearch_1_1LocalQueueInterface.html#ae0b1b95c62405c79b41604b7a4794a0d',1,'GlobalSearch::LocalQueueInterface::fetchFile()']]],
-  ['filepath',['filePath',['../classGlobalSearch_1_1OptBase.html#a707d2bf2511d4fec3f244afb2f094c6e',1,'GlobalSearch::OptBase']]],
-  ['finishedbackgroundprocessing',['finishedBackgroundProcessing',['../classGlobalSearch_1_1AbstractTab.html#a5b06b32887aa1ba75cfcfad24f9c9a86',1,'GlobalSearch::AbstractTab']]],
-  ['fixtemplatelengths',['fixTemplateLengths',['../classGlobalSearch_1_1Optimizer.html#a8205c1cb67d2111c0a9e13e78a543f00',1,'GlobalSearch::Optimizer']]]
+  ['eleminfo_0',['ElemInfo',['../classElemInfo.html',1,'']]],
+  ['emitreadonlysessionstarted_1',['emitReadOnlySessionStarted',['../classGlobalSearch_1_1OptBase.html#ae1bd90daf659e169a56622d47f6a5be2',1,'GlobalSearch::OptBase']]],
+  ['emitsessionstarted_2',['emitSessionStarted',['../classGlobalSearch_1_1OptBase.html#ae71d020ca740d76941b66c682eea6986',1,'GlobalSearch::OptBase']]],
+  ['emitstartingsession_3',['emitStartingSession',['../classGlobalSearch_1_1OptBase.html#abbcfe0cbb229deb3781b718d175c14c2',1,'GlobalSearch::OptBase']]],
+  ['empty_4',['Empty',['../classGlobalSearch_1_1Structure.html#a3f1e44cb4f603fe1b3fbc8e813535917a1639a0fd1ec7f1bba6cdaf73a2e76582',1,'GlobalSearch::Structure']]],
+  ['enableautohistogramgeneration_5',['enableAutoHistogramGeneration',['../classGlobalSearch_1_1Structure.html#a36f95cfbd571cce162a4bc59bb468f61',1,'GlobalSearch::Structure']]],
+  ['error_6',['error',['../classGlobalSearch_1_1QueueInterface.html#a08dcf06d1b99f6333472470490ca9a6dabaf3f4a536a56b3a2ac6643de3e4689f',1,'GlobalSearch::QueueInterface::Error'],['../classGlobalSearch_1_1Structure.html#a3f1e44cb4f603fe1b3fbc8e813535917a6b33b578b7e228f289720292019a998a',1,'GlobalSearch::Structure::Error'],['../classGlobalSearch_1_1OptBase.html#a0069abbd35393e6a5760b049e3497a21',1,'GlobalSearch::OptBase::error()']]],
+  ['errorbox_7',['errorBox',['../classGlobalSearch_1_1AbstractDialog.html#aee94863a2a275b8a91613b191451bc1e',1,'GlobalSearch::AbstractDialog']]],
+  ['errorbox_5f_8',['errorBox_',['../classGlobalSearch_1_1AbstractDialog.html#a4ccf7b6a73663c780f82c2c6f4a39536',1,'GlobalSearch::AbstractDialog']]],
+  ['errorstatement_9',['errorStatement',['../classGlobalSearch_1_1OptBase.html#a6bcbb9a259f9173084e2f4a82ffa0b86',1,'GlobalSearch::OptBase']]],
+  ['executegenxrdpattern_10',['executeGenXrdPattern',['../classGlobalSearch_1_1GenerateXrd.html#af1f79730b30b07fe72525c6b6f32b563',1,'GlobalSearch::GenerateXrd']]],
+  ['executeobabel_11',['executeOBabel',['../classGlobalSearch_1_1OBConvert.html#a2d55b786b3e2d81f60f77abb5b12bdef',1,'GlobalSearch::OBConvert']]]
 ];

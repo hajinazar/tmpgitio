@@ -1,12 +1,15 @@
 var searchData=
 [
-  ['popfirst',['popFirst',['../classGlobalSearch_1_1Tracker.html#a7e022f8bd6943c5eb0651f81ce369793',1,'GlobalSearch::Tracker']]],
-  ['populateoptsteplist',['populateOptStepList',['../classGlobalSearch_1_1AbstractEditTab.html#ac973d18ed4a3c2d4ed8392a1fc8bed10',1,'GlobalSearch::AbstractEditTab']]],
-  ['populatetemplates',['populateTemplates',['../classGlobalSearch_1_1AbstractEditTab.html#ae37c49f896c0d668d48ef9bcae90dcf7',1,'GlobalSearch::AbstractEditTab']]],
-  ['postwaitunlock',['postwaitUnlock',['../classGlobalSearch_1_1SlottedWaitCondition.html#a3c9f9e3ba7eebdc3cc270445385e334c',1,'GlobalSearch::SlottedWaitCondition']]],
-  ['prepareforstructureupdate',['prepareForStructureUpdate',['../classGlobalSearch_1_1QueueInterface.html#ac3a92214ace255b679951f5a5ef9a11c',1,'GlobalSearch::QueueInterface::prepareForStructureUpdate()'],['../classGlobalSearch_1_1LocalQueueInterface.html#aec8ffad280b7e550d90529624c3b50fe',1,'GlobalSearch::LocalQueueInterface::prepareForStructureUpdate()']]],
-  ['prewaitlock',['prewaitLock',['../classGlobalSearch_1_1SlottedWaitCondition.html#afb1ba4315ffa2de59eaf5045d2a4c09f',1,'GlobalSearch::SlottedWaitCondition']]],
-  ['printbacktrace',['printBackTrace',['../classGlobalSearch_1_1OptBase.html#af00d6357f3ed311e9bcd2b03153fc3cc',1,'GlobalSearch::OptBase']]],
-  ['promptforboolean',['promptForBoolean',['../classGlobalSearch_1_1OptBase.html#a3460f008a4a3cc3f8d00b3c0cd531069',1,'GlobalSearch::OptBase']]],
-  ['promptforpassword',['promptForPassword',['../classGlobalSearch_1_1OptBase.html#a934195fac431de2882383b0483505c95',1,'GlobalSearch::OptBase']]]
+  ['needboolean_0',['needBoolean',['../classGlobalSearch_1_1OptBase.html#a771c4b00f1fd857750ccb3d48116334d',1,'GlobalSearch::OptBase']]],
+  ['neednewstructure_1',['needNewStructure',['../classGlobalSearch_1_1QueueManager.html#a4b50dbd51e53b1d0d5cb93e9d7380c1c',1,'GlobalSearch::QueueManager']]],
+  ['needpassword_2',['needPassword',['../classGlobalSearch_1_1OptBase.html#aa140b7676a1fee73e1d416c164232fb3',1,'GlobalSearch::OptBase']]],
+  ['newdebug_3',['newDebug',['../classGlobalSearch_1_1AbstractDialog.html#a7353bd5b3393faf017287674691e56c6',1,'GlobalSearch::AbstractDialog']]],
+  ['newerror_4',['newError',['../classGlobalSearch_1_1AbstractDialog.html#ae0b664aa133ded37df0dc5f7a040f0c5',1,'GlobalSearch::AbstractDialog']]],
+  ['newlog_5',['newLog',['../classGlobalSearch_1_1AbstractDialog.html#a94fdb4c5a3ec5963f2764f0d821b2583',1,'GlobalSearch::AbstractDialog']]],
+  ['newmessage_6',['newMessage',['../classGlobalSearch_1_1AbstractDialog.html#ab5840deae9fddcf0aa7a61b46154fd89',1,'GlobalSearch::AbstractDialog']]],
+  ['newstatusoverview_7',['newStatusOverview',['../classGlobalSearch_1_1QueueManager.html#af37eb7a9e54e347a81dc3a1e373c8d54',1,'GlobalSearch::QueueManager']]],
+  ['newstructureadded_8',['newStructureAdded',['../classGlobalSearch_1_1Tracker.html#ab52b21fb3c4af98fe959bb904f6d029d',1,'GlobalSearch::Tracker']]],
+  ['newwarning_9',['newWarning',['../classGlobalSearch_1_1AbstractDialog.html#abe3084783126e2d1f09c9250c11f8f39',1,'GlobalSearch::AbstractDialog']]],
+  ['numatoms_10',['numAtoms',['../classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1',1,'GlobalSearch::Molecule']]],
+  ['numbonds_11',['numBonds',['../classGlobalSearch_1_1Molecule.html#a68febb14025b26c96fd08419c5314794',1,'GlobalSearch::Molecule']]]
 ];

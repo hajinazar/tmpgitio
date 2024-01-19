@@ -3,15 +3,13 @@
 
   Copyright (C) 2012 by David Lonie
 
-  This library is free software; you can redistribute it and/or modify
-  it under the terms of the GNU Library General Public License as
-  published by the Free Software Foundation; either version 2.1 of the
-  License, or (at your option) any later version.
+  This source code is released under the New BSD License, (the "License").
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public icense for more details.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  ***********************************************************************/
 
 #ifndef LOADLEVELERCONFIGDIALOG_H
@@ -19,46 +17,43 @@
 
 #ifdef ENABLE_SSH
 
-//Doxygen should ignore this file:
+// Doxygen should ignore this file:
 /// @cond
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 namespace Ui {
-  class LoadLevelerConfigDialog;
+class LoadLevelerConfigDialog;
 }
 
 namespace GlobalSearch {
-  class AbstractDialog;
-  class OptBase;
-  class LoadLevelerQueueInterface;
+class AbstractDialog;
+class OptBase;
+class LoadLevelerQueueInterface;
 
-  class LoadLevelerConfigDialog : public QDialog
-  {
-    Q_OBJECT
+class LoadLevelerConfigDialog : public QDialog
+{
+  Q_OBJECT
 
-  public:
+public:
+  explicit LoadLevelerConfigDialog(AbstractDialog* parent, OptBase* o,
+                                   LoadLevelerQueueInterface* p);
+  virtual ~LoadLevelerConfigDialog() override;
 
-    explicit LoadLevelerConfigDialog(AbstractDialog *parent,
-                             OptBase *o,
-                             LoadLevelerQueueInterface *p);
-    virtual ~LoadLevelerConfigDialog();
+public slots:
+  void updateGUI();
 
-  public slots:
-    void updateGUI();
+protected slots:
+  void accept() override;
+  void reject() override;
 
-  protected slots:
-    void accept();
-    void reject();
+protected:
+  OptBase* m_opt;
+  LoadLevelerQueueInterface* m_ll;
 
-  protected:
-    OptBase *m_opt;
-    LoadLevelerQueueInterface *m_ll;
-
-  private:
-    Ui::LoadLevelerConfigDialog *ui;
-
-  };
+private:
+  Ui::LoadLevelerConfigDialog* ui;
+};
 }
 
 /// @endcond

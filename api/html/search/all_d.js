@@ -1,10 +1,15 @@
 var searchData=
 [
-  ['operator_3d',['operator=',['../classGlobalSearch_1_1GSRandom.html#ac4d2afd7e581d4d3daa9def13f34f11a',1,'GlobalSearch::GSRandom::operator=()'],['../classGlobalSearch_1_1Structure.html#a4b257e8547d62da1c2393c123da994f1',1,'GlobalSearch::Structure::operator=(const Structure &amp;other)'],['../classGlobalSearch_1_1Structure.html#a22737e6da3810566ad0b8c6b672e1214',1,'GlobalSearch::Structure::operator=(const Avogadro::Molecule &amp;other)']]],
-  ['optbase',['OptBase',['../classGlobalSearch_1_1OptBase.html#a673110fb0bfe11da3f9f7811744c6578',1,'GlobalSearch::OptBase']]],
-  ['optbase',['OptBase',['../classGlobalSearch_1_1OptBase.html',1,'GlobalSearch']]],
-  ['optimized',['Optimized',['../classGlobalSearch_1_1Structure.html#a3f1e44cb4f603fe1b3fbc8e813535917a75ed0969285b99dc1e54c654428be5e0',1,'GlobalSearch::Structure']]],
-  ['optimizer',['Optimizer',['../classGlobalSearch_1_1Optimizer.html',1,'GlobalSearch']]],
-  ['optimizer',['optimizer',['../classGlobalSearch_1_1OptBase.html#a4dce62d15f24d665c807047aa5c618fc',1,'GlobalSearch::OptBase::optimizer()'],['../classGlobalSearch_1_1Optimizer.html#a8c5a3335ff76f8a6a21a160d0139d842',1,'GlobalSearch::Optimizer::Optimizer()']]],
-  ['optimizerchanged',['optimizerChanged',['../classGlobalSearch_1_1OptBase.html#a8f07729ab8372e2a41de0d38d7947c6a',1,'GlobalSearch::OptBase::optimizerChanged()'],['../classGlobalSearch_1_1AbstractEditTab.html#a439d2f12f3121c30adf8f3375b631dee',1,'GlobalSearch::AbstractEditTab::optimizerChanged()']]]
+  ['needboolean_0',['needBoolean',['../classGlobalSearch_1_1OptBase.html#a771c4b00f1fd857750ccb3d48116334d',1,'GlobalSearch::OptBase']]],
+  ['neednewstructure_1',['needNewStructure',['../classGlobalSearch_1_1QueueManager.html#a4b50dbd51e53b1d0d5cb93e9d7380c1c',1,'GlobalSearch::QueueManager']]],
+  ['needpassword_2',['needPassword',['../classGlobalSearch_1_1OptBase.html#aa140b7676a1fee73e1d416c164232fb3',1,'GlobalSearch::OptBase']]],
+  ['newdebug_3',['newDebug',['../classGlobalSearch_1_1AbstractDialog.html#a7353bd5b3393faf017287674691e56c6',1,'GlobalSearch::AbstractDialog']]],
+  ['newerror_4',['newError',['../classGlobalSearch_1_1AbstractDialog.html#ae0b664aa133ded37df0dc5f7a040f0c5',1,'GlobalSearch::AbstractDialog']]],
+  ['newlog_5',['newLog',['../classGlobalSearch_1_1AbstractDialog.html#a94fdb4c5a3ec5963f2764f0d821b2583',1,'GlobalSearch::AbstractDialog']]],
+  ['newmessage_6',['newMessage',['../classGlobalSearch_1_1AbstractDialog.html#ab5840deae9fddcf0aa7a61b46154fd89',1,'GlobalSearch::AbstractDialog']]],
+  ['newstatusoverview_7',['newStatusOverview',['../classGlobalSearch_1_1QueueManager.html#af37eb7a9e54e347a81dc3a1e373c8d54',1,'GlobalSearch::QueueManager']]],
+  ['newstructureadded_8',['newStructureAdded',['../classGlobalSearch_1_1Tracker.html#ab52b21fb3c4af98fe959bb904f6d029d',1,'GlobalSearch::Tracker']]],
+  ['newwarning_9',['newWarning',['../classGlobalSearch_1_1AbstractDialog.html#abe3084783126e2d1f09c9250c11f8f39',1,'GlobalSearch::AbstractDialog']]],
+  ['numatoms_10',['numAtoms',['../classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1',1,'GlobalSearch::Molecule']]],
+  ['numbonds_11',['numBonds',['../classGlobalSearch_1_1Molecule.html#a68febb14025b26c96fd08419c5314794',1,'GlobalSearch::Molecule']]]
 ];

@@ -21,7 +21,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="4" column="8">
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="push_hide">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -30,6 +30,9 @@
      </property>
      <property name="text">
       <string>&amp;Hide</string>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -198,25 +201,8 @@
   <tabstop>push_save</tabstop>
   <tabstop>push_resume</tabstop>
   <tabstop>push_begin</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>push_hide</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>GlobalSearchDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>840</x>
-     <y>494</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>199</x>
-     <y>149</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

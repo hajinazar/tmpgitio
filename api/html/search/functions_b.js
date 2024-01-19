@@ -1,12 +1,14 @@
 var searchData=
 [
-  ['needboolean',['needBoolean',['../classGlobalSearch_1_1OptBase.html#a771c4b00f1fd857750ccb3d48116334d',1,'GlobalSearch::OptBase']]],
-  ['neednewstructure',['needNewStructure',['../classGlobalSearch_1_1QueueManager.html#a4b50dbd51e53b1d0d5cb93e9d7380c1c',1,'GlobalSearch::QueueManager']]],
-  ['needpassword',['needPassword',['../classGlobalSearch_1_1OptBase.html#aa140b7676a1fee73e1d416c164232fb3',1,'GlobalSearch::OptBase']]],
-  ['newdebug',['newDebug',['../classGlobalSearch_1_1AbstractDialog.html#a7353bd5b3393faf017287674691e56c6',1,'GlobalSearch::AbstractDialog']]],
-  ['newerror',['newError',['../classGlobalSearch_1_1AbstractDialog.html#ae0b664aa133ded37df0dc5f7a040f0c5',1,'GlobalSearch::AbstractDialog']]],
-  ['newlog',['newLog',['../classGlobalSearch_1_1AbstractDialog.html#a94fdb4c5a3ec5963f2764f0d821b2583',1,'GlobalSearch::AbstractDialog']]],
-  ['newstatusoverview',['newStatusOverview',['../classGlobalSearch_1_1QueueManager.html#af37eb7a9e54e347a81dc3a1e373c8d54',1,'GlobalSearch::QueueManager']]],
-  ['newstructureadded',['newStructureAdded',['../classGlobalSearch_1_1Tracker.html#ab52b21fb3c4af98fe959bb904f6d029d',1,'GlobalSearch::Tracker']]],
-  ['newwarning',['newWarning',['../classGlobalSearch_1_1AbstractDialog.html#abe3084783126e2d1f09c9250c11f8f39',1,'GlobalSearch::AbstractDialog']]]
+  ['list_0',['list',['../classGlobalSearch_1_1Tracker.html#a2180d597290c9a4af9724a4612d78cc2',1,'GlobalSearch::Tracker']]],
+  ['load_1',['load',['../classGlobalSearch_1_1OptBase.html#a1d5e689eb327ccaf4c25f64e83e5678b',1,'GlobalSearch::OptBase::load()'],['../classGlobalSearch_1_1Optimizer.html#a5a2c5bc75be24ee41c27c1a2fe0e446a',1,'GlobalSearch::Optimizer::load()'],['../classGlobalSearch_1_1Structure.html#aa9ede9f516912b34000000caa849689c',1,'GlobalSearch::Structure::load()']]],
+  ['loadscheme_2',['loadScheme',['../classGlobalSearch_1_1AbstractEditTab.html#a0b0d6a412e3b73113a0e84f6a86c0a8c',1,'GlobalSearch::AbstractEditTab']]],
+  ['localqueueinterface_3',['LocalQueueInterface',['../classGlobalSearch_1_1LocalQueueInterface.html#ae1188c7950216c209249923050410489',1,'GlobalSearch::LocalQueueInterface']]],
+  ['localruncommand_4',['localRunCommand',['../classGlobalSearch_1_1Optimizer.html#a7a784679cc9fe2a13c8b009476b14bd5',1,'GlobalSearch::Optimizer']]],
+  ['lock_5',['lock',['../classGlobalSearch_1_1Structure.html#a473d76a356898ab0f5b207e604473714',1,'GlobalSearch::Structure']]],
+  ['lockfornaming_6',['lockForNaming',['../classGlobalSearch_1_1QueueManager.html#a11aa65d1cc9c13424a8eac1c08fe9c0b',1,'GlobalSearch::QueueManager']]],
+  ['lockforread_7',['lockForRead',['../classGlobalSearch_1_1Tracker.html#afa0bbd85ec04527c7919a29746e235e4',1,'GlobalSearch::Tracker']]],
+  ['lockforwrite_8',['lockForWrite',['../classGlobalSearch_1_1Tracker.html#aba8064ec469694aa7207b734ac075fad',1,'GlobalSearch::Tracker']]],
+  ['lockgui_9',['lockgui',['../classGlobalSearch_1_1AbstractDialog.html#af0a84714b098c38a3311299fc7f547bc',1,'GlobalSearch::AbstractDialog::lockGUI()'],['../classGlobalSearch_1_1AbstractEditTab.html#a1e1ca3972c19d71ff9e3fe45542053d3',1,'GlobalSearch::AbstractEditTab::lockGUI()'],['../classGlobalSearch_1_1AbstractTab.html#a82adaa8137d80906a35beebe92944a3e',1,'GlobalSearch::AbstractTab::lockGUI()']]],
+  ['logerrordirectory_10',['logErrorDirectory',['../classGlobalSearch_1_1LocalQueueInterface.html#ae0180fc3e28cf3906cbaf7105e4815ae',1,'GlobalSearch::LocalQueueInterface']]]
 ];

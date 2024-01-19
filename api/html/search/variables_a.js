@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['savepending',['savePending',['../classGlobalSearch_1_1OptBase.html#a2e5ba27bde6be3257cc44b7a7bb87598',1,'GlobalSearch::OptBase']]],
-  ['sobmutex',['sOBMutex',['../classGlobalSearch_1_1OptBase.html#a86c1868458b6f8430dc366c009c9deb5',1,'GlobalSearch::OptBase']]],
-  ['statefilemutex',['stateFileMutex',['../classGlobalSearch_1_1OptBase.html#af0df28a179c8a89022f4887c18761956',1,'GlobalSearch::OptBase']]]
+  ['test_5fnrunsend_0',['test_nRunsEnd',['../classGlobalSearch_1_1OptBase.html#a3433cbd854cbbb5d350e2ba7bb665c44',1,'GlobalSearch::OptBase']]],
+  ['test_5fnrunsstart_1',['test_nRunsStart',['../classGlobalSearch_1_1OptBase.html#a8d8902d09ca98a8f078182394bd1d7a1',1,'GlobalSearch::OptBase']]],
+  ['test_5fnstructs_2',['test_nStructs',['../classGlobalSearch_1_1OptBase.html#a973157ab02d197102e5f67d80aacd706',1,'GlobalSearch::OptBase']]],
+  ['testingmode_3',['testingMode',['../classGlobalSearch_1_1OptBase.html#a4aee28dd2991e1ada81243d05a1f23c9',1,'GlobalSearch::OptBase']]]
 ];

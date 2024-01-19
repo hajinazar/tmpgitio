@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['localqueueinterface',['LocalQueueInterface',['../classGlobalSearch_1_1LocalQueueInterface.html',1,'GlobalSearch']]]
+  ['defaultedittab_0',['DefaultEditTab',['../classGlobalSearch_1_1DefaultEditTab.html',1,'GlobalSearch']]]
 ];

@@ -3,14 +3,13 @@
 
   Copyright (C) 2010 by David C. Lonie
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation version 2 of the License.
+  This source code is released under the New BSD License, (the "License").
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  ***********************************************************************/
 
 // Don't document this:
@@ -18,33 +17,31 @@
 #ifndef OPTIMIZERDIALOG_H
 #define OPTIMIZERDIALOG_H
 
-#include <QtGui/QDialog>
+#include <QDialog>
 
 class QLineEdit;
 
 namespace GlobalSearch {
-  class AbstractDialog;
-  class OptBase;
-  class Optimizer;
+class AbstractDialog;
+class OptBase;
+class Optimizer;
 
-  // Basic input dialog needed for all optimizers
-  class OptimizerConfigDialog : public QDialog
-  {
-    Q_OBJECT;
-  public:
-    OptimizerConfigDialog(AbstractDialog *parent,
-                          OptBase *opt, Optimizer *o);
+// Basic input dialog needed for all optimizers
+class OptimizerConfigDialog : public QDialog
+{
+  Q_OBJECT
+public:
+  OptimizerConfigDialog(AbstractDialog* parent, OptBase* opt, Optimizer* o);
 
-  public slots:
-    void updateState();
-    void updateGUI();
+public slots:
+  void updateState();
+  void updateGUI();
 
-  protected:
-    OptBase *m_opt;
-    Optimizer *m_optimizer;
-    QLineEdit *m_lineedit;
-
-  };
+protected:
+  OptBase* m_opt;
+  Optimizer* m_optimizer;
+  QLineEdit* m_lineedit;
+};
 
 } // end namespace GlobalSearch
 

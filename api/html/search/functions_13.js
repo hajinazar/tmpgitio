@@ -1,15 +1,11 @@
 var searchData=
 [
-  ['wait',['wait',['../classGlobalSearch_1_1SlottedWaitCondition.html#a30999486ab4737cda3c4e93f8625ac1f',1,'GlobalSearch::SlottedWaitCondition']]],
-  ['wakeallslot',['wakeAllSlot',['../classGlobalSearch_1_1SlottedWaitCondition.html#a4024066fe5db52f2e2c9257fcfbb5320',1,'GlobalSearch::SlottedWaitCondition']]],
-  ['wakeoneslot',['wakeOneSlot',['../classGlobalSearch_1_1SlottedWaitCondition.html#a26b060dde9c49345da5fe1c8dbd3374c',1,'GlobalSearch::SlottedWaitCondition']]],
-  ['warning',['warning',['../classGlobalSearch_1_1OptBase.html#a4f70a04b72a92665b7fb6f8e868b527e',1,'GlobalSearch::OptBase']]],
-  ['warningstatement',['warningStatement',['../classGlobalSearch_1_1OptBase.html#a70a45deb53ed3dbd6a1c2c458ea88afe',1,'GlobalSearch::OptBase']]],
-  ['writedatatosettings',['writeDataToSettings',['../classGlobalSearch_1_1Optimizer.html#a115e78eb651af3e0fbb9fe188d50ecdc',1,'GlobalSearch::Optimizer']]],
-  ['writefiles',['writeFiles',['../classGlobalSearch_1_1QueueInterface.html#a8850904265fa4f397aa37fce9b548829',1,'GlobalSearch::QueueInterface::writeFiles()'],['../classGlobalSearch_1_1LocalQueueInterface.html#a68b017d4ee519055fc22dcb486ec2d45',1,'GlobalSearch::LocalQueueInterface::writeFiles()']]],
-  ['writeinputfiles',['writeInputFiles',['../classGlobalSearch_1_1QueueInterface.html#a4f0c5df9f5945c9c5a64cdf47b7834fa',1,'GlobalSearch::QueueInterface']]],
-  ['writesettings',['writeSettings',['../classGlobalSearch_1_1Optimizer.html#af67c36d87d7b41b1e91773b519d77829',1,'GlobalSearch::Optimizer::writeSettings()'],['../classGlobalSearch_1_1QueueInterface.html#a2ca92e5132d02e5eda672d2904779a3c',1,'GlobalSearch::QueueInterface::writeSettings()'],['../classGlobalSearch_1_1Structure.html#af6da83169c21363c545ef3ee01d891d3',1,'GlobalSearch::Structure::writeSettings()'],['../classGlobalSearch_1_1AbstractDialog.html#afab2e36367be4fa97e891b020afd1e60',1,'GlobalSearch::AbstractDialog::writeSettings()'],['../classGlobalSearch_1_1AbstractTab.html#a5b09ac7389e664c60ee5ab11a1f8d8fd',1,'GlobalSearch::AbstractTab::writeSettings()']]],
-  ['writestructuresettings',['writeStructureSettings',['../classGlobalSearch_1_1Structure.html#aa38396dff22066272e3b47604c9ac527',1,'GlobalSearch::Structure']]],
-  ['writetemplatestosettings',['writeTemplatesToSettings',['../classGlobalSearch_1_1Optimizer.html#a9c1a95c53dcdb90dce83be3ad07ac719',1,'GlobalSearch::Optimizer']]],
-  ['writeuservaluestosettings',['writeUserValuesToSettings',['../classGlobalSearch_1_1Optimizer.html#afa884a475b8001a43e592f466cf2318c',1,'GlobalSearch::Optimizer']]]
+  ['tabsdisconnectgui_0',['tabsDisconnectGUI',['../classGlobalSearch_1_1AbstractDialog.html#a3557cb9d441d0aabbd9ee3aa8cfdaea9',1,'GlobalSearch::AbstractDialog']]],
+  ['tabslockgui_1',['tabsLockGUI',['../classGlobalSearch_1_1AbstractDialog.html#a93ef632734bcb7228216f5685e90e3f1',1,'GlobalSearch::AbstractDialog']]],
+  ['tabsreadsettings_2',['tabsReadSettings',['../classGlobalSearch_1_1AbstractDialog.html#aac4850039323bd7bf05f048bc7e8437e',1,'GlobalSearch::AbstractDialog']]],
+  ['tabsupdategui_3',['tabsUpdateGUI',['../classGlobalSearch_1_1AbstractDialog.html#aea96d15a1dcd0715e4cd2b4377f052d0',1,'GlobalSearch::AbstractDialog']]],
+  ['tabswritesettings_4',['tabsWriteSettings',['../classGlobalSearch_1_1AbstractDialog.html#a17e7f95159cbbf74b44739636271bc59',1,'GlobalSearch::AbstractDialog']]],
+  ['tocartesian_5',['toCartesian',['../classGlobalSearch_1_1UnitCell.html#a4d4a6532e2a2773612025529153d9d37',1,'GlobalSearch::UnitCell']]],
+  ['tofractional_6',['toFractional',['../classGlobalSearch_1_1UnitCell.html#ab76a8e6bbc69cccfcc036097b865adaa',1,'GlobalSearch::UnitCell']]],
+  ['tracker_7',['tracker',['../classGlobalSearch_1_1Tracker.html#ae61188a8f66c57cc303a823da6130f25',1,'GlobalSearch::Tracker::Tracker()'],['../classGlobalSearch_1_1OptBase.html#a661d1e461cd22f44487972edb49214c2',1,'GlobalSearch::OptBase::tracker()']]]
 ];

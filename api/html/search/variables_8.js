@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['port',['port',['../classGlobalSearch_1_1OptBase.html#aa07a4fe47df0f8d4fface200fdde4dee',1,'GlobalSearch::OptBase']]],
-  ['progmutex',['progMutex',['../classGlobalSearch_1_1AbstractDialog.html#a06e3b73c319208a706aaf629a5f05165',1,'GlobalSearch::AbstractDialog']]],
-  ['progtimer',['progTimer',['../classGlobalSearch_1_1AbstractDialog.html#a1cf317e8206fd80628a9fe6d2ec711fc',1,'GlobalSearch::AbstractDialog']]]
+  ['readonly_0',['readOnly',['../classGlobalSearch_1_1OptBase.html#ac85d94d2e3b44f66461e470e04db3f0e',1,'GlobalSearch::OptBase']]],
+  ['rempath_1',['rempath',['../classGlobalSearch_1_1OptBase.html#a777ad7fbedbb76f522e02ca73883ab7d',1,'GlobalSearch::OptBase']]],
+  ['runningjoblimit_2',['runningJobLimit',['../classGlobalSearch_1_1OptBase.html#a02fd48b57bdd72ec4a4c20209967bd07',1,'GlobalSearch::OptBase']]]
 ];

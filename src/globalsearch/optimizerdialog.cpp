@@ -3,14 +3,13 @@
 
   Copyright (C) 2011 by David C. Lonie
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation version 2 of the License.
+  This source code is released under the New BSD License, (the "License").
 
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
  ***********************************************************************/
 
 // Don't document this:
@@ -22,65 +21,58 @@
 #include <globalsearch/optimizer.h>
 #include <globalsearch/ui/abstractdialog.h>
 
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QVBoxLayout>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QLabel>
+#include <QLineEdit>
+#include <QSpacerItem>
+#include <QVBoxLayout>
 
-#include <QtCore/QObject>
+#include <QObject>
 
 namespace GlobalSearch {
 
-  OptimizerConfigDialog::OptimizerConfigDialog
-  (AbstractDialog *parent, OptBase *opt, Optimizer *o)
-    : QDialog(parent),
-      m_opt(opt),
-      m_optimizer(o),
-      m_lineedit(0)
-  {
-    QVBoxLayout *vlayout = new QVBoxLayout(this);
+OptimizerConfigDialog::OptimizerConfigDialog(AbstractDialog* parent,
+                                             OptBase* opt, Optimizer* o)
+  : QDialog(parent), m_opt(opt), m_optimizer(o), m_lineedit(0)
+{
+  QVBoxLayout* vlayout = new QVBoxLayout(this);
 
-    QLabel *label = new QLabel
-      (tr("Local path to %1 executable "
-          "(only needed when using local queue interface):")
-       .arg(m_optimizer->m_idString), this);
-    vlayout->addWidget(label);
+  QLabel* label =
+    new QLabel(tr("Local path to %1 executable "
+                  "(only needed when using local queue interface):")
+                 .arg(m_optimizer->m_idString),
+               this);
+  vlayout->addWidget(label);
 
-    m_lineedit = new QLineEdit(this);
-    vlayout->addWidget(m_lineedit);
+  m_lineedit = new QLineEdit(this);
+  vlayout->addWidget(m_lineedit);
 
-    QSpacerItem *spacer = new QSpacerItem
-      (10,10, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    vlayout->addItem(spacer);
+  QSpacerItem* spacer =
+    new QSpacerItem(10, 10, QSizePolicy::Minimum, QSizePolicy::Expanding);
+  vlayout->addItem(spacer);
 
-    QDialogButtonBox *bbox = new QDialogButtonBox(this);
-    bbox->setStandardButtons(QDialogButtonBox::Ok |
-                             QDialogButtonBox::Cancel );
-    vlayout->addWidget(bbox);
+  QDialogButtonBox* bbox = new QDialogButtonBox(this);
+  bbox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+  vlayout->addWidget(bbox);
 
-    setLayout(vlayout);
+  setLayout(vlayout);
 
-    connect(bbox, SIGNAL(accepted()),
-            this, SLOT(updateState()));
-    connect(bbox, SIGNAL(accepted()),
-            this, SLOT(close()));
-    connect(bbox, SIGNAL(rejected()),
-            this, SLOT(updateGUI()));
-    connect(bbox, SIGNAL(rejected()),
-            this, SLOT(close()));
-  }
+  connect(bbox, SIGNAL(accepted()), this, SLOT(updateState()));
+  connect(bbox, SIGNAL(accepted()), this, SLOT(close()));
+  connect(bbox, SIGNAL(rejected()), this, SLOT(updateGUI()));
+  connect(bbox, SIGNAL(rejected()), this, SLOT(close()));
+}
 
-  void OptimizerConfigDialog::updateState()
-  {
-    m_optimizer->m_localRunCommand = m_lineedit->text();
-  }
+void OptimizerConfigDialog::updateState()
+{
+  m_optimizer->m_localRunCommand = m_lineedit->text();
+}
 
-  void OptimizerConfigDialog::updateGUI()
-  {
-    m_lineedit->setText(m_optimizer->m_localRunCommand);
-  }
+void OptimizerConfigDialog::updateGUI()
+{
+  m_lineedit->setText(m_optimizer->m_localRunCommand);
+}
 
 } // end namespace GlobalSearch
 

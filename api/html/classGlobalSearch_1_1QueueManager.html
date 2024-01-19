@@ -127,7 +127,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> monitors the running jobs and updates <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> status.  
+<p>The <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> monitors the running jobs and updates <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> status.  
  <a href="classGlobalSearch_1_1QueueManager.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="queuemanager_8h_source.html">globalsearch/queuemanager.h</a>&gt;</code></p>
@@ -287,9 +287,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a94ba4286ec00cec9516ef9766e4d76a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> monitors the running jobs and updates <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> status. </p>
+<div class="textblock"><p>The <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> monitors the running jobs and updates <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> status. </p>
 <dl class="section author"><dt>Author</dt><dd>David C. Lonie</dd></dl>
-<p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> creates a local queue and monitoring system control the submission of Structures to an optimization engine or queue.</p>
+<p>The <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> creates a local queue and monitoring system control the submission of Structures to an optimization engine or queue.</p>
 <p>For basic usage, connect the <a class="el" href="classGlobalSearch_1_1QueueManager.html#a4b50dbd51e53b1d0d5cb93e9d7380c1c">needNewStructure()</a> signal to slot that will generate a new <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> and submit it the following way: </p><pre class="fragment">// lockForNaming() returns a list of all structures that the main
 // tracker is aware of. It also locks a naming mutex to prevent
 // simultaneous naming of Structures, avoiding duplicate
@@ -377,7 +377,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">thread</td><td>A QThread instance to run in </td></tr>
-    <tr><td class="paramname">parent</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> class the <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> uses </td></tr>
+    <tr><td class="paramname">parent</td><td>The <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> class the <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> uses </td></tr>
   </table>
   </dd>
 </dl>
@@ -443,7 +443,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 </table>
 </div><div class="memdoc">
 <p>Add a structure request. This must be called every time a structure is added via <a class="el" href="classGlobalSearch_1_1QueueManager.html#a5f8012e4b5d002c444bfc486084feec1">unlockForNaming()</a>, and must be called first. This will not actually request the structure, it is only used for internal bookkeeping.</p>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="classThe.html">The</a> mutex of m_tracker is locked while incrementing the request counter. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The mutex of m_tracker is locked while incrementing the request counter. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="queuemanager_8cpp_source.html#l01412">1412</a> of file <a class="el" href="queuemanager_8cpp_source.html">queuemanager.cpp</a>.</p>
 
@@ -478,7 +478,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 <p>Writes the input files for the optimization process and queues the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be submitted for optimization at its current optStep.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be submitted </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be submitted </td></tr>
   </table>
   </dd>
 </dl>
@@ -525,8 +525,8 @@ m_queue-&gt;unlockForNaming(newStructure);
 <p>Writes the input files for the optimization process and queues the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be submitted for optimization.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be submitted </td></tr>
-    <tr><td class="paramname">optStep</td><td><a class="el" href="classThe.html">The</a> optStep to perform. s-&gt;currentOptStep is used if optStep==0. </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be submitted </td></tr>
+    <tr><td class="paramname">optStep</td><td>The optStep to perform. s-&gt;currentOptStep is used if optStep==0. </td></tr>
   </table>
   </dd>
 </dl>
@@ -564,7 +564,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 <p>All other cases should use prepareStructureForSubmission(Structure*)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be appended </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to be appended </td></tr>
   </table>
   </dd>
 </dl>
@@ -1517,10 +1517,10 @@ m_queue-&gt;unlockForNaming(newStructure);
 </table>
 </div><div class="memdoc">
 <p>Stops any running optimization processes associated with a structure and sets its status to <a class="el" href="classGlobalSearch_1_1Structure.html#a3f1e44cb4f603fe1b3fbc8e813535917acd16cf0031d5e5b522b61618fd73fdc1">Structure::Killed</a>.</p>
-<p><a class="el" href="classThe.html">The</a> structureKilled signal is emitted as well.</p>
+<p>The structureKilled signal is emitted as well.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to kill. </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to kill. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1861,7 +1861,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 <p>Kills the optimization process for the indicated <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to stop optimizing. </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to stop optimizing. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1900,7 +1900,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 <p>Emitted when a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> has completed all optimization steps.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been updated </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been updated </td></tr>
   </table>
   </dd>
 </dl>
@@ -1934,7 +1934,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 </div><div class="memdoc">
 <p>Emitted when a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> has been killed through <a class="el" href="classGlobalSearch_1_1QueueManager.html#aa79f26f791ec8315f2ae36d820bfa0ac">killStructure(Structure*)</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been killed </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been killed </td></tr>
   </table>
   </dd>
 </dl>
@@ -1969,7 +1969,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 </div><div class="memdoc">
 <p>Emitted when a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> is accepted into the queuemanager (e.g. after submission through <a class="el" href="classGlobalSearch_1_1QueueManager.html#a5f8012e4b5d002c444bfc486084feec1">unlockForNaming(Structure*)</a> </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been accepted </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been accepted </td></tr>
   </table>
   </dd>
 </dl>
@@ -2006,7 +2006,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 </div><div class="memdoc">
 <p>Emitted when a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> is submitted for optimization </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been submitted </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been submitted </td></tr>
   </table>
   </dd>
 </dl>
@@ -2040,7 +2040,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 </div><div class="memdoc">
 <p>Emitted when a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> has changed status. Useful for updating progress tables, plots, etc </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been updated </td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> that has been updated </td></tr>
   </table>
   </dd>
 </dl>
@@ -2138,7 +2138,7 @@ m_queue-&gt;unlockForNaming(newStructure);
 <p>Called on Structures that are <a class="el" href="classGlobalSearch_1_1Structure.html#a3f1e44cb4f603fe1b3fbc8e813535917ae572101eab4010061be0073888fbee39">Structure::StepOptimized</a>, this function will update the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> with the results of the optimization and pass it along to prepareStructureForNextOptStep.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> step optimized structure </td></tr>
+    <tr><td class="paramname">s</td><td>The step optimized structure </td></tr>
   </table>
   </dd>
 </dl>

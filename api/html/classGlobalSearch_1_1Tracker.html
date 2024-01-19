@@ -123,7 +123,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> contains a thread-safe list of unique Structures.  
+<p>The <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> contains a thread-safe list of unique Structures.  
  <a href="classGlobalSearch_1_1Tracker.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="tracker_8h_source.html">globalsearch/tracker.h</a>&gt;</code></p>
@@ -177,10 +177,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a29171b414ff3092c73113565e838bcc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> contains a thread-safe list of unique Structures. </p>
+<div class="textblock"><p>The <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> contains a thread-safe list of unique Structures. </p>
 <dl class="section author"><dt>Author</dt><dd>David C. Lonie</dd></dl>
 <p>In simplest terms, the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> class is a list of Structures. It provides convenience functions and signals to facilitate access.</p>
-<p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> can be used for storage of all Structures generated in a search, or as a FIFO buffer for pending operations by using the <a class="el" href="classGlobalSearch_1_1Tracker.html#aebafa2ceea4e665f2660917eb18eb4b5">append()</a> and <a class="el" href="classGlobalSearch_1_1Tracker.html#a7e022f8bd6943c5eb0651f81ce369793">popFirst()</a> functions.</p>
+<p>The <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> can be used for storage of all Structures generated in a search, or as a FIFO buffer for pending operations by using the <a class="el" href="classGlobalSearch_1_1Tracker.html#aebafa2ceea4e665f2660917eb18eb4b5">append()</a> and <a class="el" href="classGlobalSearch_1_1Tracker.html#a7e022f8bd6943c5eb0651f81ce369793">popFirst()</a> functions.</p>
 <p>If you wish to not use the convenience functions, it is possible to access the list of Structures through <a class="el" href="classGlobalSearch_1_1Tracker.html#a2180d597290c9a4af9724a4612d78cc2">list()</a> and the mutex through <a class="el" href="classGlobalSearch_1_1Tracker.html#a1afe84565eaf79ea6c6f339152653a9b">rwLock()</a>, <a class="el" href="classGlobalSearch_1_1Tracker.html#afa0bbd85ec04527c7919a29746e235e4">lockForRead()</a>, <a class="el" href="classGlobalSearch_1_1Tracker.html#aba8064ec469694aa7207b734ac075fad">lockForWrite()</a>, and <a class="el" href="classGlobalSearch_1_1Tracker.html#a3c30e04b28dd39ddeff887d3bf4e812a">unlock()</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="tracker_8h_source.html#l00041">41</a> of file <a class="el" href="tracker_8h_source.html">tracker.h</a>.</p>
@@ -203,7 +203,7 @@ Public Member Functions</h2></td></tr>
 <p>Constructor.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">parent</td><td><a class="el" href="classThe.html">The</a> object parent. </td></tr>
+    <tr><td class="paramname">parent</td><td>The object parent. </td></tr>
   </table>
   </dd>
 </dl>
@@ -267,7 +267,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if all Structures were not contained in the list, false if any were already present. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> is already present, it will not be added again. </dd>
 <dd>
-<a class="el" href="classThe.html">The</a> Structures are compared using pointer values </dd></dl>
+The Structures are compared using pointer values </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="tracker_8cpp_source.html#l00037">37</a> of file <a class="el" href="tracker_8cpp_source.html">tracker.cpp</a>.</p>
 
@@ -301,7 +301,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> was not contained in the list, false if it were already present.</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> is already present, it will not be added again.</dd>
 <dd>
-<a class="el" href="classThe.html">The</a> Structures are compared using pointer values </dd></dl>
+The Structures are compared using pointer values </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="tracker_8cpp_source.html#l00047">47</a> of file <a class="el" href="tracker_8cpp_source.html">tracker.cpp</a>.</p>
 
@@ -334,7 +334,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td><a class="el" href="classThe.html">The</a> index of the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> desired </td></tr>
+    <tr><td class="paramname">i</td><td>The index of the <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> desired </td></tr>
   </table>
   </dd>
 </dl>
@@ -364,7 +364,7 @@ Public Member Functions</h2></td></tr>
 <p>Test if a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> is in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s list.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to check.</td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to check.</td></tr>
   </table>
   </dd>
 </dl>
@@ -422,7 +422,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> list </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> list </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="tracker_8h_source.html#l00081">81</a> of file <a class="el" href="tracker_8h_source.html">tracker.h</a>.</p>
 
@@ -574,7 +574,7 @@ Public Member Functions</h2></td></tr>
 <p>Remove a <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s list.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to remove.</td></tr>
+    <tr><td class="paramname">s</td><td>The <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> to remove.</td></tr>
   </table>
   </dd>
 </dl>
@@ -635,7 +635,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s read-write mutex </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s read-write mutex </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="tracker_8h_source.html#l00076">76</a> of file <a class="el" href="tracker_8h_source.html">tracker.h</a>.</p>
 
@@ -657,7 +657,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> number of Structures in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s list. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The number of Structures in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>'s list. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="tracker_8cpp_source.html#l00083">83</a> of file <a class="el" href="tracker_8cpp_source.html">tracker.cpp</a>.</p>
 
@@ -690,7 +690,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Signal emitted when then number of Structures in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a> changes. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">c</td><td><a class="el" href="classThe.html">The</a> number of new <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>. </td></tr>
+    <tr><td class="paramname">c</td><td>The number of new <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> in the <a class="el" href="classGlobalSearch_1_1Tracker.html" title="The Tracker contains a thread-safe list of unique Structures.">Tracker</a>. </td></tr>
   </table>
   </dd>
 </dl>

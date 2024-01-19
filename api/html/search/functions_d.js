@@ -9,7 +9,5 @@ var searchData=
   ['newmessage_6',['newMessage',['../classGlobalSearch_1_1AbstractDialog.html#ab5840deae9fddcf0aa7a61b46154fd89',1,'GlobalSearch::AbstractDialog']]],
   ['newstatusoverview_7',['newStatusOverview',['../classGlobalSearch_1_1QueueManager.html#af37eb7a9e54e347a81dc3a1e373c8d54',1,'GlobalSearch::QueueManager']]],
   ['newstructureadded_8',['newStructureAdded',['../classGlobalSearch_1_1Tracker.html#ab52b21fb3c4af98fe959bb904f6d029d',1,'GlobalSearch::Tracker']]],
-  ['newwarning_9',['newWarning',['../classGlobalSearch_1_1AbstractDialog.html#abe3084783126e2d1f09c9250c11f8f39',1,'GlobalSearch::AbstractDialog']]],
-  ['numatoms_10',['numAtoms',['../classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1',1,'GlobalSearch::Molecule']]],
-  ['numbonds_11',['numBonds',['../classGlobalSearch_1_1Molecule.html#a68febb14025b26c96fd08419c5314794',1,'GlobalSearch::Molecule']]]
+  ['newwarning_9',['newWarning',['../classGlobalSearch_1_1AbstractDialog.html#abe3084783126e2d1f09c9250c11f8f39',1,'GlobalSearch::AbstractDialog']]]
 ];

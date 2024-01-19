@@ -6,6 +6,5 @@ var searchData=
   ['filename_3',['fileName',['../classGlobalSearch_1_1Structure.html#a92b2edc78b43b306f828c221746a35d7',1,'GlobalSearch::Structure']]],
   ['finishedbackgroundprocessing_4',['finishedBackgroundProcessing',['../classGlobalSearch_1_1AbstractTab.html#a5b06b32887aa1ba75cfcfad24f9c9a86',1,'GlobalSearch::AbstractTab']]],
   ['finishfeaturecalculations_5',['finishFeatureCalculations',['../classGlobalSearch_1_1OptBase.html#af121fd1d3c54d88a38275a9bf2753c23',1,'GlobalSearch::OptBase']]],
-  ['finishhardnesscalculation_6',['finishHardnessCalculation',['../classGlobalSearch_1_1OptBase.html#af95ef12850aa27360d1cd5fbbe18c3c1',1,'GlobalSearch::OptBase']]],
-  ['first_7',['first',['../classGlobalSearch_1_1Bond.html#a42adddbe34141352be0ed9b45484d805',1,'GlobalSearch::Bond']]]
+  ['finishhardnesscalculation_6',['finishHardnessCalculation',['../classGlobalSearch_1_1OptBase.html#af95ef12850aa27360d1cd5fbbe18c3c1',1,'GlobalSearch::OptBase']]]
 ];

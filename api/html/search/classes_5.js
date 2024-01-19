@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['fileutils_0',['FileUtils',['../classFileUtils.html',1,'']]],
-  ['formats_1',['Formats',['../classGlobalSearch_1_1Formats.html',1,'GlobalSearch']]],
-  ['functiontracker_2',['FunctionTracker',['../classFunctionTracker.html',1,'']]]
+  ['optbase_0',['OptBase',['../classGlobalSearch_1_1OptBase.html',1,'GlobalSearch']]],
+  ['optimizer_1',['Optimizer',['../classGlobalSearch_1_1Optimizer.html',1,'GlobalSearch']]]
 ];

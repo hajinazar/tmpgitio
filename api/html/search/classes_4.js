@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['eleminfo_0',['ElemInfo',['../classElemInfo.html',1,'']]]
+  ['localqueueinterface_0',['LocalQueueInterface',['../classGlobalSearch_1_1LocalQueueInterface.html',1,'GlobalSearch']]]
 ];

@@ -7,7 +7,5 @@ var searchData=
   ['error_4',['error',['../classGlobalSearch_1_1OptBase.html#a0069abbd35393e6a5760b049e3497a21',1,'GlobalSearch::OptBase']]],
   ['errorbox_5',['errorBox',['../classGlobalSearch_1_1AbstractDialog.html#aee94863a2a275b8a91613b191451bc1e',1,'GlobalSearch::AbstractDialog']]],
   ['errorbox_5f_6',['errorBox_',['../classGlobalSearch_1_1AbstractDialog.html#a4ccf7b6a73663c780f82c2c6f4a39536',1,'GlobalSearch::AbstractDialog']]],
-  ['errorstatement_7',['errorStatement',['../classGlobalSearch_1_1OptBase.html#a6bcbb9a259f9173084e2f4a82ffa0b86',1,'GlobalSearch::OptBase']]],
-  ['executegenxrdpattern_8',['executeGenXrdPattern',['../classGlobalSearch_1_1GenerateXrd.html#af1f79730b30b07fe72525c6b6f32b563',1,'GlobalSearch::GenerateXrd']]],
-  ['executeobabel_9',['executeOBabel',['../classGlobalSearch_1_1OBConvert.html#a2d55b786b3e2d81f60f77abb5b12bdef',1,'GlobalSearch::OBConvert']]]
+  ['errorstatement_7',['errorStatement',['../classGlobalSearch_1_1OptBase.html#a6bcbb9a259f9173084e2f4a82ffa0b86',1,'GlobalSearch::OptBase']]]
 ];

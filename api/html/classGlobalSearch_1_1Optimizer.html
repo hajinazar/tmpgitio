@@ -127,7 +127,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> class provides an interface between an <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and an external optimization engine.  
+<p>The <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> class provides an interface between an <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and an external optimization engine.  
  <a href="classGlobalSearch_1_1Optimizer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="optimizer_8h_source.html">globalsearch/optimizer.h</a>&gt;</code></p>
@@ -233,10 +233,10 @@ Friends</h2></td></tr>
 <tr class="separator:a820134b906cccccfc214c45661db99bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> class provides an interface between an <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and an external optimization engine. </p>
+<div class="textblock"><p>The <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> class provides an interface between an <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and an external optimization engine. </p>
 <dl class="section author"><dt>Author</dt><dd>David C. Lonie</dd></dl>
-<p><a class="el" href="classThe.html">The</a> <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> class standardizes communication between an <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and an external chemical optimization engine, such as GAMESS, ADF, VASP, etc.</p>
-<p><a class="el" href="classThe.html">The</a> file contents may be set using the setTemplate, appendTemplate, and removeTemplate functions. These will be passed through the associated <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a>'s template interpreter prior to writing.</p>
+<p>The <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> class standardizes communication between an <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and an external chemical optimization engine, such as GAMESS, ADF, VASP, etc.</p>
+<p>The file contents may be set using the setTemplate, appendTemplate, and removeTemplate functions. These will be passed through the associated <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a>'s template interpreter prior to writing.</p>
 <p>Once the <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> is attached to the <a class="el" href="classGlobalSearch_1_1OptBase.html" title="The OptBase class stores variables and helper functions for global searches.">OptBase</a> instance and the templates are set, the <a class="el" href="classGlobalSearch_1_1QueueManager.html" title="The QueueManager monitors the running jobs and updates Structure status.">QueueManager</a> handles all job submission, file writing, and <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> updating automatically. </p>
 
 <p class="definition">Definition at line <a class="el" href="optimizer_8h_source.html#l00051">51</a> of file <a class="el" href="optimizer_8h_source.html">optimizer.h</a>.</p>
@@ -352,7 +352,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Check m_completionFilename for any of the m_completionStrings in the working directory of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em>. If any are found, <em>success</em> is set to true.</p>
-<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>success</em> to report whether or not m_completionFileName contains any m_completionStrings. <a class="el" href="classThe.html">The</a> return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>success</em> to report whether or not m_completionFileName contains any m_completionStrings. The return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the test encountered no errors, false otherwise. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="optimizer_8cpp_source.html#l00199">199</a> of file <a class="el" href="optimizer_8cpp_source.html">optimizer.cpp</a>.</p>
@@ -397,7 +397,7 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Check if the file m_completionFilename exists in the working directory of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em> and store the result in <em>exists</em>.</p>
-<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>exists</em> to report whether or not the file exists. <a class="el" href="classThe.html">The</a> return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>exists</em> to report whether or not the file exists. The return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the test encountered no errors, false otherwise. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="optimizer_8cpp_source.html#l00193">193</a> of file <a class="el" href="optimizer_8cpp_source.html">optimizer.cpp</a>.</p>
@@ -532,7 +532,7 @@ Friends</h2></td></tr>
 <p>Get a QHash of the interpreted templates.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> structure whose templates are to be interpreted.</td></tr>
+    <tr><td class="paramname">s</td><td>The structure whose templates are to be interpreted.</td></tr>
   </table>
   </dd>
 </dl>
@@ -640,7 +640,7 @@ Friends</h2></td></tr>
 <p>Check if a name is a template file name.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td><a class="el" href="classThe.html">The</a> template file name.</td></tr>
+    <tr><td class="paramname">name</td><td>The template file name.</td></tr>
   </table>
   </dd>
 </dl>
@@ -787,7 +787,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="optimizer_8cpp_source.html#l00284">284</a> of file <a class="el" href="optimizer_8cpp_source.html">optimizer.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="structure_8h_source.html#l00428">GlobalSearch::Structure::getIDString()</a>, <a class="el" href="optimizer_8h_source.html#l00450">m_idString</a>, and <a class="el" href="formats_8cpp_source.html#l00071">GlobalSearch::Formats::read()</a>.</p>
+<p class="reference">References <a class="el" href="structure_8h_source.html#l00428">GlobalSearch::Structure::getIDString()</a>, and <a class="el" href="optimizer_8h_source.html#l00450">m_idString</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="optimizer_8cpp_source.html#l00263">load()</a>, and <a class="el" href="optimizer_8cpp_source.html#l00224">update()</a>.</p>
 
@@ -1570,7 +1570,7 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Store generic data types. This is not commonly used, see XtalOpt's VASPOptimizer for an example where it is used to store information about pseudopotentials. <a class="el" href="classThe.html">The</a> names of templates that this optimizer utilizes. </p>
+<p>Store generic data types. This is not commonly used, see XtalOpt's VASPOptimizer for an example where it is used to store information about pseudopotentials. The names of templates that this optimizer utilizes. </p>
 
 <p class="definition">Definition at line <a class="el" href="optimizer_8h_source.html#l00340">340</a> of file <a class="el" href="optimizer_8h_source.html">optimizer.h</a>.</p>
 

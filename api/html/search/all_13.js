@@ -10,12 +10,8 @@ var searchData=
   ['test_5fnrunsstart_7',['test_nRunsStart',['../classGlobalSearch_1_1OptBase.html#a8d8902d09ca98a8f078182394bd1d7a1',1,'GlobalSearch::OptBase']]],
   ['test_5fnstructs_8',['test_nStructs',['../classGlobalSearch_1_1OptBase.html#a973157ab02d197102e5f67d80aacd706',1,'GlobalSearch::OptBase']]],
   ['testingmode_9',['testingMode',['../classGlobalSearch_1_1OptBase.html#a4aee28dd2991e1ada81243d05a1f23c9',1,'GlobalSearch::OptBase']]],
-  ['the_10',['The',['../classThe.html',1,'']]],
-  ['timer_11',['Timer',['../classTimer.html',1,'']]],
-  ['tocartesian_12',['toCartesian',['../classGlobalSearch_1_1UnitCell.html#a4d4a6532e2a2773612025529153d9d37',1,'GlobalSearch::UnitCell']]],
-  ['tofractional_13',['toFractional',['../classGlobalSearch_1_1UnitCell.html#ab76a8e6bbc69cccfcc036097b865adaa',1,'GlobalSearch::UnitCell']]],
-  ['tracker_14',['tracker',['../classGlobalSearch_1_1Tracker.html',1,'GlobalSearch::Tracker'],['../classGlobalSearch_1_1Tracker.html#ae61188a8f66c57cc303a823da6130f25',1,'GlobalSearch::Tracker::Tracker()'],['../classGlobalSearch_1_1OptBase.html#a661d1e461cd22f44487972edb49214c2',1,'GlobalSearch::OptBase::tracker()']]],
-  ['tt_5foptimizer_15',['TT_Optimizer',['../classGlobalSearch_1_1OptBase.html#a68dfe3764817275c8bb445d75f781c9aa27b4d30052c4bae9257dc3efaa4884d9',1,'GlobalSearch::OptBase']]],
-  ['tt_5fqueueinterface_16',['TT_QueueInterface',['../classGlobalSearch_1_1OptBase.html#a68dfe3764817275c8bb445d75f781c9aab4146e30ac06bbaba46f26175a06ff4c',1,'GlobalSearch::OptBase']]],
-  ['tt_5funknown_17',['TT_Unknown',['../classGlobalSearch_1_1OptBase.html#a68dfe3764817275c8bb445d75f781c9aa60e906c403304cdd33205c703e5fa730',1,'GlobalSearch::OptBase']]]
+  ['tracker_10',['tracker',['../classGlobalSearch_1_1Tracker.html',1,'GlobalSearch::Tracker'],['../classGlobalSearch_1_1OptBase.html#a661d1e461cd22f44487972edb49214c2',1,'GlobalSearch::OptBase::tracker()'],['../classGlobalSearch_1_1Tracker.html#ae61188a8f66c57cc303a823da6130f25',1,'GlobalSearch::Tracker::Tracker()']]],
+  ['tt_5foptimizer_11',['TT_Optimizer',['../classGlobalSearch_1_1OptBase.html#a68dfe3764817275c8bb445d75f781c9aa27b4d30052c4bae9257dc3efaa4884d9',1,'GlobalSearch::OptBase']]],
+  ['tt_5fqueueinterface_12',['TT_QueueInterface',['../classGlobalSearch_1_1OptBase.html#a68dfe3764817275c8bb445d75f781c9aab4146e30ac06bbaba46f26175a06ff4c',1,'GlobalSearch::OptBase']]],
+  ['tt_5funknown_13',['TT_Unknown',['../classGlobalSearch_1_1OptBase.html#a68dfe3764817275c8bb445d75f781c9aa60e906c403304cdd33205c703e5fa730',1,'GlobalSearch::OptBase']]]
 ];

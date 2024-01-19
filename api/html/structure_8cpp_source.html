@@ -161,7 +161,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
 <div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#ab7e8a0041535442bca879148833831ac">   37</a></span><a class="code hl_function" href="classGlobalSearch_1_1Structure.html#ab7e8a0041535442bca879148833831ac">Structure::Structure</a>(QObject* parent)</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  : <a class="code hl_class" href="classGlobalSearch_1_1Molecule.html">Molecule</a>(), m_hasEnthalpy(false), m_updatedSinceDupChecked(true),</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  : Molecule(), m_hasEnthalpy(false), m_updatedSinceDupChecked(true),</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    m_primitiveChecked(false), m_skippedOptimization(false),</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    m_supercellGenerationChecked(false), m_histogramGenerationPending(false),</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    m_generation(0), m_id(0), m_rank(0), m_jobID(0), m_energy(0), m_enthalpy(0),</div>
@@ -179,7 +179,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#ad5f2adb0f379ee6dde14984df3eb73bc">   53</a></span><a class="code hl_function" href="classGlobalSearch_1_1Structure.html#ab7e8a0041535442bca879148833831ac">Structure::Structure</a>(<span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Structure.html">Structure</a>&amp; other)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  : <a class="code hl_class" href="classGlobalSearch_1_1Molecule.html">Molecule</a>(other), m_updatedSinceDupChecked(true), m_primitiveChecked(false),</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  : Molecule(other), m_updatedSinceDupChecked(true), m_primitiveChecked(false),</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    m_skippedOptimization(false), m_supercellGenerationChecked(false),</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    m_histogramGenerationPending(false), m_generation(0), m_id(0), m_rank(0),</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    m_jobID(0), m_energy(0), m_enthalpy(0), m_PV(0), m_optStart(QDateTime()),</div>
@@ -200,8 +200,8 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
 <div class="foldopen" id="foldopen00071" data-start="{" data-end="}">
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#ae34e0ec660c0b8e172830f219fed9dd8">   71</a></span><a class="code hl_function" href="classGlobalSearch_1_1Structure.html#ab7e8a0041535442bca879148833831ac">Structure::Structure</a>(<span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Molecule.html">GlobalSearch::Molecule</a>&amp; other)</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  : <a class="code hl_class" href="classGlobalSearch_1_1Molecule.html">Molecule</a>(other), m_updatedSinceDupChecked(true), m_primitiveChecked(false),</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#ae34e0ec660c0b8e172830f219fed9dd8">   71</a></span><a class="code hl_function" href="classGlobalSearch_1_1Structure.html#ab7e8a0041535442bca879148833831ac">Structure::Structure</a>(<span class="keyword">const</span> GlobalSearch::Molecule&amp; other)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  : Molecule(other), m_updatedSinceDupChecked(true), m_primitiveChecked(false),</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    m_skippedOptimization(false), m_supercellGenerationChecked(false),</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    m_histogramGenerationPending(false), m_generation(0), m_id(0), m_rank(0),</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    m_jobID(0), m_energy(0), m_enthalpy(0), m_PV(0), m_optStart(QDateTime()),</div>
@@ -331,7 +331,7 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
 <div class="foldopen" id="foldopen00190" data-start="{" data-end="}">
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a66547f9a5a78e11fa021ece0e7945044">  190</a></span><a class="code hl_class" href="classGlobalSearch_1_1Structure.html">Structure</a>&amp; <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a4b257e8547d62da1c2393c123da994f1">Structure::operator=</a>(<span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Molecule.html">GlobalSearch::Molecule</a>&amp; mol)</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a66547f9a5a78e11fa021ece0e7945044">  190</a></span><a class="code hl_class" href="classGlobalSearch_1_1Structure.html">Structure</a>&amp; <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a4b257e8547d62da1c2393c123da994f1">Structure::operator=</a>(<span class="keyword">const</span> GlobalSearch::Molecule&amp; mol)</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>{</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  Molecule::operator=(mol);</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
@@ -562,7 +562,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>      <span class="keywordtype">size_t</span> ind1 = entry.split(<span class="charliteral">&#39;,&#39;</span>)[0].toUInt();</div>
 <div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>      <span class="keywordtype">size_t</span> ind2 = entry.split(<span class="charliteral">&#39;,&#39;</span>)[1].split(<span class="charliteral">&#39;:&#39;</span>)[0].toUInt();</div>
 <div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>      <span class="keywordtype">size_t</span> bondOrder = entry.split(<span class="charliteral">&#39;,&#39;</span>)[1].split(<span class="charliteral">&#39;:&#39;</span>)[1].toUInt();</div>
-<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>      preoptBonds.push_back(<a class="code hl_class" href="classGlobalSearch_1_1Bond.html">Bond</a>(ind1, ind2, bondOrder));</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>      preoptBonds.push_back(Bond(ind1, ind2, bondOrder));</div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>    }</div>
 <div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#ac88b6b3db43ee9919e58c6806c4010d9">setPreoptBonding</a>(preoptBonds);</div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    settings-&gt;endArray();</div>
@@ -706,17 +706,17 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
 <div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>  <span class="comment">// Atomic numbers</span></div>
 <div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>  settings-&gt;beginWriteArray(<span class="stringliteral">&quot;atomicNums&quot;</span>);</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>(); i++) {</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; numAtoms(); i++) {</div>
 <div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>    settings-&gt;setArrayIndex(i);</div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    settings-&gt;setValue(<span class="stringliteral">&quot;value&quot;</span>, QString::number(<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>(i).<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a1e9fe292b23f8d1011f7617057ccf71e">atomicNumber</a>()));</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>    settings-&gt;setValue(<span class="stringliteral">&quot;value&quot;</span>, QString::number(atom(i).atomicNumber()));</div>
 <div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>  }</div>
 <div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>  settings-&gt;endArray();</div>
 <div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span> </div>
 <div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>  <span class="comment">// Cartesian coords</span></div>
 <div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>  Vector3 cartCoords;</div>
 <div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>  settings-&gt;beginWriteArray(<span class="stringliteral">&quot;coords&quot;</span>);</div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>(); i++) {</div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    cartCoords = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>(i).<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#ac698c30d8d838e78d7d43d1eea59ab9c">pos</a>();</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; numAtoms(); i++) {</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>    cartCoords = atom(i).pos();</div>
 <div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>    settings-&gt;setArrayIndex(i);</div>
 <div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>    settings-&gt;setValue(<span class="stringliteral">&quot;x&quot;</span>, QString::number(cartCoords[0]));</div>
 <div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>    settings-&gt;setValue(<span class="stringliteral">&quot;y&quot;</span>, QString::number(cartCoords[1]));</div>
@@ -726,10 +726,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span> </div>
 <div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>  <span class="comment">// Check to see if cell info exists before saving it...</span></div>
 <div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>  <span class="comment">// This is important for non-periodic structures</span></div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aa22efcc3e4c5e98bef2349ae8f76c98e">hasUnitCell</a>()) {</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>  <span class="keywordflow">if</span> (hasUnitCell()) {</div>
 <div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>    settings-&gt;setValue(<span class="stringliteral">&quot;hasCellInfo&quot;</span>, <span class="keyword">true</span>);</div>
 <div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>    <span class="comment">// Cell info</span></div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    Matrix3 uc = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">unitCell</a>().<a class="code hl_function" href="classGlobalSearch_1_1UnitCell.html#a70afaef20015b7e2553a17c003a3b065">cellMatrix</a>();</div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>    Matrix3 uc = unitCell().cellMatrix();</div>
 <div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>    settings-&gt;beginGroup(<span class="stringliteral">&quot;cell&quot;</span>);</div>
 <div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>    settings-&gt;setValue(<span class="stringliteral">&quot;00&quot;</span>, (uc(0, 0)));</div>
 <div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>    settings-&gt;setValue(<span class="stringliteral">&quot;01&quot;</span>, (uc(0, 1)));</div>
@@ -792,7 +792,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>    settings-&gt;endGroup();</div>
 <div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span> </div>
 <div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>    <span class="comment">// Set the cell info</span></div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">unitCell</a>().<a class="code hl_function" href="classGlobalSearch_1_1UnitCell.html#ab7ab41dbc42ec4a31d1bb2dc35fb9dea">setCellMatrix</a>(cellMatrix);</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>    unitCell().setCellMatrix(cellMatrix);</div>
 <div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>  }</div>
 <div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span> </div>
 <div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>  <span class="comment">// Just in case there were atoms set elsewhere for some reason...</span></div>
@@ -800,9 +800,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span> </div>
 <div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>  <span class="comment">// Now let&#39;s add in the atoms...</span></div>
 <div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; atomicNums.size(); i++) {</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">Atom</a>&amp; newAtom = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a72e2cfd6768bca1ff2c7c20f3334c3dc">addAtom</a>();</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    newAtom.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#a65e1817efddf39b39aad68aa518d3a5f">setAtomicNumber</a>(atomicNums.at(i));</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    newAtom.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#a5980979185a4092bb0cb8a24ea388721">setPos</a>(cartCoords.at(i));</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>    Atom&amp; newAtom = addAtom();</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>    newAtom.setAtomicNumber(atomicNums.at(i));</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    newAtom.setPos(cartCoords.at(i));</div>
 <div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>  }</div>
 <div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>  settings-&gt;endGroup();</div>
 <div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>}</div>
@@ -811,18 +811,18 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00658" data-start="{" data-end="}">
 <div class="line"><a id="l00658" name="l00658"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a0a98af5ea0e0fb908cdc61b23829f477">  658</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a0a98af5ea0e0fb908cdc61b23829f477">Structure::perceiveBonds</a>()</div>
 <div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>{</div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>  <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a6ac971e36bd09965c4f7407f1139360a">clearBonds</a>();</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>  clearBonds();</div>
 <div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span> </div>
 <div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>  <span class="comment">// The cutoff tolerance to be used</span></div>
 <div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span>  <span class="keywordtype">double</span> tol = 0.1;</div>
 <div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> </div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a> = this-&gt;<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>();</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>.size(); ++i) {</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = i + 1; j &lt; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>.size(); ++j) {</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>      <span class="keyword">const</span> <span class="keyword">auto</span>&amp; rad1 = ElemInfo::getCovalentRadius(<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>[i].<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a1e9fe292b23f8d1011f7617057ccf71e">atomicNumber</a>());</div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>      <span class="keyword">const</span> <span class="keyword">auto</span>&amp; rad2 = ElemInfo::getCovalentRadius(<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>[j].<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a1e9fe292b23f8d1011f7617057ccf71e">atomicNumber</a>());</div>
-<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>(<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>[i].pos(), <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>[j].pos()) &lt; rad1 + rad2 + tol)</div>
-<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a876d04750c0667af457701f9bc96bbf2">addBond</a>(i, j);</div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>  <span class="keyword">const</span> <span class="keyword">auto</span>&amp; atoms = this-&gt;atoms();</div>
+<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>  <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; atoms.size(); ++i) {</div>
+<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> j = i + 1; j &lt; atoms.size(); ++j) {</div>
+<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span>      <span class="keyword">const</span> <span class="keyword">auto</span>&amp; rad1 = ElemInfo::getCovalentRadius(atoms[i].atomicNumber());</div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>      <span class="keyword">const</span> <span class="keyword">auto</span>&amp; rad2 = ElemInfo::getCovalentRadius(atoms[j].atomicNumber());</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>      <span class="keywordflow">if</span> (distance(atoms[i].pos(), atoms[j].pos()) &lt; rad1 + rad2 + tol)</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>        addBond(i, j);</div>
 <div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    }</div>
 <div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span>  }</div>
 <div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>}</div>
@@ -841,16 +841,16 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00683" name="l00683"></a><span class="lineno">  683</span>                                     <span class="keyword">const</span> <span class="keywordtype">double</span> energy, <span class="keyword">const</span> <span class="keywordtype">double</span> enthalpy,</div>
 <div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>                                     <span class="keyword">const</span> Matrix3&amp; cell)</div>
 <div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>{</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>  Q_ASSERT_X(atomicNums.size() == coords.size() &amp;&amp; coords.size() == <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>(),</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>  Q_ASSERT_X(atomicNums.size() == coords.size() &amp;&amp; coords.size() == numAtoms(),</div>
 <div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>             Q_FUNC_INFO,</div>
 <div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>             <span class="stringliteral">&quot;Lengths of atomicNums and coords must match numAtoms().&quot;</span>);</div>
 <div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span> </div>
 <div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>  <span class="comment">// Update atoms</span></div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>  <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">Atom</a> <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>;</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>(); i++) {</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a> = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>()[i];</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#a65e1817efddf39b39aad68aa518d3a5f">setAtomicNumber</a>(atomicNums.at(i));</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#a5980979185a4092bb0cb8a24ea388721">setPos</a>(coords.at(i));</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>  Atom atom;</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numAtoms(); i++) {</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>    atom = atoms()[i];</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>    atom.setAtomicNumber(atomicNums.at(i));</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>    atom.setPos(coords.at(i));</div>
 <div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>  }</div>
 <div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span> </div>
 <div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>  <span class="comment">// Update energy/enthalpy</span></div>
@@ -866,7 +866,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span> </div>
 <div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>  <span class="comment">// Update cell if necessary</span></div>
 <div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>  <span class="keywordflow">if</span> (!cell.isZero())</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">unitCell</a>().<a class="code hl_function" href="classGlobalSearch_1_1UnitCell.html#ab7ab41dbc42ec4a31d1bb2dc35fb9dea">setCellMatrix</a>(cell);</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>    unitCell().setCellMatrix(cell);</div>
 <div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>}</div>
 </div>
 <div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span> </div>
@@ -899,13 +899,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00737" name="l00737"></a><span class="lineno">  737</span>  <span class="comment">// Reset atoms</span></div>
 <div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>  clearAtoms();</div>
 <div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; atomicNums.size() &amp;&amp; i &lt; coords.size(); ++i)</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a72e2cfd6768bca1ff2c7c20f3334c3dc">addAtom</a>(atomicNums[i], coords[i]);</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>    addAtom(atomicNums[i], coords[i]);</div>
 <div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span> </div>
 <div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span>  <span class="comment">// Are we to use the same bonds as we used in pre-optimization? If true,</span></div>
 <div class="line"><a id="l00743" name="l00743"></a><span class="lineno">  743</span>  <span class="comment">// use them and clear it.</span></div>
 <div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a031039ffac9a7de5108e5b15e3a0d97a">reusePreoptBonding</a>() &amp;&amp; !<a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a5ad30c036d5c2b07b40688e5e9810238">getPreoptBonding</a>().empty()) {</div>
 <div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>    <span class="comment">// bonds() returns a reference. So we can set it.</span></div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a61645d849888a22ecc6ba1dcb5dc0f73">bonds</a>() = <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a5ad30c036d5c2b07b40688e5e9810238">getPreoptBonding</a>();</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>    bonds() = <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a5ad30c036d5c2b07b40688e5e9810238">getPreoptBonding</a>();</div>
 <div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>    <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a58e1fd33b42f0eb3e6a6275ddb2e94bd">clearPreoptBonding</a>();</div>
 <div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>  }</div>
 <div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span> </div>
@@ -922,7 +922,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span> </div>
 <div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>  <span class="comment">// Update cell if necessary</span></div>
 <div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>  <span class="keywordflow">if</span> (!cell.isZero())</div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">unitCell</a>().<a class="code hl_function" href="classGlobalSearch_1_1UnitCell.html#ab7ab41dbc42ec4a31d1bb2dc35fb9dea">setCellMatrix</a>(cell);</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>    unitCell().setCellMatrix(cell);</div>
 <div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>}</div>
 </div>
 <div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span> </div>
@@ -978,7 +978,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>  Vector3 coords;</div>
 <div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span> </div>
 <div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>  <span class="comment">// For first atom, add to 0, 0, 0</span></div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>() == 0) {</div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span>  <span class="keywordflow">if</span> (numAtoms() == 0) {</div>
 <div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    coords = Vector3(0, 0, 0);</div>
 <div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>  } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    <span class="keywordflow">do</span> {</div>
@@ -989,7 +989,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>      <span class="keywordtype">double</span> z = getRandDouble();</div>
 <div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span>      coords = Vector3(x, y, z);</div>
 <div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span> </div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>      coords = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">unitCell</a>().<a class="code hl_function" href="classGlobalSearch_1_1UnitCell.html#a4d4a6532e2a2773612025529153d9d37">toCartesian</a>(coords);</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>      coords = unitCell().toCartesian(coords);</div>
 <div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>      coords[0] += maxIAD;</div>
 <div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>      coords[1] += maxIAD;</div>
 <div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>      coords[2] += maxIAD;</div>
@@ -1006,9 +1006,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>      <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>  }</div>
 <div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span> </div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>  <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">Atom</a>&amp; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a> = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a72e2cfd6768bca1ff2c7c20f3334c3dc">addAtom</a>();</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>  <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#a5980979185a4092bb0cb8a24ea388721">setPos</a>(coords);</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>  <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#a65e1817efddf39b39aad68aa518d3a5f">setAtomicNumber</a>(<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a1e9fe292b23f8d1011f7617057ccf71e">atomicNumber</a>);</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>  Atom&amp; atom = addAtom();</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>  atom.setPos(coords);</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>  atom.setAtomicNumber(atomicNumber);</div>
 <div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>}</div>
 </div>
@@ -1085,7 +1085,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00913" name="l00913"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a4eb08d60e97e936091c0107b65d18e23">  913</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a4eb08d60e97e936091c0107b65d18e23">Structure::getNearestNeighborDistances</a>(QList&lt;double&gt;* list)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span><span class="keyword"></span>{</div>
 <div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span>  list-&gt;clear();</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>();</div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = atoms();</div>
 <div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>  <span class="keywordflow">if</span> (atomList.size() &lt; 2)</div>
 <div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span> </div>
@@ -1107,7 +1107,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00934" data-start="{" data-end="}">
 <div class="line"><a id="l00934" name="l00934"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a61d17912b7bcce470ff38cb1d8fcd8ce">  934</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a61d17912b7bcce470ff38cb1d8fcd8ce">Structure::getShortestInteratomicDistance</a>(<span class="keywordtype">double</span>&amp; shortest)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00935" name="l00935"></a><span class="lineno">  935</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>();</div>
+<div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = atoms();</div>
 <div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>  <span class="keywordflow">if</span> (atomList.size() &lt;= 1)</div>
 <div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Need at least two atoms!</span></div>
 <div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span>  QList&lt;Vector3&gt; atomPositions;</div>
@@ -1117,7 +1117,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>  Vector3 v1 = atomPositions.at(0);</div>
 <div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span>  Vector3 v2 = atomPositions.at(1);</div>
 <div class="line"><a id="l00945" name="l00945"></a><span class="lineno">  945</span>  shortest = std::fabs((v1 - v2).norm());</div>
-<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>  <span class="keywordtype">double</span> <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>;</div>
+<div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>  <span class="keywordtype">double</span> distance;</div>
 <div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span> </div>
 <div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>  <span class="comment">// Find shortest distance</span></div>
 <div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; atomList.size(); i++) {</div>
@@ -1125,9 +1125,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = i + 1; j &lt; atomList.size(); j++) {</div>
 <div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>      v2 = atomPositions.at(j);</div>
 <div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>      <span class="comment">// Intercell</span></div>
-<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>      <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a> = std::fabs((v1 - v2).norm());</div>
-<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>      <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a> &lt; shortest)</div>
-<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>        shortest = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>;</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span>      distance = std::fabs((v1 - v2).norm());</div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno">  955</span>      <span class="keywordflow">if</span> (distance &lt; shortest)</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>        shortest = distance;</div>
 <div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>    }</div>
 <div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>  }</div>
 <div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
@@ -1139,7 +1139,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00963" name="l00963"></a><span class="lineno">  963</span>                                           <span class="keyword">const</span> <span class="keywordtype">double</span> z,</div>
 <div class="line"><a id="l00964" name="l00964"></a><span class="lineno">  964</span>                                           <span class="keywordtype">double</span>&amp; shortest)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00965" name="l00965"></a><span class="lineno">  965</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>();</div>
+<div class="line"><a id="l00966" name="l00966"></a><span class="lineno">  966</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = atoms();</div>
 <div class="line"><a id="l00967" name="l00967"></a><span class="lineno">  967</span>  <span class="keywordflow">if</span> (atomList.size() &lt; 2)</div>
 <div class="line"><a id="l00968" name="l00968"></a><span class="lineno">  968</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// Need at least two atoms!</span></div>
 <div class="line"><a id="l00969" name="l00969"></a><span class="lineno">  969</span>  QList&lt;Vector3&gt; atomPositions;</div>
@@ -1149,25 +1149,25 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00973" name="l00973"></a><span class="lineno">  973</span>  Vector3 v1(x, y, z);</div>
 <div class="line"><a id="l00974" name="l00974"></a><span class="lineno">  974</span>  Vector3 v2 = atomPositions.at(0);</div>
 <div class="line"><a id="l00975" name="l00975"></a><span class="lineno">  975</span>  shortest = fabs((v1 - v2).norm());</div>
-<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>  <span class="keywordtype">double</span> <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>;</div>
+<div class="line"><a id="l00976" name="l00976"></a><span class="lineno">  976</span>  <span class="keywordtype">double</span> distance;</div>
 <div class="line"><a id="l00977" name="l00977"></a><span class="lineno">  977</span> </div>
 <div class="line"><a id="l00978" name="l00978"></a><span class="lineno">  978</span>  <span class="comment">// Find shortest distance</span></div>
 <div class="line"><a id="l00979" name="l00979"></a><span class="lineno">  979</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; atomList.size(); j++) {</div>
 <div class="line"><a id="l00980" name="l00980"></a><span class="lineno">  980</span>    v2 = atomPositions.at(j);</div>
 <div class="line"><a id="l00981" name="l00981"></a><span class="lineno">  981</span>    <span class="comment">// Intercell</span></div>
-<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a> = fabs((v1 - v2).norm());</div>
-<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a> &lt; shortest)</div>
-<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>      shortest = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>;</div>
+<div class="line"><a id="l00982" name="l00982"></a><span class="lineno">  982</span>    distance = fabs((v1 - v2).norm());</div>
+<div class="line"><a id="l00983" name="l00983"></a><span class="lineno">  983</span>    <span class="keywordflow">if</span> (distance &lt; shortest)</div>
+<div class="line"><a id="l00984" name="l00984"></a><span class="lineno">  984</span>      shortest = distance;</div>
 <div class="line"><a id="l00985" name="l00985"></a><span class="lineno">  985</span>  }</div>
 <div class="line"><a id="l00986" name="l00986"></a><span class="lineno">  986</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00987" name="l00987"></a><span class="lineno">  987</span>}</div>
 </div>
 <div class="line"><a id="l00988" name="l00988"></a><span class="lineno">  988</span> </div>
 <div class="foldopen" id="foldopen00989" data-start="{" data-end="}">
-<div class="line"><a id="l00989" name="l00989"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a43879ff4a15257cafe184fac9d21d2cb">  989</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a67841e5db87f52941d687be28ae9d970">Structure::getNearestNeighborDistance</a>(<span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">GlobalSearch::Atom</a>&amp; atom,</div>
+<div class="line"><a id="l00989" name="l00989"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a43879ff4a15257cafe184fac9d21d2cb">  989</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a67841e5db87f52941d687be28ae9d970">Structure::getNearestNeighborDistance</a>(<span class="keyword">const</span> GlobalSearch::Atom&amp; atom,</div>
 <div class="line"><a id="l00990" name="l00990"></a><span class="lineno">  990</span>                                           <span class="keywordtype">double</span>&amp; shortest)<span class="keyword"> const</span></div>
 <div class="line"><a id="l00991" name="l00991"></a><span class="lineno">  991</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>  Vector3 position = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#ac698c30d8d838e78d7d43d1eea59ab9c">pos</a>();</div>
+<div class="line"><a id="l00992" name="l00992"></a><span class="lineno">  992</span>  Vector3 position = atom.pos();</div>
 <div class="line"><a id="l00993" name="l00993"></a><span class="lineno">  993</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a67841e5db87f52941d687be28ae9d970">getNearestNeighborDistance</a>(position.x(), position.y(), position.z(),</div>
 <div class="line"><a id="l00994" name="l00994"></a><span class="lineno">  994</span>                                    shortest);</div>
 <div class="line"><a id="l00995" name="l00995"></a><span class="lineno">  995</span>}</div>
@@ -1184,7 +1184,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01004" name="l01004"></a><span class="lineno"> 1004</span>  }</div>
 <div class="line"><a id="l01005" name="l01005"></a><span class="lineno"> 1005</span>  Vector3 vec(x, y, z);</div>
 <div class="line"><a id="l01006" name="l01006"></a><span class="lineno"> 1006</span>  <span class="keywordtype">double</span> cutoffSquared = cutoff * cutoff;</div>
-<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>();</div>
+<div class="line"><a id="l01007" name="l01007"></a><span class="lineno"> 1007</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = atoms();</div>
 <div class="line"><a id="l01008" name="l01008"></a><span class="lineno"> 1008</span>  <span class="keywordflow">for</span> (std::vector&lt;Atom&gt;::const_iterator it = atomList.begin(),</div>
 <div class="line"><a id="l01009" name="l01009"></a><span class="lineno"> 1009</span>                                         it_end = atomList.end();</div>
 <div class="line"><a id="l01010" name="l01010"></a><span class="lineno"> 1010</span>       it != it_end; ++it) {</div>
@@ -1201,11 +1201,11 @@ $(document).ready(function() { init_codefold(0); });
 </div>
 <div class="line"><a id="l01021" name="l01021"></a><span class="lineno"> 1021</span> </div>
 <div class="foldopen" id="foldopen01022" data-start="{" data-end="}">
-<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#ab52622849becb775c6d0d4271af825c4"> 1022</a></span>QList&lt;Atom&gt; <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#af8cc1815c7102a808265dfdd4f242b9a">Structure::getNeighbors</a>(<span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">GlobalSearch::Atom</a>&amp; atom,</div>
+<div class="line"><a id="l01022" name="l01022"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#ab52622849becb775c6d0d4271af825c4"> 1022</a></span>QList&lt;Atom&gt; <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#af8cc1815c7102a808265dfdd4f242b9a">Structure::getNeighbors</a>(<span class="keyword">const</span> GlobalSearch::Atom&amp; atom,</div>
 <div class="line"><a id="l01023" name="l01023"></a><span class="lineno"> 1023</span>                                    <span class="keyword">const</span> <span class="keywordtype">double</span> cutoff,</div>
 <div class="line"><a id="l01024" name="l01024"></a><span class="lineno"> 1024</span>                                    QList&lt;double&gt;* distances)<span class="keyword"> const</span></div>
 <div class="line"><a id="l01025" name="l01025"></a><span class="lineno"> 1025</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>  Vector3 position = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#ac698c30d8d838e78d7d43d1eea59ab9c">pos</a>();</div>
+<div class="line"><a id="l01026" name="l01026"></a><span class="lineno"> 1026</span>  Vector3 position = atom.pos();</div>
 <div class="line"><a id="l01027" name="l01027"></a><span class="lineno"> 1027</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#af8cc1815c7102a808265dfdd4f242b9a">getNeighbors</a>(position.x(), position.y(), position.z(), cutoff,</div>
 <div class="line"><a id="l01028" name="l01028"></a><span class="lineno"> 1028</span>                      distances);</div>
 <div class="line"><a id="l01029" name="l01029"></a><span class="lineno"> 1029</span>}</div>
@@ -1255,10 +1255,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen01064" data-start="{" data-end="}">
 <div class="line"><a id="l01064" name="l01064"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a52b7ffe91ee5b50c2f82be65b8cf96df"> 1064</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a52b7ffe91ee5b50c2f82be65b8cf96df">Structure::generateIADHistogram</a>(QList&lt;double&gt;* dist, QList&lt;double&gt;* freq,</div>
 <div class="line"><a id="l01065" name="l01065"></a><span class="lineno"> 1065</span>                                     <span class="keywordtype">double</span> min, <span class="keywordtype">double</span> max, <span class="keywordtype">double</span> step,</div>
-<div class="line"><a id="l01066" name="l01066"></a><span class="lineno"> 1066</span>                                     <span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">GlobalSearch::Atom</a>&amp; atom)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01066" name="l01066"></a><span class="lineno"> 1066</span>                                     <span class="keyword">const</span> GlobalSearch::Atom&amp; atom)<span class="keyword"> const</span></div>
 <div class="line"><a id="l01067" name="l01067"></a><span class="lineno"> 1067</span><span class="keyword"></span>{</div>
 <div class="line"><a id="l01068" name="l01068"></a><span class="lineno"> 1068</span>  QList&lt;QVariant&gt; distv, freqv;</div>
-<div class="line"><a id="l01069" name="l01069"></a><span class="lineno"> 1069</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a52b7ffe91ee5b50c2f82be65b8cf96df">generateIADHistogram</a>(&amp;distv, &amp;freqv, min, max, step, <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>)) {</div>
+<div class="line"><a id="l01069" name="l01069"></a><span class="lineno"> 1069</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a52b7ffe91ee5b50c2f82be65b8cf96df">generateIADHistogram</a>(&amp;distv, &amp;freqv, min, max, step, atom)) {</div>
 <div class="line"><a id="l01070" name="l01070"></a><span class="lineno"> 1070</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l01071" name="l01071"></a><span class="lineno"> 1071</span>  }</div>
 <div class="line"><a id="l01072" name="l01072"></a><span class="lineno"> 1072</span>  dist-&gt;clear();</div>
@@ -1327,9 +1327,9 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01135" name="l01135"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a731c44ab2f8b1f2c56a8d4510a04199d"> 1135</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a52b7ffe91ee5b50c2f82be65b8cf96df">Structure::generateIADHistogram</a>(QList&lt;QVariant&gt;* distance,</div>
 <div class="line"><a id="l01136" name="l01136"></a><span class="lineno"> 1136</span>                                     QList&lt;QVariant&gt;* frequency, <span class="keywordtype">double</span> min,</div>
 <div class="line"><a id="l01137" name="l01137"></a><span class="lineno"> 1137</span>                                     <span class="keywordtype">double</span> max, <span class="keywordtype">double</span> step,</div>
-<div class="line"><a id="l01138" name="l01138"></a><span class="lineno"> 1138</span>                                     <span class="keyword">const</span> <a class="code hl_class" href="classGlobalSearch_1_1Atom.html">GlobalSearch::Atom</a>&amp; atom)<span class="keyword"> const</span></div>
+<div class="line"><a id="l01138" name="l01138"></a><span class="lineno"> 1138</span>                                     <span class="keyword">const</span> GlobalSearch::Atom&amp; atom)<span class="keyword"> const</span></div>
 <div class="line"><a id="l01139" name="l01139"></a><span class="lineno"> 1139</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l01140" name="l01140"></a><span class="lineno"> 1140</span>  <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>-&gt;clear();</div>
+<div class="line"><a id="l01140" name="l01140"></a><span class="lineno"> 1140</span>  distance-&gt;clear();</div>
 <div class="line"><a id="l01141" name="l01141"></a><span class="lineno"> 1141</span>  frequency-&gt;clear();</div>
 <div class="line"><a id="l01142" name="l01142"></a><span class="lineno"> 1142</span> </div>
 <div class="line"><a id="l01143" name="l01143"></a><span class="lineno"> 1143</span>  <span class="keywordflow">if</span> (min &gt; max &amp;&amp; step &gt; 0) {</div>
@@ -1347,12 +1347,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01155" name="l01155"></a><span class="lineno"> 1155</span> </div>
 <div class="line"><a id="l01156" name="l01156"></a><span class="lineno"> 1156</span>  <span class="keywordtype">double</span> val = min;</div>
 <div class="line"><a id="l01157" name="l01157"></a><span class="lineno"> 1157</span>  <span class="keywordflow">do</span> {</div>
-<div class="line"><a id="l01158" name="l01158"></a><span class="lineno"> 1158</span>    <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>-&gt;append(val);</div>
+<div class="line"><a id="l01158" name="l01158"></a><span class="lineno"> 1158</span>    distance-&gt;append(val);</div>
 <div class="line"><a id="l01159" name="l01159"></a><span class="lineno"> 1159</span>    frequency-&gt;append(0);</div>
 <div class="line"><a id="l01160" name="l01160"></a><span class="lineno"> 1160</span>    val += step;</div>
 <div class="line"><a id="l01161" name="l01161"></a><span class="lineno"> 1161</span>  } <span class="keywordflow">while</span> (val &lt; max);</div>
 <div class="line"><a id="l01162" name="l01162"></a><span class="lineno"> 1162</span> </div>
-<div class="line"><a id="l01163" name="l01163"></a><span class="lineno"> 1163</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>();</div>
+<div class="line"><a id="l01163" name="l01163"></a><span class="lineno"> 1163</span>  <span class="keyword">const</span> std::vector&lt;Atom&gt;&amp; atomList = atoms();</div>
 <div class="line"><a id="l01164" name="l01164"></a><span class="lineno"> 1164</span>  QList&lt;Vector3&gt; atomPositions;</div>
 <div class="line"><a id="l01165" name="l01165"></a><span class="lineno"> 1165</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; atomList.size(); i++)</div>
 <div class="line"><a id="l01166" name="l01166"></a><span class="lineno"> 1166</span>    atomPositions.push_back(atomList.at(i).pos());</div>
@@ -1363,14 +1363,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01171" name="l01171"></a><span class="lineno"> 1171</span> </div>
 <div class="line"><a id="l01172" name="l01172"></a><span class="lineno"> 1172</span>  <span class="comment">// build histogram</span></div>
 <div class="line"><a id="l01173" name="l01173"></a><span class="lineno"> 1173</span>  <span class="comment">// Loop over all atoms -- use map-reduce</span></div>
-<div class="line"><a id="l01174" name="l01174"></a><span class="lineno"> 1174</span>  <span class="keywordflow">if</span> (<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#add1e063124900eeac301bafd5358908a">atomicNumber</a>() == 0) {</div>
+<div class="line"><a id="l01174" name="l01174"></a><span class="lineno"> 1174</span>  <span class="keywordflow">if</span> (atom.atomicNumber() == 0) {</div>
 <div class="line"><a id="l01175" name="l01175"></a><span class="lineno"> 1175</span>    QList&lt;NNHistMap&gt; ml;</div>
 <div class="line"><a id="l01176" name="l01176"></a><span class="lineno"> 1176</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; atomList.size(); i++) {</div>
 <div class="line"><a id="l01177" name="l01177"></a><span class="lineno"> 1177</span>      NNHistMap m;</div>
 <div class="line"><a id="l01178" name="l01178"></a><span class="lineno"> 1178</span>      m.i = i;</div>
 <div class="line"><a id="l01179" name="l01179"></a><span class="lineno"> 1179</span>      m.halfstep = halfstep;</div>
 <div class="line"><a id="l01180" name="l01180"></a><span class="lineno"> 1180</span>      m.atomPositions = &amp;atomPositions;</div>
-<div class="line"><a id="l01181" name="l01181"></a><span class="lineno"> 1181</span>      m.dist = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>;</div>
+<div class="line"><a id="l01181" name="l01181"></a><span class="lineno"> 1181</span>      m.dist = distance;</div>
 <div class="line"><a id="l01182" name="l01182"></a><span class="lineno"> 1182</span>      ml.append(m);</div>
 <div class="line"><a id="l01183" name="l01183"></a><span class="lineno"> 1183</span>    }</div>
 <div class="line"><a id="l01184" name="l01184"></a><span class="lineno"> 1184</span>    (*frequency) = QtConcurrent::blockingMappedReduced(ml, calcNNHistChunk,</div>
@@ -1378,15 +1378,15 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01186" name="l01186"></a><span class="lineno"> 1186</span>  }</div>
 <div class="line"><a id="l01187" name="l01187"></a><span class="lineno"> 1187</span>  <span class="comment">// Or, just the one requested</span></div>
 <div class="line"><a id="l01188" name="l01188"></a><span class="lineno"> 1188</span>  <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l01189" name="l01189"></a><span class="lineno"> 1189</span>    v1 = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>.<a class="code hl_function" href="classGlobalSearch_1_1Atom.html#ac698c30d8d838e78d7d43d1eea59ab9c">pos</a>();</div>
+<div class="line"><a id="l01189" name="l01189"></a><span class="lineno"> 1189</span>    v1 = atom.pos();</div>
 <div class="line"><a id="l01190" name="l01190"></a><span class="lineno"> 1190</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; atomList.size(); j++) {</div>
-<div class="line"><a id="l01191" name="l01191"></a><span class="lineno"> 1191</span>      <span class="keywordflow">if</span> (atomList.at(j) == <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">atom</a>)</div>
+<div class="line"><a id="l01191" name="l01191"></a><span class="lineno"> 1191</span>      <span class="keywordflow">if</span> (atomList.at(j) == atom)</div>
 <div class="line"><a id="l01192" name="l01192"></a><span class="lineno"> 1192</span>        <span class="keywordflow">continue</span>;</div>
 <div class="line"><a id="l01193" name="l01193"></a><span class="lineno"> 1193</span>      v2 = atomPositions.at(j);</div>
 <div class="line"><a id="l01194" name="l01194"></a><span class="lineno"> 1194</span>      <span class="comment">// Intercell</span></div>
 <div class="line"><a id="l01195" name="l01195"></a><span class="lineno"> 1195</span>      diff = fabs((v1 - v2).norm());</div>
-<div class="line"><a id="l01196" name="l01196"></a><span class="lineno"> 1196</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>-&gt;size(); k++) {</div>
-<div class="line"><a id="l01197" name="l01197"></a><span class="lineno"> 1197</span>        <span class="keywordtype">double</span> radius = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">distance</a>-&gt;at(k).toDouble();</div>
+<div class="line"><a id="l01196" name="l01196"></a><span class="lineno"> 1196</span>      <span class="keywordflow">for</span> (<span class="keywordtype">int</span> k = 0; k &lt; distance-&gt;size(); k++) {</div>
+<div class="line"><a id="l01197" name="l01197"></a><span class="lineno"> 1197</span>        <span class="keywordtype">double</span> radius = distance-&gt;at(k).toDouble();</div>
 <div class="line"><a id="l01198" name="l01198"></a><span class="lineno"> 1198</span>        <span class="keywordtype">double</span> d;</div>
 <div class="line"><a id="l01199" name="l01199"></a><span class="lineno"> 1199</span>        <span class="keywordflow">if</span> (diff != 0 &amp;&amp; fabs(diff - radius) &lt; halfstep) {</div>
 <div class="line"><a id="l01200" name="l01200"></a><span class="lineno"> 1200</span>          d = frequency-&gt;at(k).toDouble();</div>
@@ -1521,8 +1521,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01321" name="l01321"></a><span class="lineno"><a class="line" href="classGlobalSearch_1_1Structure.html#a8474a318e0d8b4c09a220e3857c7a909"> 1321</a></span>QList&lt;QString&gt; <a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a8474a318e0d8b4c09a220e3857c7a909">Structure::getSymbols</a>()<span class="keyword"> const</span></div>
 <div class="line"><a id="l01322" name="l01322"></a><span class="lineno"> 1322</span><span class="keyword"></span>{</div>
 <div class="line"><a id="l01323" name="l01323"></a><span class="lineno"> 1323</span>  QList&lt;QString&gt; list;</div>
-<div class="line"><a id="l01324" name="l01324"></a><span class="lineno"> 1324</span>  <span class="keywordflow">for</span> (std::vector&lt;Atom&gt;::const_iterator it = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>().begin(),</div>
-<div class="line"><a id="l01325" name="l01325"></a><span class="lineno"> 1325</span>                                         it_end = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>().end();</div>
+<div class="line"><a id="l01324" name="l01324"></a><span class="lineno"> 1324</span>  <span class="keywordflow">for</span> (std::vector&lt;Atom&gt;::const_iterator it = atoms().begin(),</div>
+<div class="line"><a id="l01325" name="l01325"></a><span class="lineno"> 1325</span>                                         it_end = atoms().end();</div>
 <div class="line"><a id="l01326" name="l01326"></a><span class="lineno"> 1326</span>       it != it_end; ++it) {</div>
 <div class="line"><a id="l01327" name="l01327"></a><span class="lineno"> 1327</span>    QString symbol = ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str();</div>
 <div class="line"><a id="l01328" name="l01328"></a><span class="lineno"> 1328</span>    <span class="keywordflow">if</span> (!list.contains(symbol)) {</div>
@@ -1542,8 +1542,8 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01340" name="l01340"></a><span class="lineno"> 1340</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; symbols.size(); i++)</div>
 <div class="line"><a id="l01341" name="l01341"></a><span class="lineno"> 1341</span>    list.append(0);</div>
 <div class="line"><a id="l01342" name="l01342"></a><span class="lineno"> 1342</span>  <span class="keywordtype">int</span> ind;</div>
-<div class="line"><a id="l01343" name="l01343"></a><span class="lineno"> 1343</span>  <span class="keywordflow">for</span> (std::vector&lt;Atom&gt;::const_iterator it = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>().begin(),</div>
-<div class="line"><a id="l01344" name="l01344"></a><span class="lineno"> 1344</span>                                         it_end = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>().end();</div>
+<div class="line"><a id="l01343" name="l01343"></a><span class="lineno"> 1343</span>  <span class="keywordflow">for</span> (std::vector&lt;Atom&gt;::const_iterator it = atoms().begin(),</div>
+<div class="line"><a id="l01344" name="l01344"></a><span class="lineno"> 1344</span>                                         it_end = atoms().end();</div>
 <div class="line"><a id="l01345" name="l01345"></a><span class="lineno"> 1345</span>       it != it_end; ++it) {</div>
 <div class="line"><a id="l01346" name="l01346"></a><span class="lineno"> 1346</span>    QString symbol = ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str();</div>
 <div class="line"><a id="l01347" name="l01347"></a><span class="lineno"> 1347</span>    Q_ASSERT_X(symbols.contains(symbol), Q_FUNC_INFO,</div>
@@ -1566,10 +1566,10 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01362" name="l01362"></a><span class="lineno"> 1362</span>  std::vector&lt;Atom&gt;::const_iterator it;</div>
 <div class="line"><a id="l01363" name="l01363"></a><span class="lineno"> 1363</span>  <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; symbols.size(); i++) {</div>
 <div class="line"><a id="l01364" name="l01364"></a><span class="lineno"> 1364</span>    symbol_ref = symbols.at(i);</div>
-<div class="line"><a id="l01365" name="l01365"></a><span class="lineno"> 1365</span>    <span class="keywordflow">for</span> (it = <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>().begin(); it != <a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">atoms</a>().end(); it++) {</div>
+<div class="line"><a id="l01365" name="l01365"></a><span class="lineno"> 1365</span>    <span class="keywordflow">for</span> (it = atoms().begin(); it != atoms().end(); it++) {</div>
 <div class="line"><a id="l01366" name="l01366"></a><span class="lineno"> 1366</span>      symbol_cur = ElemInfo::getAtomicSymbol((*it).atomicNumber()).c_str();</div>
 <div class="line"><a id="l01367" name="l01367"></a><span class="lineno"> 1367</span>      <span class="keywordflow">if</span> (symbol_cur == symbol_ref) {</div>
-<div class="line"><a id="l01368" name="l01368"></a><span class="lineno"> 1368</span>        list.append(<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">unitCell</a>().toFractional((*it).pos()));</div>
+<div class="line"><a id="l01368" name="l01368"></a><span class="lineno"> 1368</span>        list.append(unitCell().toFractional((*it).pos()));</div>
 <div class="line"><a id="l01369" name="l01369"></a><span class="lineno"> 1369</span>      }</div>
 <div class="line"><a id="l01370" name="l01370"></a><span class="lineno"> 1370</span>    }</div>
 <div class="line"><a id="l01371" name="l01371"></a><span class="lineno"> 1371</span>  }</div>
@@ -1695,7 +1695,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01479" name="l01479"></a><span class="lineno"> 1479</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(structure_j-&gt;numAtoms()) &lt;</div>
 <div class="line"><a id="l01480" name="l01480"></a><span class="lineno"> 1480</span>          structure_i-&gt;<a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a36f8a87ecf6dadfed92eeb797ab2c0d6">getEnthalpy</a>() /</div>
 <div class="line"><a id="l01481" name="l01481"></a><span class="lineno"> 1481</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(</div>
-<div class="line"><a id="l01482" name="l01482"></a><span class="lineno"> 1482</span>              structure_i-&gt;<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>())) { <span class="comment">// PSA Enthalpy per atom</span></div>
+<div class="line"><a id="l01482" name="l01482"></a><span class="lineno"> 1482</span>              structure_i-&gt;numAtoms())) { <span class="comment">// PSA Enthalpy per atom</span></div>
 <div class="line"><a id="l01483" name="l01483"></a><span class="lineno"> 1483</span>        structures-&gt;swap(i, j);</div>
 <div class="line"><a id="l01484" name="l01484"></a><span class="lineno"> 1484</span>        tmp = structure_i;</div>
 <div class="line"><a id="l01485" name="l01485"></a><span class="lineno"> 1485</span>        structure_i = structure_j;</div>
@@ -1772,7 +1772,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01552" name="l01552"></a><span class="lineno"> 1552</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(structure_j-&gt;numAtoms()) &lt;</div>
 <div class="line"><a id="l01553" name="l01553"></a><span class="lineno"> 1553</span>          structure_i-&gt;<a class="code hl_function" href="classGlobalSearch_1_1Structure.html#a36f8a87ecf6dadfed92eeb797ab2c0d6">getEnthalpy</a>() /</div>
 <div class="line"><a id="l01554" name="l01554"></a><span class="lineno"> 1554</span>            <span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(</div>
-<div class="line"><a id="l01555" name="l01555"></a><span class="lineno"> 1555</span>              structure_i-&gt;<a class="code hl_function" href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">numAtoms</a>())) { <span class="comment">// PSA Enthalpy per atom</span></div>
+<div class="line"><a id="l01555" name="l01555"></a><span class="lineno"> 1555</span>              structure_i-&gt;numAtoms())) { <span class="comment">// PSA Enthalpy per atom</span></div>
 <div class="line"><a id="l01556" name="l01556"></a><span class="lineno"> 1556</span>        rstructures.swap(i, j);</div>
 <div class="line"><a id="l01557" name="l01557"></a><span class="lineno"> 1557</span>        tmp = structure_i;</div>
 <div class="line"><a id="l01558" name="l01558"></a><span class="lineno"> 1558</span>        structure_i = structure_j;</div>
@@ -1830,24 +1830,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l01607" name="l01607"></a><span class="lineno"> 1607</span>  <span class="keywordflow">return</span> numberOfEachFormulaUnit;</div>
 <div class="line"><a id="l01608" name="l01608"></a><span class="lineno"> 1608</span>}</div>
 <div class="line"><a id="l01609" name="l01609"></a><span class="lineno"> 1609</span>} <span class="comment">// end namespace GlobalSearch</span></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Atom_html"><div class="ttname"><a href="classGlobalSearch_1_1Atom.html">GlobalSearch::Atom</a></div><div class="ttdoc">A basic atom class. Each atom has an atomic number and a position.</div><div class="ttdef"><b>Definition</b> <a href="atom_8h_source.html#l00027">atom.h:28</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Atom_html_a5980979185a4092bb0cb8a24ea388721"><div class="ttname"><a href="classGlobalSearch_1_1Atom.html#a5980979185a4092bb0cb8a24ea388721">GlobalSearch::Atom::setPos</a></div><div class="ttdeci">void setPos(const Vector3 &amp;pos)</div><div class="ttdef"><b>Definition</b> <a href="atom_8h_source.html#l00080">atom.h:80</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Atom_html_a65e1817efddf39b39aad68aa518d3a5f"><div class="ttname"><a href="classGlobalSearch_1_1Atom.html#a65e1817efddf39b39aad68aa518d3a5f">GlobalSearch::Atom::setAtomicNumber</a></div><div class="ttdeci">void setAtomicNumber(unsigned short num)</div><div class="ttdef"><b>Definition</b> <a href="atom_8h_source.html#l00073">atom.h:73</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Atom_html_ac698c30d8d838e78d7d43d1eea59ab9c"><div class="ttname"><a href="classGlobalSearch_1_1Atom.html#ac698c30d8d838e78d7d43d1eea59ab9c">GlobalSearch::Atom::pos</a></div><div class="ttdeci">Vector3 &amp; pos()</div><div class="ttdef"><b>Definition</b> <a href="atom_8h_source.html#l00095">atom.h:95</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Atom_html_add1e063124900eeac301bafd5358908a"><div class="ttname"><a href="classGlobalSearch_1_1Atom.html#add1e063124900eeac301bafd5358908a">GlobalSearch::Atom::atomicNumber</a></div><div class="ttdeci">unsigned short atomicNumber() const</div><div class="ttdef"><b>Definition</b> <a href="atom_8h_source.html#l00087">atom.h:87</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Bond_html"><div class="ttname"><a href="classGlobalSearch_1_1Bond.html">GlobalSearch::Bond</a></div><div class="ttdoc">A basic bond class. Just stores two atom indices and a bond order. There is potential for more to be ...</div><div class="ttdef"><b>Definition</b> <a href="bond_8h_source.html#l00026">bond.h:27</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html">GlobalSearch::Molecule</a></div><div class="ttdoc">A basic molecule class. Contains a vector of atoms and a unit cell.</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00033">molecule.h:34</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a0df5910ed5b1f1b0931c7b5973b76bea"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a0df5910ed5b1f1b0931c7b5973b76bea">GlobalSearch::Molecule::atom</a></div><div class="ttdeci">Atom &amp; atom(size_t ind)</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00532">molecule.h:532</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a1e9fe292b23f8d1011f7617057ccf71e"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a1e9fe292b23f8d1011f7617057ccf71e">GlobalSearch::Molecule::atomicNumber</a></div><div class="ttdeci">unsigned short atomicNumber(size_t ind) const</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00561">molecule.h:561</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a2113ea10659263b3f9f5fbd73e411634"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a2113ea10659263b3f9f5fbd73e411634">GlobalSearch::Molecule::distance</a></div><div class="ttdeci">double distance(const Vector3 &amp;A, const Vector3 &amp;B) const</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00576">molecule.h:576</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a37d1bea3b5b44bbf69e43bbf2d139981"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a37d1bea3b5b44bbf69e43bbf2d139981">GlobalSearch::Molecule::unitCell</a></div><div class="ttdeci">UnitCell &amp; unitCell()</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00476">molecule.h:476</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a61645d849888a22ecc6ba1dcb5dc0f73"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a61645d849888a22ecc6ba1dcb5dc0f73">GlobalSearch::Molecule::bonds</a></div><div class="ttdeci">std::vector&lt; Bond &gt; &amp; bonds()</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00369">molecule.h:369</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a6ac971e36bd09965c4f7407f1139360a"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a6ac971e36bd09965c4f7407f1139360a">GlobalSearch::Molecule::clearBonds</a></div><div class="ttdeci">void clearBonds()</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00454">molecule.h:454</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a72e2cfd6768bca1ff2c7c20f3334c3dc"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a72e2cfd6768bca1ff2c7c20f3334c3dc">GlobalSearch::Molecule::addAtom</a></div><div class="ttdeci">Atom &amp; addAtom(unsigned short atomicNum=0, const Vector3 &amp;pos=Vector3(0.0, 0.0, 0.0))</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00514">molecule.h:514</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a7c859488a8d00828acfb3ecf8df3593d"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a7c859488a8d00828acfb3ecf8df3593d">GlobalSearch::Molecule::atoms</a></div><div class="ttdeci">std::vector&lt; Atom &gt; &amp; atoms()</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00168">molecule.h:168</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_a876d04750c0667af457701f9bc96bbf2"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#a876d04750c0667af457701f9bc96bbf2">GlobalSearch::Molecule::addBond</a></div><div class="ttdeci">void addBond(size_t ind1, size_t ind2, unsigned short bondOrder=1)</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00611">molecule.h:611</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_aa22efcc3e4c5e98bef2349ae8f76c98e"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#aa22efcc3e4c5e98bef2349ae8f76c98e">GlobalSearch::Molecule::hasUnitCell</a></div><div class="ttdeci">bool hasUnitCell() const</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00462">molecule.h:462</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1Molecule_html_aeb639fc7674e69c1c09383eb083209e1"><div class="ttname"><a href="classGlobalSearch_1_1Molecule.html#aeb639fc7674e69c1c09383eb083209e1">GlobalSearch::Molecule::numAtoms</a></div><div class="ttdeci">size_t numAtoms() const</div><div class="ttdef"><b>Definition</b> <a href="molecule_8h_source.html#l00191">molecule.h:191</a></div></div>
 <div class="ttc" id="aclassGlobalSearch_1_1Structure_html"><div class="ttname"><a href="classGlobalSearch_1_1Structure.html">GlobalSearch::Structure</a></div><div class="ttdoc">Generic molecule object.</div><div class="ttdef"><b>Definition</b> <a href="structure_8h_source.html#l00045">structure.h:46</a></div></div>
 <div class="ttc" id="aclassGlobalSearch_1_1Structure_html_a031039ffac9a7de5108e5b15e3a0d97a"><div class="ttname"><a href="classGlobalSearch_1_1Structure.html#a031039ffac9a7de5108e5b15e3a0d97a">GlobalSearch::Structure::reusePreoptBonding</a></div><div class="ttdeci">bool reusePreoptBonding()</div><div class="ttdef"><b>Definition</b> <a href="structure_8h_source.html#l00832">structure.h:832</a></div></div>
 <div class="ttc" id="aclassGlobalSearch_1_1Structure_html_a0a32fcd453d536f956b76015d6b7c729"><div class="ttname"><a href="classGlobalSearch_1_1Structure.html#a0a32fcd453d536f956b76015d6b7c729">GlobalSearch::Structure::setEnergy</a></div><div class="ttdeci">void setEnergy(double energy)</div><div class="ttdef"><b>Definition</b> <a href="structure_8h_source.html#l01143">structure.h:1143</a></div></div>
@@ -1960,9 +1942,6 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassGlobalSearch_1_1Structure_html_af8cc1815c7102a808265dfdd4f242b9a"><div class="ttname"><a href="classGlobalSearch_1_1Structure.html#af8cc1815c7102a808265dfdd4f242b9a">GlobalSearch::Structure::getNeighbors</a></div><div class="ttdeci">QList&lt; GlobalSearch::Atom &gt; getNeighbors(const double x, const double y, const double z, const double cutoff, QList&lt; double &gt; *distances=0) const</div><div class="ttdef"><b>Definition</b> <a href="structure_8cpp_source.html#l00997">structure.cpp:997</a></div></div>
 <div class="ttc" id="aclassGlobalSearch_1_1Structure_html_afc5507175ebfb4da413a5c40a2a8dfb3"><div class="ttname"><a href="classGlobalSearch_1_1Structure.html#afc5507175ebfb4da413a5c40a2a8dfb3">GlobalSearch::Structure::setOptTimerStart</a></div><div class="ttdeci">void setOptTimerStart(const QDateTime &amp;d)</div><div class="ttdef"><b>Definition</b> <a href="structure_8h_source.html#l01389">structure.h:1389</a></div></div>
 <div class="ttc" id="aclassGlobalSearch_1_1Structure_html_aff5394b9be0fa599c58f906d9a03f9d5"><div class="ttname"><a href="classGlobalSearch_1_1Structure.html#aff5394b9be0fa599c58f906d9a03f9d5">GlobalSearch::Structure::setupConnections</a></div><div class="ttdeci">virtual void setupConnections()</div><div class="ttdef"><b>Definition</b> <a href="structure_8cpp_source.html#l00084">structure.cpp:84</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1UnitCell_html_a4d4a6532e2a2773612025529153d9d37"><div class="ttname"><a href="classGlobalSearch_1_1UnitCell.html#a4d4a6532e2a2773612025529153d9d37">GlobalSearch::UnitCell::toCartesian</a></div><div class="ttdeci">Vector3 toCartesian(const Vector3 &amp;frac) const</div><div class="ttdef"><b>Definition</b> <a href="unitcell_8h_source.html#l00329">unitcell.h:329</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1UnitCell_html_a70afaef20015b7e2553a17c003a3b065"><div class="ttname"><a href="classGlobalSearch_1_1UnitCell.html#a70afaef20015b7e2553a17c003a3b065">GlobalSearch::UnitCell::cellMatrix</a></div><div class="ttdeci">Matrix3 cellMatrix() const</div><div class="ttdef"><b>Definition</b> <a href="unitcell_8h_source.html#l00119">unitcell.h:119</a></div></div>
-<div class="ttc" id="aclassGlobalSearch_1_1UnitCell_html_ab7ab41dbc42ec4a31d1bb2dc35fb9dea"><div class="ttname"><a href="classGlobalSearch_1_1UnitCell.html#ab7ab41dbc42ec4a31d1bb2dc35fb9dea">GlobalSearch::UnitCell::setCellMatrix</a></div><div class="ttdeci">void setCellMatrix(const Matrix3 &amp;mat)</div><div class="ttdef"><b>Definition</b> <a href="unitcell_8h_source.html#l00112">unitcell.h:112</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- HTML footer for doxygen 1.8.6-->
 <!-- start footer part -->

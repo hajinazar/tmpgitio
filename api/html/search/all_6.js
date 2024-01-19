@@ -19,16 +19,11 @@ var searchData=
   ['filename_16',['fileName',['../classGlobalSearch_1_1Structure.html#a92b2edc78b43b306f828c221746a35d7',1,'GlobalSearch::Structure']]],
   ['filepath_17',['filePath',['../classGlobalSearch_1_1OptBase.html#a707d2bf2511d4fec3f244afb2f094c6e',1,'GlobalSearch::OptBase']]],
   ['filetemplatetype_18',['fileTemplateType',['../classGlobalSearch_1_1OptBase.html#a966dc2f3f4ab21d719be37c7a9ad2a54',1,'GlobalSearch::OptBase']]],
-  ['fileutils_19',['FileUtils',['../classFileUtils.html',1,'']]],
-  ['final_20configuration_3a_20',['BFGS: Final Configuration:',['../classGlobalSearch_1_1CastepFormat.html#autotoc_md1',1,'']]],
-  ['finishedbackgroundprocessing_21',['finishedBackgroundProcessing',['../classGlobalSearch_1_1AbstractTab.html#a5b06b32887aa1ba75cfcfad24f9c9a86',1,'GlobalSearch::AbstractTab']]],
-  ['finishfeaturecalculations_22',['finishFeatureCalculations',['../classGlobalSearch_1_1OptBase.html#af121fd1d3c54d88a38275a9bf2753c23',1,'GlobalSearch::OptBase']]],
-  ['finishhardnesscalculation_23',['finishHardnessCalculation',['../classGlobalSearch_1_1OptBase.html#af95ef12850aa27360d1cd5fbbe18c3c1',1,'GlobalSearch::OptBase']]],
-  ['first_24',['first',['../classGlobalSearch_1_1Bond.html#a42adddbe34141352be0ed9b45484d805',1,'GlobalSearch::Bond']]],
-  ['formats_25',['Formats',['../classGlobalSearch_1_1Formats.html',1,'GlobalSearch']]],
-  ['fs_5fdismiss_26',['FS_Dismiss',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67ab71dc3288b1ae42ed3be5e8885085909',1,'GlobalSearch::Structure']]],
-  ['fs_5ffail_27',['FS_Fail',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67ac8be770c64178701e03e3f8512dd1c44',1,'GlobalSearch::Structure']]],
-  ['fs_5fnotcalculated_28',['FS_NotCalculated',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67a1f2290880cb70fe07738cd781f0587fb',1,'GlobalSearch::Structure']]],
-  ['fs_5fretain_29',['FS_Retain',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67aefb6792df7f0351bd4f4f71bcf0a4c30',1,'GlobalSearch::Structure']]],
-  ['functiontracker_30',['FunctionTracker',['../classFunctionTracker.html',1,'']]]
+  ['finishedbackgroundprocessing_19',['finishedBackgroundProcessing',['../classGlobalSearch_1_1AbstractTab.html#a5b06b32887aa1ba75cfcfad24f9c9a86',1,'GlobalSearch::AbstractTab']]],
+  ['finishfeaturecalculations_20',['finishFeatureCalculations',['../classGlobalSearch_1_1OptBase.html#af121fd1d3c54d88a38275a9bf2753c23',1,'GlobalSearch::OptBase']]],
+  ['finishhardnesscalculation_21',['finishHardnessCalculation',['../classGlobalSearch_1_1OptBase.html#af95ef12850aa27360d1cd5fbbe18c3c1',1,'GlobalSearch::OptBase']]],
+  ['fs_5fdismiss_22',['FS_Dismiss',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67ab71dc3288b1ae42ed3be5e8885085909',1,'GlobalSearch::Structure']]],
+  ['fs_5ffail_23',['FS_Fail',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67ac8be770c64178701e03e3f8512dd1c44',1,'GlobalSearch::Structure']]],
+  ['fs_5fnotcalculated_24',['FS_NotCalculated',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67a1f2290880cb70fe07738cd781f0587fb',1,'GlobalSearch::Structure']]],
+  ['fs_5fretain_25',['FS_Retain',['../classGlobalSearch_1_1Structure.html#a21bd7894469c82e3098782c844e39e67aefb6792df7f0351bd4f4f71bcf0a4c30',1,'GlobalSearch::Structure']]]
 ];

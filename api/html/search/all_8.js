@@ -16,13 +16,10 @@ var searchData=
   ['handlesupercellstructure_13',['handleSupercellStructure',['../classGlobalSearch_1_1QueueManager.html#ae67018b5053dfa982d6602d34be39a89',1,'GlobalSearch::QueueManager']]],
   ['handleupdatingstructure_14',['handleUpdatingStructure',['../classGlobalSearch_1_1QueueManager.html#a82b9d1f1df369bf14c1de84e0b4b5d70',1,'GlobalSearch::QueueManager']]],
   ['handlewaitingforoptimizationstructure_15',['handleWaitingForOptimizationStructure',['../classGlobalSearch_1_1QueueManager.html#a6333f3ba572efd281e6dfd489c01ef8d',1,'GlobalSearch::QueueManager']]],
-  ['hasbonds_16',['hasBonds',['../classGlobalSearch_1_1Molecule.html#a99d3a67fec66b59e4499b7e4c9638777',1,'GlobalSearch::Molecule']]],
-  ['haschangedsincedupchecked_17',['hasChangedSinceDupChecked',['../classGlobalSearch_1_1Structure.html#a30b8895da1515056a968ae9622c54408',1,'GlobalSearch::Structure']]],
-  ['hasdialog_18',['hasdialog',['../group__dialog.html#gac4335196cdf08e3555f6d0e152761604',1,'GlobalSearch::Optimizer::hasDialog()'],['../group__dialog.html#gaa78e95fa76777efba3cdfd70d8e3caf9',1,'GlobalSearch::QueueInterface::hasDialog()']]],
-  ['hasenthalpy_19',['hasEnthalpy',['../classGlobalSearch_1_1Structure.html#a2051a23aabc651782d35608b492189ab',1,'GlobalSearch::Structure']]],
-  ['hasparentstructure_20',['hasParentStructure',['../classGlobalSearch_1_1Structure.html#ae376a5fcb6407d55346d5357299c919f',1,'GlobalSearch::Structure']]],
-  ['hasunitcell_21',['hasUnitCell',['../classGlobalSearch_1_1Molecule.html#aa22efcc3e4c5e98bef2349ae8f76c98e',1,'GlobalSearch::Molecule']]],
-  ['host_22',['host',['../classGlobalSearch_1_1OptBase.html#a450b588c2994270e8e053365f094fb52',1,'GlobalSearch::OptBase']]],
-  ['hoursforcanceljobaftertime_23',['hoursForCancelJobAfterTime',['../classGlobalSearch_1_1OptBase.html#ad5f042cd3b5da38dfa47e6c61b54bd87',1,'GlobalSearch::OptBase']]],
-  ['httprequestmanager_24',['HttpRequestManager',['../classHttpRequestManager.html',1,'']]]
+  ['haschangedsincedupchecked_16',['hasChangedSinceDupChecked',['../classGlobalSearch_1_1Structure.html#a30b8895da1515056a968ae9622c54408',1,'GlobalSearch::Structure']]],
+  ['hasdialog_17',['hasdialog',['../group__dialog.html#gac4335196cdf08e3555f6d0e152761604',1,'GlobalSearch::Optimizer::hasDialog()'],['../group__dialog.html#gaa78e95fa76777efba3cdfd70d8e3caf9',1,'GlobalSearch::QueueInterface::hasDialog()']]],
+  ['hasenthalpy_18',['hasEnthalpy',['../classGlobalSearch_1_1Structure.html#a2051a23aabc651782d35608b492189ab',1,'GlobalSearch::Structure']]],
+  ['hasparentstructure_19',['hasParentStructure',['../classGlobalSearch_1_1Structure.html#ae376a5fcb6407d55346d5357299c919f',1,'GlobalSearch::Structure']]],
+  ['host_20',['host',['../classGlobalSearch_1_1OptBase.html#a450b588c2994270e8e053365f094fb52',1,'GlobalSearch::OptBase']]],
+  ['hoursforcanceljobaftertime_21',['hoursForCancelJobAfterTime',['../classGlobalSearch_1_1OptBase.html#ad5f042cd3b5da38dfa47e6c61b54bd87',1,'GlobalSearch::OptBase']]]
 ];

@@ -390,7 +390,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Check if the file <em>filename</em> exists in the working directory of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em> and store the result in <em>exists</em>.</p>
-<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>exists</em> to report whether or not the file exists. <a class="el" href="classThe.html">The</a> return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>exists</em> to report whether or not the file exists. The return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the test encountered no errors, false otherwise. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="local_8cpp_source.html#l00408">408</a> of file <a class="el" href="local_8cpp_source.html">local.cpp</a>.</p>
@@ -562,7 +562,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> queue status of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The queue status of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em>. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="local_8cpp_source.html#l00270">270</a> of file <a class="el" href="local_8cpp_source.html">local.cpp</a>.</p>
 
@@ -627,7 +627,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Grep through the file <em>filename</em> for <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s's</em> working directory, looking for <em>matchText</em>. <a class="el" href="classThe.html">The</a> list of matches is returned in the QStringList <em>matches</em> and the exit status is returned as <em>exitcode</em>.</p>
+<p>Grep through the file <em>filename</em> for <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s's</em> working directory, looking for <em>matchText</em>. The list of matches is returned in the QStringList <em>matches</em> and the exit status is returned as <em>exitcode</em>.</p>
 <p>Possible exitcodes:</p><ul>
 <li>0: Matches were found, execution successful</li>
 <li>1: No matches found, execution successful</li>
@@ -761,7 +761,7 @@ On local queue interface, grep is not actually used and the exit code behavior i
 <p>Perform any work needed before calling <a class="el" href="classGlobalSearch_1_1Optimizer.html#a7e57844e4e6d713c87e6cf29ea03c5e2">Optimizer::update</a>. This function mainly exists for RemoteQueue classes to copy files back from the server, but may be used for other purposes. It is guaranteed to be called by <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> before updating.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> structure that is to be updated.</td></tr>
+    <tr><td class="paramname">s</td><td>The structure that is to be updated.</td></tr>
   </table>
   </dd>
 </dl>
@@ -826,10 +826,10 @@ On local queue interface, grep is not actually used and the exit code behavior i
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">workdir</td><td>Workind directory for the command </td></tr>
-    <tr><td class="paramname">command</td><td><a class="el" href="classThe.html">The</a> command </td></tr>
-    <tr><td class="paramname">sout</td><td><a class="el" href="classThe.html">The</a> stdout string </td></tr>
-    <tr><td class="paramname">serr</td><td><a class="el" href="classThe.html">The</a> stderr string </td></tr>
-    <tr><td class="paramname">ercd</td><td><a class="el" href="classThe.html">The</a> exit error code</td></tr>
+    <tr><td class="paramname">command</td><td>The command </td></tr>
+    <tr><td class="paramname">sout</td><td>The stdout string </td></tr>
+    <tr><td class="paramname">serr</td><td>The stderr string </td></tr>
+    <tr><td class="paramname">ercd</td><td>The exit error code</td></tr>
   </table>
   </dd>
 </dl>
@@ -947,7 +947,7 @@ On local queue interface, grep is not actually used and the exit code behavior i
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="classThe.html">The</a> filenames in <em>files</em> must not be absolute, but relative to the structure's working directory.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The filenames in <em>files</em> must not be absolute, but relative to the structure's working directory.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="local_8cpp_source.html#l00103">103</a> of file <a class="el" href="local_8cpp_source.html">local.cpp</a>.</p>

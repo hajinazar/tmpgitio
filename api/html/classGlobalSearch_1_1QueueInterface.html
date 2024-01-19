@@ -383,7 +383,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Check if the file <em>filename</em> exists in the working directory of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em> and store the result in <em>exists</em>.</p>
-<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>exists</em> to report whether or not the file exists. <a class="el" href="classThe.html">The</a> return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function uses the argument <em>exists</em> to report whether or not the file exists. The return value indicates whether the file check was performed without errors (e.g. network errors).</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the test encountered no errors, false otherwise. </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="optimizer_8cpp_source.html#l00193">GlobalSearch::Optimizer::checkIfOutputFileExists()</a>, and <a class="el" href="optbase_8cpp_source.html#l00564">GlobalSearch::OptBase::finishFeatureCalculations()</a>.</p>
@@ -591,7 +591,7 @@ For a remote run, this creates/discards the ssh connection.</dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> name of the queue interface (e.g. "Local", "PBS", etc) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The name of the queue interface (e.g. "Local", "PBS", etc) </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="queueinterface_8h_source.html#l00294">294</a> of file <a class="el" href="queueinterface_8h_source.html">queueinterface.h</a>.</p>
 
@@ -624,7 +624,7 @@ For a remote run, this creates/discards the ssh connection.</dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> queue status of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The queue status of <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s</em>. </dd></dl>
 
 </div>
 </div>
@@ -650,7 +650,7 @@ For a remote run, this creates/discards the ssh connection.</dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classThe.html">The</a> names of all template files associated with this interface. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>The names of all template files associated with this interface. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="queueinterface_8h_source.html#l00300">300</a> of file <a class="el" href="queueinterface_8h_source.html">queueinterface.h</a>.</p>
 
@@ -717,7 +717,7 @@ For a remote run, this creates/discards the ssh connection.</dd></dl>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Grep through the file <em>filename</em> in <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s's</em> working directory, looking for <em>matchText</em>. <a class="el" href="classThe.html">The</a> list of matches is returned in the QStringList <em>matches</em> and the exit status is returned as <em>exitcode</em>.</p>
+<p>Grep through the file <em>filename</em> in <a class="el" href="classGlobalSearch_1_1Structure.html" title="Generic molecule object.">Structure</a> <em>s's</em> working directory, looking for <em>matchText</em>. The list of matches is returned in the QStringList <em>matches</em> and the exit status is returned as <em>exitcode</em>.</p>
 <p>Possible exitcodes:</p><ul>
 <li>0: Matches were found, execution successful</li>
 <li>1: No matches found, execution successful</li>
@@ -807,7 +807,7 @@ On local queue interface, grep is not actually used and the exit code behavior i
 <p>Check if a name is a template file name.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">name</td><td><a class="el" href="classThe.html">The</a> template file name.</td></tr>
+    <tr><td class="paramname">name</td><td>The template file name.</td></tr>
   </table>
   </dd>
 </dl>
@@ -845,7 +845,7 @@ On local queue interface, grep is not actually used and the exit code behavior i
 <p>Perform any work needed before calling <a class="el" href="classGlobalSearch_1_1Optimizer.html#a7e57844e4e6d713c87e6cf29ea03c5e2">Optimizer::update</a>. This function mainly exists for RemoteQueue classes to copy files back from the server, but may be used for other purposes. It is guaranteed to be called by <a class="el" href="classGlobalSearch_1_1Optimizer.html" title="The Optimizer class provides an interface between an OptBase instance and an external optimization en...">Optimizer</a> before updating.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td><a class="el" href="classThe.html">The</a> structure that is to be updated.</td></tr>
+    <tr><td class="paramname">s</td><td>The structure that is to be updated.</td></tr>
   </table>
   </dd>
 </dl>
@@ -946,11 +946,11 @@ On local queue interface, grep is not actually used and the exit code behavior i
 <dl class="section note"><dt>Note</dt><dd>For a remote run, this function creates/discards the ssh connection for its own.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">workdir</td><td><a class="el" href="classThe.html">The</a> working directory in which command is running </td></tr>
-    <tr><td class="paramname">command</td><td><a class="el" href="classThe.html">The</a> command to be run </td></tr>
-    <tr><td class="paramname">sout</td><td><a class="el" href="classThe.html">The</a> standard output of command </td></tr>
-    <tr><td class="paramname">serr</td><td><a class="el" href="classThe.html">The</a> standard error of command </td></tr>
-    <tr><td class="paramname">ercd</td><td><a class="el" href="classThe.html">The</a> error code of command</td></tr>
+    <tr><td class="paramname">workdir</td><td>The working directory in which command is running </td></tr>
+    <tr><td class="paramname">command</td><td>The command to be run </td></tr>
+    <tr><td class="paramname">sout</td><td>The standard output of command </td></tr>
+    <tr><td class="paramname">serr</td><td>The standard error of command </td></tr>
+    <tr><td class="paramname">ercd</td><td>The error code of command</td></tr>
   </table>
   </dd>
 </dl>
@@ -1062,7 +1062,7 @@ On local queue interface, grep is not actually used and the exit code behavior i
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd><a class="el" href="classThe.html">The</a> filenames in <em>files</em> must not be absolute, but relative to the structure's working directory.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The filenames in <em>files</em> must not be absolute, but relative to the structure's working directory.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>True on success, false otherwise. </dd></dl>
 
 <p class="reference">Referenced by <a class="el" href="queueinterface_8cpp_source.html#l00027">writeInputFiles()</a>.</p>

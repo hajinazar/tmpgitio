@@ -374,7 +374,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>This function expects the internal mutex, m_mutex, to be locked before prior to using being called. This can be accomplished by calling lock() on <a class="el" href="classGlobalSearch_1_1SlottedWaitCondition.html#a41005dfd85daa8dd9f13810f71f8afbe">mutex()</a> or <a class="el" href="classGlobalSearch_1_1SlottedWaitCondition.html#afb1ba4315ffa2de59eaf5045d2a4c09f">prewaitLock()</a>. <a class="el" href="classThe.html">The</a> internal mutex will be locked before returning from this function. <a class="el" href="classThe.html">The</a> mutex can be unlocked by calling the convenience function <a class="el" href="classGlobalSearch_1_1SlottedWaitCondition.html#a3c9f9e3ba7eebdc3cc270445385e334c">postwaitUnlock()</a>. See class description for example usage. </p>
+<p>This function expects the internal mutex, m_mutex, to be locked before prior to using being called. This can be accomplished by calling lock() on <a class="el" href="classGlobalSearch_1_1SlottedWaitCondition.html#a41005dfd85daa8dd9f13810f71f8afbe">mutex()</a> or <a class="el" href="classGlobalSearch_1_1SlottedWaitCondition.html#afb1ba4315ffa2de59eaf5045d2a4c09f">prewaitLock()</a>. The internal mutex will be locked before returning from this function. The mutex can be unlocked by calling the convenience function <a class="el" href="classGlobalSearch_1_1SlottedWaitCondition.html#a3c9f9e3ba7eebdc3cc270445385e334c">postwaitUnlock()</a>. See class description for example usage. </p>
 
 <p class="definition">Definition at line <a class="el" href="slottedwaitcondition_8h_source.html#l00135">135</a> of file <a class="el" href="slottedwaitcondition_8h_source.html">slottedwaitcondition.h</a>.</p>
 

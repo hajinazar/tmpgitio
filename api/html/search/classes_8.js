@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['localqueueinterface_0',['LocalQueueInterface',['../classGlobalSearch_1_1LocalQueueInterface.html',1,'GlobalSearch']]]
+  ['tracker_0',['Tracker',['../classGlobalSearch_1_1Tracker.html',1,'GlobalSearch']]]
 ];

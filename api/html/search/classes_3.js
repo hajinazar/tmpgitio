@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['defaultedittab_0',['DefaultEditTab',['../classGlobalSearch_1_1DefaultEditTab.html',1,'GlobalSearch']]]
+  ['globalqueueinterfacesettingswidget_0',['GlobalQueueInterfaceSettingsWidget',['../classGlobalSearch_1_1GlobalQueueInterfaceSettingsWidget.html',1,'GlobalSearch']]]
 ];

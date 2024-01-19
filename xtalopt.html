@@ -24,7 +24,6 @@
 
   </script>
   <script type="text/javascript" src='dist/js/bootstrap.min.js'></script>
-  <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
   <script>
     $(function(){
       $("#navbar").load("navbar.html");
@@ -231,17 +230,11 @@
           <li style="padding-bottom:7px">The strain operator allows XtalOpt to mutate the unit cell parameters, but not the fractional positions of the atoms.
           <li style="padding-bottom:7px">One can multiply the cell row vectors by the symmetric voight matrix, as shown below,
           <center>
-            <p lang="latex">
-            \centering
-            \vec{\textrm{v}}_{\textrm{new}} = \vec{\textrm{v}}
-            \begin{bmatrix}
-              1+\varepsilon_{11} & \frac{\varepsilon_{12}}{2} & \frac{\varepsilon_{13}}{2} \\
-              \frac{\varepsilon_{12}}{2} & 1+\varepsilon_{22} & \frac{\varepsilon_{32}}{2} \\
-              \frac{\varepsilon_{13}}{2} & \frac{\varepsilon_{23}}{2} & 1+\varepsilon_{33}
-            \end{bmatrix}
+            <p>
+            <img src="https://latex.codecogs.com/svg.image?\vec{\textrm{v}}_{\textrm{new}}=\vec{\textrm{v}}\begin{bmatrix}1&plus;\varepsilon_{11}&\frac{\varepsilon_{12}}{2}&\frac{\varepsilon_{13}}{2}\\\frac{\varepsilon_{12}}{2}&1&plus;\varepsilon_{22}&\frac{\varepsilon_{32}}{2}\\\frac{\varepsilon_{13}}{2}&\frac{\varepsilon_{23}}{2}&1&plus;\varepsilon_{33}\end{bmatrix}"/>
             </p>
           </center>
-          where &#949;<sub>i,j</sub> is a random selected value, taken from a zero-centered normal distribution.
+          where &epsilon;<sub>i,j</sub> is a random selected value, taken from a zero-centered normal distribution.
         </ul>
       </p>
       <br>
@@ -267,19 +260,19 @@
       <p>
         <ul align="left" style="text-align:-moz-left">
           <li style="padding-bottom:7px">The ripple operator acts as a periodic displacement of the atomic coordinates in a cell.
-          <li style="padding-bottom:7px">A random axis is chosen (for this example the <span lang="latex">z</span> axis will be chosen) and the atoms along this axis are shifted by an amount, <span lang="latex">\Delta z</span>, where the new coordinate along that axis will be <span lang="latex">z_{new} = z + \Delta z</span>.
-          <li style="padding-bottom:7px">The displacement along the axis chosen is dependent on atomic placement in the orthogonal plane (<span lang="latex">x</span> and <span lang="latex">y</span> axes for this example) following the formula:
+            <li style="padding-bottom:7px">A random axis is chosen (for this example the z axis will be chosen) and the atoms along this axis are shifted by an amount, &Delta;z, where the new coordinate along that axis will be z<sub>new</sub> = z + &Delta;z.
+          <li style="padding-bottom:7px">The displacement along the axis chosen is dependent on atomic placement in the orthogonal plane (x and y axes for this example) following the formula:
           <center>
           <br>
-          <p lang="latex">
-            \Delta z = \rho\cos(2\pi\mu x+\theta_{x})\cos(2\pi\eta y+\theta_{y})~~~~~\mu\in\mathbb{Z},~\eta\in\mathbb{Z}
+          <p>
+          <img src="https://latex.codecogs.com/svg.image?\Delta&space;z=\rho\cos(2\pi\mu&space;x&plus;\theta_{x})\cos(2\pi\eta&space;y&plus;\theta_{y})~~~~~\mu\in\mathbb{Z},~\eta\in\mathbb{Z}"/>
           </p>
           </center>
           <li style="padding-bottom:7px">In this equation:
           <ul align="left" style="text-align:-moz-left">
-            <li style="padding-bottom:7px"><span lang="latex">\rho</span> is the maximum displacement of an atom along the axis.
-            <li style="padding-bottom:7px"><span lang="latex">\mu</span> and <span lang="latex">\eta</span> determines the number of cosine waves in the orthogonal directions.
-            <li style="padding-bottom:7px"><span lang="latex">\theta_{x}</span> and <span lang="latex">\theta_{y}</span> are randomly chosen values between 0 and 2<span lang="latex">\pi</span> that specify the strength of the ripple in various areas of the cell.
+            <li style="padding-bottom:7px">&rho; is the maximum displacement of an atom along the axis.
+            <li style="padding-bottom:7px">&mu; and &eta; determines the number of cosine waves in the orthogonal directions.
+            <li style="padding-bottom:7px">&theta;<sub>x</sub> and &theta;<sub>y</sub> are randomly chosen values between 0 and 2&pi; that specify the strength of the ripple in various areas of the cell.
           </ul>
         </ul>
       </p>

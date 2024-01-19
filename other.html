@@ -24,7 +24,6 @@
 
   </script>
   <script type="text/javascript" src='dist/js/bootstrap.min.js'></script>
-  <script type="text/javascript" src="http://latex.codecogs.com/latexit.js"></script>
     <script> 
       $(function(){
         $("#navbar").load("navbar.html"); 
@@ -128,16 +127,15 @@
         <br>
         <li>Conformers of the substrate and/or matrix molecules are generated and pre–optimized using one of the force field implementations in the OpenBabel library. Either an exhaustive search can be performed, or a specified number of conformers may be created. The latter option does not guarantee that the most stable conformers will be found, since the conformer­generating algorithm stops once the specified number has been reached.</li>
         <br>
-        <li>Conformers of the matrix and/or substrate molecules are chosen such that the probability <a lang="latex">p_{i}</a> of selecting a given individual is calculated from its energy <a lang="latex">E_{i}</sub></a> (evaluated via the specified force field) as:
+        <li>Conformers of the matrix and/or substrate molecules are chosen such that the probability p<sub>i</sub> of selecting a given individual is calculated from its energy E<sub>i</sub> (evaluated via the specified force field) as:
         <br>
         <br>
         <center>      
-          <p lang="latex">
-            \centering
-            p_{i} = N(1 - \frac{E_{i} - E_{min}}{E_{max} - E_{min}})
+          <p>
+          <img src="https://latex.codecogs.com/svg.image?p_{i}=N(1-\frac{E_{i}-E_{min}}{E_{max}-E_{min}})"/>
           </p>
         </center>
-        where <a lang="latex">E_{min}</a> and <a lang="latex">E_{max}</a> are the energies of the most stable and the least stable conformer, and <a lang="latex">N</a> is a normalization factor ensuring that <a lang="latex">\Sigma p_{i} = 1</a>.</li>
+        where E<sub>min</sub> and E<sub>max</sub> are the energies of the most stable and the least stable conformer, and N is a normalization factor ensuring that &Sigma;p<sub>i</sub>=1.</li>
         <br>
         <li>The matrix molecules are placed randomly about the substrate subject to user–specified distance constraints. A range for the interatomic distances (IAD) between all atoms in the matrix and substrate molecules may be specified. This ensures that all atoms between any template­matrix pair are separated by at least the minimum IAD (in angstroms), but at least one pair, from each matrix molecule, must be closer than the IAD maximum value.</li>
  </div>

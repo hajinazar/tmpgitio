@@ -12,6 +12,22 @@
   <title>XtalOpt - Zurek Lab</title>
 
   <!-- Scripts -->
+  <style>
+  details > summary:first-of-type {
+    list-style-type: none;
+  }
+  </style>
+
+  <style>
+  .content {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  }
+  </style>
+
   <script src="dist/js/jquery.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -73,12 +89,16 @@
         </div>
       </div>
 
-        <br>
+    <a class="anchor" id="news">
+      <br>
+      <br>
+    </a>
 
     <div class="jumbotron" id="news">
       <h2>News</h2>
       <hr>
-      <h3>XtalOpt Version r12.0 Released!</h3>
+      <details>
+      <summary><h4 align="left">&#x25A0; Oct 21, 2018: XtalOpt Version r12.0 Released!</h4></summary>
       <div class="row-fluid">
         <div class="span6">
           <ul align="left" style="text-align:-moz-left">
@@ -113,7 +133,10 @@
         </div>
       </div>
       <hr>
-      <h3>XtalOpt Version r11.0 Released!</h3>
+      </details>
+
+      <details>
+      <summary><h4 align="left">&#x25A0; Sep 11, 2017: XtalOpt Version r11.0 Released!</h4></summary>
       <div class="row-fluid">
         <div class="span6">
           <ul align="left" style="text-align:-moz-left">
@@ -148,7 +171,10 @@
         </div>
       </div>
       <hr>
-      <h3>XtalOpt Version r10.0 Released!</h3>
+      </details>
+
+      <details>
+      <summary><h4 align="left">&#x25A0; Jun 14, 2017: XtalOpt Version r10.0 Released!</h4></summary>
       <center>
         <a class="popup" target="_blank" href="dist/img/xtalopt-r10.png">
           <img width="60%" src="dist/img/xtalopt-r10.png" alt="xtalopt-r10" max-width="85%">
@@ -198,14 +224,20 @@
         </div>
       </div>
       <hr>
-      <h3>Avogadro2 Updates</h3>
+      </details>
+
+      <details>
+      <summary><h4 align="left">&#x25A0; Avogadro2 Updates</h4></summary>
         Our Ph.D. student, Patrick Avery, was accepted to the Google Summer of Code 2016!!!
             <br><br>
         He has been working on Avogadro2.
             <br><br>
         You can read about his most recent work on his <a target='_blank' href="http://avogadro2crystals.blogspot.com/2016/06/recently-those-of-us-in-google-summer.html?m=1">blog</a>.
       <hr>
-      <h3>XtalOpt Version r9.0 Released!</h3>
+      </details>
+
+      <details>
+      <summary><h4 align="left">&#x25A0; Aug 11, 2016: XtalOpt Version r9.1 Released!</h4></summary>
       <div class="row-fluid">
         <div class="span6">
           <ul align="left" style="text-align:-moz-left">
@@ -258,6 +290,7 @@
         </div>
       </div>
     </div>
+    </details>
 
     <a class="anchor" id="support">
       <br>
@@ -266,6 +299,7 @@
 
     <div class="jumbotron">
       <h2>Supporters</h2>
+      <hr>
       <img src="dist/img/ub-logo.png" alt="ub-logo.png" style="max-width:15%">
       <img src="dist/img/nsf_seal_scaled.png" alt="nsf_seal_scaled.png" style="max-width:15%">
       <br>
